@@ -892,6 +892,37 @@ article footer .addthis iframe {
   color: #777;
   line-height: 1;
 }
+#sidebar .social ul {
+  padding: 0 0;
+  margin: 0 auto;
+  font-size: 0.9em;
+  height: 40px;
+  margin: 15px 5px 5px 15px;
+}
+#sidebar .social ul li {
+  float: left;
+  margin: 3px 0 0 3px;
+}
+#sidebar .social ul li .twitter {
+  background-image: url("http://villadora-blog.qiniudn.com/icontwitter.png");
+}
+#sidebar .social ul li .github {
+  background-image: url("http://villadora-blog.qiniudn.com/icongh.png");
+}
+#sidebar .social ul li .douban {
+  background-image: url("http://villadora-blog.qiniudn.com/icondouban.png");
+}
+#sidebar .social ul li a {
+  -webkit-background-size: 25px 25px;
+  -moz-background-size: 25px 25px;
+  background-size: 25px 25px;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  display: block;
+  text-indent: -1000em;
+  overflow: hidden;
+}
 #sidebar .tagcloud .entry {
   padding-right: 5px;
 }
