@@ -1,0 +1,992 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>时光屋</title>
+  <meta name="author" content="Villa Dora">
+  
+  
+  <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="时光屋"/>
+
+  <link rel="alternate" href="atom.xml" title="时光屋" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7622998-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <!--<h1><a href="/">时光屋</a></h1>-->
+
+  <div id="contenedor">
+  <ul class="cube">
+    <li class="cara">
+        时光屋
+    </li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara">
+    Villadora
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+
+		var cube = $('.cube'),
+				offset = $('#contenedor').offset(),
+				offsetleft = (offset.left + 100),
+				offsettop = (offset.top + 100);
+
+		cube.on({
+			mousemove: function(e) {
+				$(this).css('transform','rotateX(' + (e.pageY - offsettop) + 'deg) rotateY(' + (e.pageX - offsetleft) + 'deg)');
+				$(this).addClass('noanimar').removeClass('animar');
+			},
+			mouseout: function() {
+				$(this).css('transform','rotateX(0deg) rotateY(0deg)');
+				$(this).addClass('animar').removeClass('noanimar');
+			}
+		});
+
+		//console.log('x=' + offsetleft + ', y=' + offsettop);
+});
+</script>
+<script src="/js/prefixfree.min.js"></script>
+
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-08T02:18:00.000Z">4月 8 2014</time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/08/isroll-event-preventDefault/">Iscroll5的几个bug</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
+<ol>
+<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">this</span>.fadeTimeout = setTimeout((function (<span class="keyword">val</span>) {
+    <span class="keyword">this</span>.wrapperStyle.opacity = <span class="keyword">val</span>;
+    <span class="keyword">this</span>.visible = +<span class="keyword">val</span>;
+}).bind(<span class="keyword">this</span>, <span class="keyword">val</span>), delay);
+</pre></td></tr></table></figure>
+
+<p>去掉bind, 改成closure解决问题</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> selft = this;
+<span class="keyword">self</span>.fadetimeout = setTimeout(<span class="function"><span class="keyword">function</span> <span class="params">(val)</span> {</span>
+    <span class="keyword">self</span>.wrapperStyle.opacity = val;
+    <span class="keyword">self</span>.visible = +val;
+}, delay);
+</pre></td></tr></table></figure>
+
+<p>这个修正已经有人发了 pullrequest 只不过暂时还没有merge到master分支中。</p>
+<ol>
+<li>click事件多次触发。在有些浏览器上会发现使用了iscroll的元素click事件会导致多次触发, 这是因为iscroll为了模拟滑动事件，屏蔽了scroll元素上的click事件，而自己通过touchend来决定是否触发模拟的click事件。但是在移动上的有些浏览器上e.preventDefault并不能阻止事件，因为click事件的cancelable为false。 这个时候只能检测e.cancelable属性，然后决定是否要产生模拟事件。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-06T07:18:00.000Z">3月 6 2014</time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/06/passport-openid-nodejs/">在cluster中使用passport openID</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Passport_openid_in_cluster">Passport openid in cluster</h1>
+<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
+<h2 id="session">session</h2>
+<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
+<h2 id="open_id_association">open id association</h2>
+<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。<br>但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="code"><pre>    <span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);
+    <span class="keyword">var</span> strategy = <span class="keyword">new</span> GoogleStrategy({
+        returnURL: callbackURL,
+        realm: realm,
+        stateless: <span class="literal">true</span>
+    };
+    
+    <span class="comment">// ...</span>
+
+    strategy.saveAssociation(<span class="function"><span class="keyword">function</span><span class="params">(handle, provider, algorithm, secret, expiresIn, done)</span> {</span>
+        <span class="keyword">var</span> assoc = {
+            handle: handle,
+            provider: provider,
+            algorithm: algorithm,
+            secret: secret,
+            expiresIn: expiresIn
+        };
+        
+        <span class="comment">// save to redis/mongodb</span>
+        save(<span class="function"><span class="keyword">function</span><span class="params">(err)</span> {</span>
+            done(err);
+        });
+    });
+
+    strategy.loadAssociation(<span class="function"><span class="keyword">function</span><span class="params">(handle, done)</span> {</span>
+        <span class="comment">// load from redis/mongodb</span>
+        load(handle, <span class="function"><span class="keyword">function</span><span class="params">(err, assoc)</span> {</span>
+            <span class="keyword">if</span>(err) <span class="keyword">return</span> done(err);
+            done(err, assoc.provider, assoc.algorithm, assoc.secret);
+        });
+    });
+    
+    passport.use(strategy);
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-08T08:00:19.000Z">8月 8 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/08/arguments-exceed-javascript/">javascript arguments长度限制</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>先看下这一段代码片段(in chrome):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">var</span> a = [];
+a[<span class="number">2</span>&lt;&lt;<span class="number">16</span>] = <span class="number">1</span>;
+fucntion b() {}
+b.apply([], a);
+</pre></td></tr></table></figure>
+
+<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.<br>为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？<br>大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
+<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。<br>实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。从某种意义上来数arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用慢了！本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-06T05:51:11.000Z">8月 6 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/06/interupt-when-hexo-generating/">interupt when hexo generating</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-06T03:34:06.000Z">8月 6 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/06/svg-spec/">SVG Spec</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="SVG的Painters_model">SVG的Painters model</h3>
+<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
+<h3 id="Rendering_Order">Rendering Order</h3>
+<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
+<h3 id="groups">groups</h3>
+<p>‘g’元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,’g’的子元素则在这块画布上进行绘制</p>
+<h3 id="types_of_graphics_elements">types of graphics elements</h3>
+<p>SVG支持三种基本的图形元素:</p>
+<ul>
+<li>Shapes: 用到最多的，主要由各种线和填充构成</li>
+<li>Text: 字符的组合</li>
+<li>Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</li>
+</ul>
+<h4 id="Shapes_and_Text">Shapes and Text</h4>
+<p>字符实际上最终也是形状的一种，由<strong>stroke</strong>和<strong>fill</strong>构成, 对于有一些形状, 比如path, 可以定义一些<strong>marker symbol</strong>,主要用来绘制箭头等。<br>其中<strong>fill</strong>首先被绘制，然后是<strong>stroke</strong>, 最后是<strong>marker symbol</strong>, <strong>marker</strong>的绘制顺序是沿着形状的outline来进行，从形状的起始点开始到结束点。</p>
+<p>Ref: <a href="http://www.w3.org/TR/SVG/render" target="_blank">http://www.w3.org/TR/SVG/render.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-08T01:30:00.000Z">7月 8 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/07/08/hostname-in-mac/">hostname in mac</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
+<p>在prompt里面的%m hostname通过以下途径获得：</p>
+<ol>
+<li>/etc/hostconfig: 在这个配置文件中配置</li>
+<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的’System&gt;System&gt;HostName’值</li>
+<li>如果这个值为空，则通过逆向DNS查询找到ip地址</li>
+<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的’System&gt;Network&gt;HostNames&gt;LocalHOstName’，这个也是用户在系统配置中的共享里配置的名字</li>
+<li>最后如果这个也没查到，那就会返回localhost</li>
+</ol>
+<p>所以由于我hostconfig没配置，然后就找到preferences.plist中的HostName，也就是第二项。</p>
+<p>而hostname命令就不一样了，好吧，这个过程是怎么样我也没找到，应该除了上述几个地方还有一些mac自己存放的配置文件，通过<code>scutil</code>来修改。只不过顺序和具体包含哪些不是很清楚。<br>只不过其中DNS查询在去找preferences.plist之前，所以我的<code>hostname</code>会返回ip地址</p>
+<p>修改则可以通过</p>
+<pre><code><span class="built_in">sudo</span> scutil --set HostName &lt;hostname&gt;
+</code></pre><p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-31T06:30:00.000Z">5月 31 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/31/html5/">HTML5</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction" target="_blank">http://dev.w3.org/html5/spec/Overview.html#introduction</a><br>HTML5 各方角力又开始了</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-29T01:53:00.000Z">5月 29 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/29/$-in-auto-mode-alist/">&#39;$&#39; in auto-mode-alist</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
+<p>“Note that \’ matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing newlines. (Should be pretty rare… )”</p>
+<p>也就是说”$”可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的”\.\(md\|markdown\)$”一直匹配不到,改成”\.\(md\|markdown\)\‘“就好了，好吧 这个正则够诡异的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-24T01:34:00.000Z">5月 24 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/24/uglify-js-processing/">Uglify-js Processing</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="UglifyJs_1">UglifyJs 1</h2>
+<p>‘parse-js’:主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end<br>‘process.js’:在ast的IR上做优化, 其中包括:</p>
+<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等;<br>2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类;<br>3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。</p>
+<pre><code><span class="bullet">* </span>[]取值变成.操作符  <span class="smartquote">```foo['</span>bar'] =&gt; foo.bar<span class="code">```</span>
+<span class="bullet">* </span>去掉不必要的{}
+<span class="bullet">* </span>..etc.
+</code></pre><h2 id="UglifyJs_2">UglifyJs 2</h2>
+<p>在生成ast之后，在topLevel scope上定义了figure_out_scope方法，提供了额外的关于变量定义等node的其他关联信息，这样在之后做mangle和其他优化的时候有了更多信息。之后的优化和更改都放在了一些transform和walker中。</p>
+<p>只不过在设计的时候TreeWalker和ast定义在一起，不得不考虑ast结构来进行visit，而transform更是定义在walker之上，导致一个本来很简单的树遍历需要考虑很多复杂的情况，而且由于ast本身并没有父结点的ref，回溯的信息都放到了walker里面，而一些transform的操作在需要知道父结点相关信息的时候需要一个个的去定义不同node的情况。自己在deobfuscate中写了个travese.js，基本可以完成transform和walker的工作。还是觉得esprima这种纯json的ast比较简洁。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-22T02:51:00.000Z">5月 22 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/22/type-system-in-javascript/">Description on Function/Object and other things in Javascript</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="Pre-Knowledge">Pre-Knowledge</h2>
+<p>Function is a Object, Object has a constructor and a property called ‘__proto__‘, and also you know what happens during the ‘=new=’ keyword (allocate memory; set __proto__ to <em>Function</em>.prototype; apply <em>Function</em> to new created object;)</p>
+<h2 id="What’s_a_Function?">What’s a Function?</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>    <span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> === <span class="literal">true</span> <span class="comment">// everything is a Object</span>
+    <span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span> <span class="comment">// Function is a Function, interesting, right?</span>
+    <span class="built_in">Function</span>.constructor === <span class="built_in">Function</span>  <span class="comment">// Function initialize by itself</span>
+    <span class="built_in">Function</span>.prototype === <span class="built_in">Function</span>:Empty  <span class="comment">// Function has prototype because it's a Function </span>
+    <span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>:Empty  <span class="comment">// Function has __proto__ because it's a Object</span>
+</pre></td></tr></table></figure>
+
+<p>From these above we can easily understand that Function is a Object (everything is Object), and also is a <em>Function</em>. as Object, its constructor is itself; and the prototype is the Empty Function(remember is not a</p>
+<figure class="highlight function()"><figcaption><span>{}```); and as an instance of _Function_; it's '\_\_proto\_\_' property is set to Function.prototype, which is the Empty Function.</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>
+Here is something interesting:
+
+What is <span class="keyword">Function</span>:Empty? it's a empty <span class="keyword">function</span>? we can test it
+
+``` javascript
+    <span class="keyword">Function</span>.prototype instanceof Object === <span class="keyword">true</span> // <span class="keyword">Function</span>.prototype is a object, because everything is object
+    <span class="keyword">Function</span>.prototype instanceof <span class="keyword">Function</span> === <span class="keyword">false</span> // <span class="keyword">Function</span>.prototype Empty <span class="keyword">Function</span> is not a <span class="keyword">Function</span>! it can be called mother of all the functions, the Force!!
+    <span class="keyword">Function</span>.prototype.__proto__ === {].__proto__ === Object {} // the __proto__ of <span class="keyword">Function</span>:Empty is the same as a <span class="keyword">Function</span>
+    <span class="keyword">Function</span>.prototype.prototype === undefined // Because it's not a <span class="keyword">Function</span>, so it don't have prototype
+</pre></td></tr></table></figure>
+
+<p>So the Function:Empty is an Object rather than a Function, but it’s the mother of all the functions; That is said that all the functions are clone from this one.</p>
+<p>That’s make sense, right? Let’s go back to the prototype chain:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>     <span class="built_in">Function</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span>
+</pre></td></tr></table></figure>
+
+
+<p>Function is prototyped from Function, according to the object creating process: we allocate the memory first, then set ‘__proto__‘ to ‘Function.prototype’.. wait so ‘Function.prototype’ is also a Function, there is a cycling here, so we need something to break the cycle, that’s ‘Function.Empty’.</p>
+<p>What about new functions like</p>
+<figure class="highlight function"><figcaption><span>A() {}```? </span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>
+``` javascript
+    A instanceof <span class="keyword">Function</span> === true // A <span class="keyword">is</span> a <span class="attribute">'Function</span>' Object
+    A.__proto__ === <span class="keyword">Function</span>.prototype // A should has everything <span class="keyword">in</span> <span class="attribute">'Function</span>'
+    A.constructor === <span class="keyword">Function</span> // A <span class="keyword">is</span> constructed by <span class="attribute">'Function</span>'
+    A.prototype !== <span class="keyword">Function</span>.prototype // A.prototype <span class="keyword">is</span> a <span class="keyword">new</span> object, this <span class="keyword">is</span> belong <span class="keyword">to</span> A, <span class="keyword">and</span> should be initialized during <span class="keyword">Function</span>(). I believe that every <span class="keyword">new</span> <span class="keyword">function</span> has a <span class="keyword">new</span> object as its prototype, <span class="keyword">if</span> I<span class="attribute">'m</span> wrong correct me
+</pre></td></tr></table></figure>
+
+<h2 id="What’s_an_Object?">What’s an Object?</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>    <span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> === <span class="literal">true</span> <span class="comment">//everything is object</span>
+    <span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span> <span class="comment">// Object also is a Function</span>
+    <span class="built_in">Object</span>.constructor === <span class="built_in">Function</span> [native code] <span class="comment">//Object is initialized by vm</span>
+    <span class="built_in">Object</span>.prototype === <span class="built_in">Object</span> {} <span class="comment">// Object.prototype is the 'Object {}'</span>
+    <span class="built_in">Object</span>.prototype === <span class="built_in">Function</span>.prototype.__proto__ === {}.__proto__ <span class="comment">// the 'Object {}' is unique</span>
+    <span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span> <span class="comment">// 'Object {}' is not a Object in V8, it's a root object in native code</span>
+</pre></td></tr></table></figure>
+
+<p>Object is also an Object because ‘everything is an object’, and Object is also a Function; and just like cycling in ‘Function’, the Object also need a root, that is ‘Object {}’. </p>
+<p>Actually, objects are not an instance of Object,  they are objects whose prototype is ‘Object{}’, which is Object.prototype, when we create objects with Object Function, the Object.prototype is set to obj.__proto__.</p>
+<h2 id="New_is_a_mistake?">New is a mistake?</h2>
+<p>As already said by many people, seen in Douglas’s book, ‘=new=’ keyword done things that can be done with <code>Object.create</code> and <code>Function.apply</code>, see <a href="http://stackoverflow.com/questions/3650892/what-does-the-new-keyword-do-under-the-hood" target="_blank">StackOverflow:what does ‘new’ word do under the hook</a>.</p>
+<p>In class hierarchy, the Class and Instance are different things, but in prototype hierarchy, there is no class and instance things, there are only Objects. Just like rumor, the ‘new’ keyword added is because the Manager in Netscape ask them to make something looks like Java:-)</p>
+<h2 id="Ref:">Ref:</h2>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model" target="_blank">MDN Details of the Object Model</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/page/2/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+<div class="search">
+  <form action="http://google.com/search" method="get" accept-charset="utf-8">
+    <input type="text" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:villadora.github.io">
+  </form>
+</div>
+
+
+<div class="widget social">  
+  <h3 class="title">链接</h3>
+  <ul>
+  <li>
+    <a class="github" href="http://github.com/villadora">github</a>
+  </li>
+  <li>
+    <a class="twitter" href="http://twitter.com/villadora">twitter</a>
+  </li>
+  <li>
+    <a class="douban" href="http://www.douban.com/people/villadora">douban</a>
+  </li>
+  </ul>
+</div>
+
+
+
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/编译器/">编译器</a><small>1</small></li>
+  
+    <li><a href="/categories/C++/">C++</a><small>1</small></li>
+  
+    <li><a href="/categories/DotNet/">DotNet</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>2</small></li>
+  
+    <li><a href="/categories/Web/HTML5/">HTML5</a><small>1</small></li>
+  
+    <li><a href="/categories/Nodejs/">Nodejs</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <a href="/tags/Games/"><li>Games<small>1</small></li></a>
+  
+    <a href="/tags/rubik's cube/"><li>rubik&#39;s cube<small>1</small></li></a>
+  
+    <a href="/tags/rubic, cube/"><li>rubic, cube<small>1</small></li></a>
+  
+    <a href="/tags/computer/"><li>computer<small>1</small></li></a>
+  
+    <a href="/tags/compiler/"><li>compiler<small>1</small></li></a>
+  
+    <a href="/tags/SSA/"><li>SSA<small>1</small></li></a>
+  
+    <a href="/tags/C++/"><li>C++<small>1</small></li></a>
+  
+    <a href="/tags/smart point/"><li>smart point<small>1</small></li></a>
+  
+    <a href="/tags/c#/"><li>c#<small>1</small></li></a>
+  
+    <a href="/tags/notes/"><li>notes<small>1</small></li></a>
+  
+    <a href="/tags/笔记/"><li>笔记<small>1</small></li></a>
+  
+    <a href="/tags/dotnet/"><li>dotnet<small>1</small></li></a>
+  
+    <a href="/tags/web, mobile/"><li>web, mobile<small>1</small></li></a>
+  
+    <a href="/tags/html5/"><li>html5<small>1</small></li></a>
+  
+    <a href="/tags/web/"><li>web<small>1</small></li></a>
+  
+    <a href="/tags/barcamp/"><li>barcamp<small>1</small></li></a>
+  
+    <a href="/tags/shanghai/"><li>shanghai<small>1</small></li></a>
+  
+    <a href="/tags/虚拟机/"><li>虚拟机<small>1</small></li></a>
+  
+    <a href="/tags/virtualbox/"><li>virtualbox<small>1</small></li></a>
+  
+    <a href="/tags/网络/"><li>网络<small>1</small></li></a>
+  
+    <a href="/tags/nat/"><li>nat<small>1</small></li></a>
+  
+    <a href="/tags/bridgedappter/"><li>bridgedappter<small>1</small></li></a>
+  
+    <a href="/tags/graphviz/"><li>graphviz<small>1</small></li></a>
+  
+    <a href="/tags/图形学/"><li>图形学<small>1</small></li></a>
+  
+    <a href="/tags/layout/"><li>layout<small>1</small></li></a>
+  
+    <a href="/tags/读书/"><li>读书<small>2</small></li></a>
+  
+    <a href="/tags/历史/"><li>历史<small>1</small></li></a>
+  
+    <a href="/tags/程序员/"><li>程序员<small>1</small></li></a>
+  
+    <a href="/tags/经济/"><li>经济<small>2</small></li></a>
+  
+    <a href="/tags/专业化/"><li>专业化<small>1</small></li></a>
+  
+    <a href="/tags/读后感/"><li>读后感<small>1</small></li></a>
+  
+    <a href="/tags/思维方式/"><li>思维方式<small>1</small></li></a>
+  
+    <a href="/tags/分析/"><li>分析<small>1</small></li></a>
+  
+    <a href="/tags/学习/"><li>学习<small>1</small></li></a>
+  
+    <a href="/tags/全球化/"><li>全球化<small>1</small></li></a>
+  
+    <a href="/tags/泡沫/"><li>泡沫<small>1</small></li></a>
+  
+    <a href="/tags/经济,股市,发行审核制度/"><li>经济,股市,发行审核制度<small>1</small></li></a>
+  
+    <a href="/tags/编程, Ruby, slice, stackoverflow/"><li>编程, Ruby, slice, stackoverflow<small>1</small></li></a>
+  
+    <a href="/tags/IDE, Eclipse, Orion, Web/"><li>IDE, Eclipse, Orion, Web<small>1</small></li></a>
+  
+    <a href="/tags/IE7, bugs/"><li>IE7, bugs<small>1</small></li></a>
+  
+    <a href="/tags/javascript/"><li>javascript<small>4</small></li></a>
+  
+    <a href="/tags/synchronize/"><li>synchronize<small>1</small></li></a>
+  
+    <a href="/tags/git, customize/"><li>git, customize<small>1</small></li></a>
+  
+    <a href="/tags/nodejs, chil_process, spawn, exec/"><li>nodejs, chil_process, spawn, exec<small>1</small></li></a>
+  
+    <a href="/tags/type/"><li>type<small>1</small></li></a>
+  
+    <a href="/tags/prototype/"><li>prototype<small>1</small></li></a>
+  
+    <a href="/tags/javascript, ast, parse, minification/"><li>javascript, ast, parse, minification<small>1</small></li></a>
+  
+    <a href="/tags/emacs, auto-mode/"><li>emacs, auto-mode<small>1</small></li></a>
+  
+    <a href="/tags/mac, linux/"><li>mac, linux<small>1</small></li></a>
+  
+    <a href="/tags/hexo, interupt/"><li>hexo, interupt<small>1</small></li></a>
+  
+    <a href="/tags/svg, web, spec/"><li>svg, web, spec<small>1</small></li></a>
+  
+    <a href="/tags/javascript, Array.push, push, Range Error/"><li>javascript, Array.push, push, Range Error<small>1</small></li></a>
+  
+    <a href="/tags/passport/"><li>passport<small>1</small></li></a>
+  
+    <a href="/tags/openid/"><li>openid<small>1</small></li></a>
+  
+    <a href="/tags/nodejs/"><li>nodejs<small>1</small></li></a>
+  
+    <a href="/tags/cluster/"><li>cluster<small>1</small></li></a>
+  
+    <a href="/tags/mobile/"><li>mobile<small>1</small></li></a>
+  
+    <a href="/tags/android/"><li>android<small>1</small></li></a>
+  
+    <a href="/tags/iscroll/"><li>iscroll<small>1</small></li></a>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Villa Dora
+  
+  <br />
+  Powered by <a href="http://zespia.tw/hexo/">Hexo</a>
+</div>
+<div class="alignright license">
+<img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /> 本站作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh">知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议</a>进行许可。
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'villadora-blog';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

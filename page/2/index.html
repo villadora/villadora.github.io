@@ -1,0 +1,823 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 2 页 | 时光屋</title>
+  <meta name="author" content="Villa Dora">
+  
+  
+  <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="时光屋"/>
+
+  <link rel="alternate" href="atom.xml" title="时光屋" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7622998-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <!--<h1><a href="/">时光屋</a></h1>-->
+
+  <div id="contenedor">
+  <ul class="cube">
+    <li class="cara">
+        时光屋
+    </li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara"></li>
+    <li class="cara">
+    Villadora
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+
+		var cube = $('.cube'),
+				offset = $('#contenedor').offset(),
+				offsetleft = (offset.left + 100),
+				offsettop = (offset.top + 100);
+
+		cube.on({
+			mousemove: function(e) {
+				$(this).css('transform','rotateX(' + (e.pageY - offsettop) + 'deg) rotateY(' + (e.pageX - offsetleft) + 'deg)');
+				$(this).addClass('noanimar').removeClass('animar');
+			},
+			mouseout: function() {
+				$(this).css('transform','rotateX(0deg) rotateY(0deg)');
+				$(this).addClass('animar').removeClass('noanimar');
+			}
+		});
+
+		//console.log('x=' + offsetleft + ', y=' + offsettop);
+});
+</script>
+<script src="/js/prefixfree.min.js"></script>
+
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-07T05:41:00.000Z">5月 7 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/07/differences-between-exec-and-spawn/">NodeJs中exec和spawn的差别</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在NodeJS中创建一个子进程有两种方式: <code>spawn</code>和<code>exec</code>；这两者都可以通过｀require(‘child_process’)`来引入。那么这两个有什么区别呢？我应该使用哪一个呢？</p>
+<p>这两者的区别主要是在他们和父进程之间的IO处理上,<code>spawn</code>调用后返回的是一个流,可以对stdout上添加事件来响应流数据,如<code>stdout.on(&#39;data&#39;, function() {...})</code>；在这个过程中，子进程输出到stdout中的数据会调用callback，是处于一个流工作的模式下，有一点输出就处理。而<code>exec</code>则是将输出放到一个buffer里面，这个buffer的大小是可以通过maxBuffer这个option配置的，默认是200k.</p>
+<p>比较有趣的是实际上<code>exec</code>调用的是<code>execFile</code>，然后在<code>execFile</code>里面最终调用的还是<code>spawn</code>(see <a href="https://github.com/joyent/node/blob/master/lib/child_process.js#L573" target="_blank">L573</a>, <a href="https://github.com/joyent/node/blob/master/lib/child_process.js#L602" target="_blank">L602</a>).只不过在调用时<code>on(&#39;data&#39;,function(chunk){...}</code>是像一个string buffer里卖弄写chuck罢了。</p>
+<p>最后如果只是输出很小那么直接用<code>exec</code>就可以了，而如果子进程的输出很大，而分配一个那么大的buffer也不是很合时宜的时候，就是用<code>spawn</code>。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T03:56:00.000Z">5月 6 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/custom-git-command/">自定义git命令, like git-flow, git-extras</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>git flow和git extras很强大，原先以为是用一些git alias定义git命令去调用shell脚本，之后看了代码才发现完全不是那么回事。</p>
+<p>git的可扩展性非常强，去自定义一个git命令, 在unix环境下，你只需要在PATH中定义一个可执行的脚本，以”git=”开头，然后剩余的部分就是你的sub command的名字了。比如如果有一个”git-mark”的脚本，那么在执行git mark命令时，实际上git会去调用git-mark这个脚本。是不是很简单？</p>
+<p>为了了解git对alias,builtin,custom command的执行顺序，弄了下脚本做测试。</p>
+<ol>
+<li>在有builtin的情况下，alias和custom command不起作用，就是说像log, status等这些命令是无法通过alias和custom command来覆盖的。</li>
+<li>在没有builtin的情况下, custom command会先与alias之前，也就是说如果存在alias.try和git-try，那么在执行”git try”的时候始终会调用git-try而不是alias。</li>
+</ol>
+<p>这样顺序就是builtin &gt; custom command &gt; alias。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-26T02:54:00.000Z">4月 26 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/26/usage-of-synchronize-tasks-in-javascript/">同步调用在javascript中的应用</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在javascript中很多任务都是异步执行的，而在有些情况下，我们更希望利用同步的方式来组织：</p>
+<ol>
+<li>页面动画. 页面动画的执行现在即可以通过css也可以通过javascript来执行，理想的情况下自然是通过css来处理所有动画，但是在css并没有完全覆盖所有的动画并且设计总是在不断的涌现新的需求的情况下，很多时候我们的动画效果都是css和javascript混合执行的，而这个时候，我们希望在前一个css效果结束后才调用javascript之后的调用。或者两个javsacript的动画效果能够按照顺序执行。</li>
+<li>page unload. 在执行page unload返回一些统计信息的时候，我们不希望函数被async的执行，否则在callback调用时页面已经被destory了，callback方法自然是没办法执行了。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-06T12:38:00.000Z">4月 6 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/">IE7的两个兼容性问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="1-_获取href的属性_getAttribute(‘href’)">1. 获取href的属性 getAttribute(‘href’)</h2>
+<p>在使用.getAttribute(‘href’)获取anchor上的’href’属性时，ie7的实现和其他的浏览器不一样：在ie里面会返回完整的url，而其他的浏览器则只会返回href的设置的值。而jQuery的attr是通过.getAttribute来拿属性的，也不可避免的存在了这个问题。stackoverflow上的建议是用.get(0).href。</p>
+<p>ie7 has different implementation for .getAttribute(‘href’) with other browsers.</p>
+<p>other browser will return the actual value in href attribute, but ie7 will return the full url of that link.</p>
+<p>ref:<a href="http://stackoverflow.com/questions/1593174/wrong-extraction-of-attrhref-in-ie7-vs-all-other-browsers" target="_blank">http://stackoverflow.com/questions/1593174/wrong-extraction-of-attrhref-in-ie7-vs-all-other-browsers</a></p>
+<h2 id="2-_‘mouseevent’穿透">2. ‘mouseevent’穿透</h2>
+<p>在ie7中，使用绝对定位的元素如果’background-color’设为none或者transparent，那么鼠标事件则会完全忽略掉这个元素，而直接在藏在背后的元素上触发。</p>
+<p>对于这类元素就只有设置他的background-color的值(不能为transparent)，而不能忽略。</p>
+<p>For position:absolute element in IE7, if the background-color is none or transparent, the mouse events (like ‘click’, ‘mouseenter’,ect) will be triggered in the element that behind front one. Like a penetrability effect.</p>
+<p>so make sure the absolute element and its children has a fixed background.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-03T02:28:00.000Z">4月 3 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/03/orion-next-eclipse/">Orion: Next Eclipse?</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Orion是一个开源的online IDE，javascript的client和java的server,也是属于Eclipse Project下面的一个重要项目；希望打造一个online版的eclipse。</p>
+<p>比较好奇的是居然没有做成比较流行的SPA(Single Page Application)的形式，而是可以打开多个tab，并且允许你通过link共享，这是好处吧，不好的是这样每次做新的操作都要切换tab并且等待刷新，用户体验不是很好。就不能两者都结合起来么？</p>
+<p>Link: <a href="https://orionhub.org" target="_blank">https://orionhub.org</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-03-26T09:22:00.000Z">3月 26 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/03/26/array-slice-in-ruby/">Array slice in Ruby</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Ruby的文档实在太省略了,之前用slice不是很理解结果，在stackoverflow上面发现一个非常不错的<a href="http://stackoverflow.com/questions/3568222/array-slicing-in-ruby-looking-for-explanation-for-illogical-behaviour-taken-fr" target="_blank">解释</a>，也得到了confirm. </p>
+<p>可以看到ruby的array.slice的处理是用元素之间的space来标记index的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-03-01T05:18:00.000Z">3月 1 2013</time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/03/01/boot-configuration-data/">Boot Configuration Data</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Boot Configuration Data</p>
+<p>Boot Configuration Data (BCD) is a firmware-independent database for boot-time configuration data. It replaces the boot.ini that was used by NTLDR, and is used by Microsoft’s new Windows Boot Manager.</p>
+<p>Boot Configuration Data are stored in a data file that has the same format as the Windows Registry.[1] The file is located either on the EFI System Partition (on machines that use Extensible Firmware Interface firmware) or in \Boot\Bcd on the system volume (on machines that use IBM PC compatible firmware).</p>
+<p>Boot Configuration Data may be altered using a command-line tool (bcdedit.exe), using Registry Editor (regedit.exe), using Windows Management Instrumentation, or with third party tools like EasyBCD.</p>
+<p>Boot Configuration Data contain the menu entries that are presented by the Windows Boot Manager, just as boot.ini contained the menu entries that were presented by NTLDR. These menu entries can include:</p>
+<ol>
+<li>Options to boot Windows Vista by invoking winload.exe.</li>
+<li>Options to resume Windows Vista from hibernation by invoking winresume.exe.</li>
+<li>Options to boot a prior version of the Windows NT family by invoking its NTLDR.</li>
+<li>Options to load and to execute a volume boot record.</li>
+</ol>
+<p>Boot Configuration Data allows for third party integration so anyone can implement tools like diagnostics or recovery options.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2012-07-14T05:03:00.000Z">7月 14 2012</time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/07/14/comments-on-ipo-system-in-china/">原尚书记对发行审核制度改革的评价</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在位的可以说不能做，大家都看得到问题所在，但是谁会去动这一下呢?</p>
+<p>“发行审核制度改革最先推的是保荐人制度，就是整体上讲，要让发行制度更加市场化。市场化的核心是让市场的主体发挥作用，让他们归位尽责。如果市场主体该做的事情不去做，市场化就是缘木求鱼，方向就不对。因此，最早推的是保荐人制度。保荐人制度推出，就是让保荐人在公司上市过程中承担更大责任。这样，保荐人帮助公司做好做细上市前的工作，促使它在上市前就完成改制，按照股份制公司、公众公司的标准去改造；而不是对它进行包装，包装之后让它来过关。我曾经把这个变化比喻为：过去是过一个关，现在把它变成了一个管子；公司要想过这个关，就必须按照公众公司的标准去改造，才能过这个关，前期工作应该做得更好些。所以保荐制度是最先改革的，然后才是发审委的改革。</p>
+<p>　　发审委的改革，就是让它更加阳光化，更加专业化。过去有一个发审委的名单，据说有80多个人。那个时候名单是保密的，听说市场还有卖这个名单的。关键问题是这个名单本身就不透明，缺乏社会约束。</p>
+<p>　　第一，阳光是最好的消毒剂。于是，证监会就聘请专业的人来参加，提高审核的专业水平。第二，这些人员大部分是会计师、律师。他们的职业生涯是和社会的认可度联系在一起的，是受社会监督的。第三，在发审制度上保证能够集体决策，而不是哪一个人说了就能过关。这样就推出了发审委制度改革，发审委名单比过去缩小了，但是变成了专职的。主要是从会计师事务所和律师事务所引进专业队伍。发审委的改革，从目前看是成功的，他们确实能够恪尽职守，客观地发表意见。从工作程序上，我们也做了一些安排，比如发审委所有工作都要有工作底稿，以后可能还要追责，有非常严格的要求，保证能够最大限度正常地发挥它应该发挥的职能，保护投资者的合法权益。</p>
+<p>　　上市公司通过发审委审核以后，到市场上开始定价。我们希望定价机制更加市场化。这个市场化过程当中也有一个归位尽责的问题。上市公司总是希望自己的股票卖得贵一点。但是在成熟市场上，发行人看重的并不是能融多少资，而是确定一个合理的价格，让这个价格保持合理的逐步增长的空间。这样下来，投资者对上市公司的认可度会提高，使得上市公司未来有更好的发展机会的时候还可以再顺利融资。我们的企业在这方面还有差距，总是觉得有这么一次机会，赶快融资，融得越多越好。企业有抬价的动机。另一方面，我们的买方应该使劲压价，但是靠谁去压价，怎么样形成价格的博弈，这当中，保荐人、承销商就起了比较重要的作用。比较成熟的市场上，承销商的作用是，一手托买家，一边把公司股票卖出去，卖给熟悉的投资者，这样达到利益的均衡：卖方觉得卖的价格合适，买方觉得买的股票有上涨空间。我们现在没有让承销商搞配售制度，就是怕配售的时候又有些权力寻租。我们的目标是在市场化过程中，让市场主体归位尽责，逐步培育这样的机制。就是上市公司在发行股票的时候要考虑得更长远一些，能够保证公司逐步成长；承销商要逐步变成一手托两家，均衡双方的利益。</p>
+<p>　　现在离这个目标还有差距，今后在改革过程中要朝着这个方向努力，一方面是更加市场化，另一方面是逐步建立起市场各方都能归位尽责，形成一种机制。这种机制建立起来之后，把现在的核准制逐步改为注册制才有条件。如果说机制没有建立起来，我们的审批条件先放松，恐怕对投资者权益不是保护。市场上有人说，如果不改变这种行政审批，市场供求是不平衡的，发行价格总是维持在较高水平。这其实是技术层面的问题，发得快一点也是一样的，也解决了市场供求问题。但是，现在我们缺的是这种制衡机制。这种机制没建立起来，就把制度改了，可能未必是好事。</p>
+<p>　　记者：按照您的规划，注册制还有多长时间才能实现？</p>
+<p>　　尚福林：市场发展当中，有些是不大好规划的，比如做一些制度上的改变，设置多层次市场，现在我们可以做一些规划。有些事情的改变是要靠市场机制的培育，看它的成熟程度，这是需要时间的，需要根据市场参与各方的成熟程度来决定什么时候推出。市场化恰恰就是有些地方是规划不到的。有的时候大家经常问我，你这件事情有没有时间表？什么时间推出？我经常讲，没有时间表。不是说我有时间表不说，我确实是没有时间表。而且我在证监会工作安排上，总是要求做到水到渠成，这样才能使改革顺利推出。这是更市场化的做法，是更适应市场需要的一种工作方法。这种工作方法不是说工作可以拖沓，而是要积极地创造条件，培育条件，在条件成熟的时候再推出。条件不成熟，设立个“到哪天必须推出”的时间表，如果到时条件不成熟硬推出去，对市场是一种伤害。我总是说，要符合市场发展规律，要符合中国市场发展规律，我们在具体工作中也要体现出这种要求。这种方法是符合科学发展观的。</p>
+<p>　　规范的目的是什么？是促进市场能够健康发展，而不是把市场规范得失去活力，或是市场效率极大降低，这也不是我们监管的目标。我们的监管目标是维护市场三公原则，提高市场效率。方法上就是要规范发展，规范和发展相辅相成，有了规范才能更好地发展。”</p>
+<p>　　　　　　　　　　　　　　　　　　　　　－－－　尚福林</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2012-07-14T04:30:00.000Z">7月 14 2012</time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/07/14/graphviz-ji-chong-layoutde-mode/">Graphviz 几种layout的mode</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>graphviz的工具dot主要有6种filter：<br>dot<br>neato<br>twopi<br>circo<br>fdp<br>sfdp<br>其中dot可以用来绘制有向图，但是似乎是要在原始graph里面有layout信息<br>neato用来绘制无向图，layout的结果是根据force-directed algorithms也就是spring algorithms算出来的。spring layout是一个对现实进行模拟的很好例子，它利用胡克定律和库伦定律，node之间的作用力由node本身相互之间的吸引力和斥力以及edge上的弹力所决定。经过多次迭代，最终会达到一个力平衡的状态。之前在做training project时还写了一个javascript版的spring layout.<br>而nodes之间的力有库伦定律得出，edges上的力则有胡克定律得出。在这样一个算法中，各个参数和迭代次数的选择对于layout的结果是非常重要的。</p>
+<p> twopi是一个绘制radial layout  (see G. Wills, Symposium on Graph Drawing GD’97, September, 1997)的filter，首先它会选择一个root node，然后根据其他nodes到root的步长来决定它们分布在那个环上，比如步长为1的就分布在离圆心最近的一个环上，步长为2就分布在离圆心第二远的环上，依次类推。</p>
+<p>  circo则是根据circular layout (see Six and Tollis, GD ’99 and ALENEX ’99, and Kaufmann and Wiese, GD ’02.)来绘制layout. 该算法和上面的radial layout类似，不同的是会尽量将有biconncted的node group放在一个环上，这样可以尽可能的减少环与环之间的edges. 当graph是一个outerplanar的时候，这个算法绘制出来的是一个plannar layout.<br>  plannar就是平面图，也就是说存在一种绘制方法将graph画在一个平面上而没有边交叉。而outerplannar则是在绘制成为plannar之后，所有的node都处在graph的boundary上，即没有一个node被围在中心。</p>
+<p>   fdp和sfdp两个filter都是利用了一种spring layout来绘制无向图，这种spring layout manual上说是 “a force-directed approach in the spirit of Fruchterman and Reingold (cf. Software-Practice &amp; Experience 21(11), 1991, pp. 1129-1164)”; 也没有看， 不知道和一般的spring layout有什么区别。后面sfdp实际上是scale-fdp，算法应该是可以多路同时计算的，因此更快，适合于large graphs.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2012-05-14T04:53:00.000Z">5月 14 2012</time>
+      
+      
+  
+    <h1 class="title"><a href="/2012/05/14/shanghai-barcamp/">Shanghai Barcamp</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>早上起来晚了，晚睡晚起的习惯很不好！总是有段时间会养成这样的不好习惯，过一段时间又会早睡早起。总结的说，去了还是有不少收获的，而且刚好就在前一段时间看了不少关于vc和初期投资培养方面的知识，结果这次居然就用到了，不然有几个就不知道在讲什么。</p>
+<p>早上一眼睁开就发现已经九点半了，然后打开电脑弄了半天才搞懂创智天地在那，知道了原来可以坐公交过去的。真正等到一身轻出门的时候已经是10：00了，可是去了才知道，时间刚刚好～ 哈哈 到的时候是10：40，还没有一个speech开始！大家都是很不守时，后来觉得忘带了笔记本（不是电脑！）和相机，只好依靠大脑记点东西，靠着不靠谱的手机拍个不清晰的照片。</p>
+<p>下面是今天听过的几个:</p>
+<hr>
+<p>1) SVB Financial Group —— How to make a technique company in China? SVB以前没听过，后来知道是硅谷银行，做的讲座其实也有宣传的部分，大概内容包括：</p>
+<p>首先要考虑的问题：企业接受怎样的货币投资，是RMB还是USD，如果是USD是选择怎样的结构，Offshore还是VIE等；这个主要影响到税收和资本流动性。之后考虑最终的退出机制是什么，这些基本上是他们做投资和牵头投资时所考虑的问题；接下来就是根据business model, team来分析是否值得投。但从描述来看，SVB在其中也是充当一个桥梁的作用，毕竟性质还是BANK，美国的regulation方面也不会允许性质为BANK的Entity去做创业阶段的风险投资。不过有一个比较有创新的finance product是 venture term debt，SVB说是这种debt他们会严格审查，确认了盈利模式和发展之后才发放的，但是他们是不会要求换取equity的，回报率一般在15%-20%。回来后在网上看了下，这种debt在美国很多还是要求换取的是可转债或者和一些warrent组合一起来提供保险。</p>
+<p>结束后和这次过来的两个SVB的员工聊天，发现其中一个是05SS的，这个世界真小。了解到我漏看了后面的Financial Group，SVB下面不止有银行，我甚至怀疑他们的银行更多的是做private bank，用来为其他的entity如Fund，Capital Investor等提供资金。它这样将实际投资的Entity分开，用来剥离风险。</p>
+<p>2) App Evolution —— by david kennan David同学还是很有想法的，不过对于其前景不是很看好；趋势是对了；技术也有些眉头，但还是不是现成的；市场在现来看却不大，而培养市场这个步骤却是自己也是任何企业无法短时间内做到的，也许google和apple这种巨头利用其在技术圈内的粉丝群能够在短期内推广，但是利益分割模式（也就是david的商业模式）在细节上还有很多问题，需要实践中来检验了。</p>
+<p>phase 1在技术上几乎不可行，太难了；而他所追求的编程行业内的微经济（mini economy）能够在初期培养多大的市场很大程度上决定了这个项目的成功与否。可行的phase 2更想是想创建一个standard，但在技术领域就如同现实中一样，这些都需要authority来帮忙推广，所以最终与大公司合作甚至出路就是被收购都是无法避免的。 后来和david聊了下，互相留了email，倒是对他这个项目技术方面的实现有点想法。</p>
+<p>下午不知道是有点困了还是怎么了，听的打不起精神来</p>
+<p>3）openstack 知道大家都在倒腾cloud operation system，也听过openstack，但是对这方面真不是很了解，只知道hapdop和map reduce。 属于技术简介，演讲者还是debian的狂热爱好者，也是debian社区的成员。反正听的不是很多，回头去看openstack的文档。</p>
+<p>4）机器人自动检测 听完了上一场，上一个听完后换了个场，不过这个已经到了快结束了；大致内容是机器人手臂+激光扫描+3D建模；觉得如果能够和生产线结合起来做自动化质量控制还是很有前途的，如果硬要专到困难，市场需求下而且作用不到的自动维修上，那么就没啥前途了；产品失败的可能性多种多样，特别是内部性损坏，按照他的展示根本就不可能自动修复，而如果是外部性损坏，他也只能修复整体化的模块：比如一整块钢，塑料等，如果是一个已经组装好了的收音机呢？而这种整块的产品一般处理方法就是回炉重新做就是了，损失不大（如果差错率高，那买下那条生产线的好去死了），何必要买一个100w的设备去修理可能出现的0.1%的质量修复呢；不过在高精度市场还是有前途的，比如军工航天产业，一点点误差都是要人命的，而在这样的行业中不少精密仪器的组成部件都很复杂，重新制作需要很多到供需；但是这样对于修复机器人要求非常高，如果修复出现的问题的话，那就可以制作一个制造这种高精度复杂组件的机器人了不是？所以可行的方案还是用来检测误差，同时由于有模型比对，所以这个设备可以将结果传递给生产线去自我调整。</p>
+<p>5) Forge+Entrepreneur = Make something cool 一个美籍上海宁小孩讲的，约莫这22岁左右，美国文化熏陶果然是比较容易创新和开放，很有passion，孩子家境也不错；当讲的东西有感觉是受到了这部电影的启发：make something cool。不过现实却不是这样，他创新是为了寻找cool的东西并且也期待这在其中找到商机，而在国内，很多人是因为不满足与现状，期待这一夜成名，怀着改变生活的梦想才创业的，一开始就是迫于“成就一番事业”的压力，这压力是自己给的，不可能只是为了一个毫无意义的cool来进行创业；一个人若是投入了全部的家当去创办一个企业，能指望只是做一个cool的东西玩吗？而这位小孩子自然是没有这种压力的，不过他有个理解我却很赞同，创业的成功不是说你努力计算就能够实现的，有时候精心的准备business plan，去找投资去谋求盈利，甚至夸大自己的事业（看到cctv2里面那些在台上拉投资的人就像笑，感觉中国一年内就要冒出100个facebook的样子）；这些都不如追求简单，把一个简单的事做到极致来的更快更便捷。因为所有的成功都是要看机遇的，时代的机遇和社会的机遇不是能以人的意志为转移的。</p>
+<p>6) Love Hotel 这个是讲字符编码的，后面进去的时候只听到了关于unicode的部分，才知道现在的unicode如此的千奇百怪，连国旗，表情都成为了unicode的一部分，因为有了男女的图标，由于不得歧视同性恋，所以unicode还加入了男男和女女的图标… 比较寒。 内容非常有意思，简直就是一部曲折离奇的搞怪史。后面还展示了一个图标是LoveHotel，好吧，这也能被加入unicode， 哈哈</p>
+<p>7) co-working - people squared 公司的图标很有意思，也是本次活动的赞助方之一。不知道co-working的上网搜一下就知道，这个还是很有前途的，不过需要环境不是，如果市场需求不够，那么就赢利不起来。好比大家都在创业，如同在加州淘金的人群的时候，有人发现卖水淘金的工具比淘金更容易发财。唯一的问题在于外部是否提供了一个创业的环境，使得能够在co-working workshop中的企业能够发展起来。上海能够提供这样的环境么？</p>
+<p>8) urban farming 绿色城市，无土培育，利用建筑物本身来培养城市所需的农作物，很不错也很有意思，不过对于人口密度如此之大的中国，不符合国情。</p>
+<p>9)AngelVest 基本就是介绍自己公司，由于之前对于Angel Investor和VC都有所了解了，所以也就觉得没啥意思了。这个AAMA的中国分支还算有点名气吧。不多说了，觉得比Innovation Work看起来顺眼，IW可能对于那些有项目的人和投资方来说很不错，但是四处招摇撞骗把刚毕业的大学生骗进去做苦力就不对了，过于急功近利，即使成功，在那样的地方，开复同学还负责苦工之后的企业家管理技能培训不？如果不，那些付出汗水和艰辛的人最后能够胜任自己创造起来的企业中的管理职位吗？</p>
+<p>好了 就这么多了，累了不写了，可能还有一些漏掉了。这次活动组织起来还是很不错的，这次通知知道的晚没准备，下次有机会到是有好几个topic想讲一讲的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/" class="alignleft prev">上一页</a>
+  
+  
+    <a href="/page/3/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+<div class="search">
+  <form action="http://google.com/search" method="get" accept-charset="utf-8">
+    <input type="text" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:villadora.github.io">
+  </form>
+</div>
+
+
+<div class="widget social">  
+  <h3 class="title">链接</h3>
+  <ul>
+  <li>
+    <a class="github" href="http://github.com/villadora">github</a>
+  </li>
+  <li>
+    <a class="twitter" href="http://twitter.com/villadora">twitter</a>
+  </li>
+  <li>
+    <a class="douban" href="http://www.douban.com/people/villadora">douban</a>
+  </li>
+  </ul>
+</div>
+
+
+
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/编译器/">编译器</a><small>1</small></li>
+  
+    <li><a href="/categories/C++/">C++</a><small>1</small></li>
+  
+    <li><a href="/categories/DotNet/">DotNet</a><small>1</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>2</small></li>
+  
+    <li><a href="/categories/Web/HTML5/">HTML5</a><small>1</small></li>
+  
+    <li><a href="/categories/Nodejs/">Nodejs</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <a href="/tags/Games/"><li>Games<small>1</small></li></a>
+  
+    <a href="/tags/rubik's cube/"><li>rubik&#39;s cube<small>1</small></li></a>
+  
+    <a href="/tags/rubic, cube/"><li>rubic, cube<small>1</small></li></a>
+  
+    <a href="/tags/computer/"><li>computer<small>1</small></li></a>
+  
+    <a href="/tags/compiler/"><li>compiler<small>1</small></li></a>
+  
+    <a href="/tags/SSA/"><li>SSA<small>1</small></li></a>
+  
+    <a href="/tags/C++/"><li>C++<small>1</small></li></a>
+  
+    <a href="/tags/smart point/"><li>smart point<small>1</small></li></a>
+  
+    <a href="/tags/c#/"><li>c#<small>1</small></li></a>
+  
+    <a href="/tags/notes/"><li>notes<small>1</small></li></a>
+  
+    <a href="/tags/笔记/"><li>笔记<small>1</small></li></a>
+  
+    <a href="/tags/dotnet/"><li>dotnet<small>1</small></li></a>
+  
+    <a href="/tags/web, mobile/"><li>web, mobile<small>1</small></li></a>
+  
+    <a href="/tags/html5/"><li>html5<small>1</small></li></a>
+  
+    <a href="/tags/web/"><li>web<small>1</small></li></a>
+  
+    <a href="/tags/barcamp/"><li>barcamp<small>1</small></li></a>
+  
+    <a href="/tags/shanghai/"><li>shanghai<small>1</small></li></a>
+  
+    <a href="/tags/虚拟机/"><li>虚拟机<small>1</small></li></a>
+  
+    <a href="/tags/virtualbox/"><li>virtualbox<small>1</small></li></a>
+  
+    <a href="/tags/网络/"><li>网络<small>1</small></li></a>
+  
+    <a href="/tags/nat/"><li>nat<small>1</small></li></a>
+  
+    <a href="/tags/bridgedappter/"><li>bridgedappter<small>1</small></li></a>
+  
+    <a href="/tags/graphviz/"><li>graphviz<small>1</small></li></a>
+  
+    <a href="/tags/图形学/"><li>图形学<small>1</small></li></a>
+  
+    <a href="/tags/layout/"><li>layout<small>1</small></li></a>
+  
+    <a href="/tags/读书/"><li>读书<small>2</small></li></a>
+  
+    <a href="/tags/历史/"><li>历史<small>1</small></li></a>
+  
+    <a href="/tags/程序员/"><li>程序员<small>1</small></li></a>
+  
+    <a href="/tags/经济/"><li>经济<small>2</small></li></a>
+  
+    <a href="/tags/专业化/"><li>专业化<small>1</small></li></a>
+  
+    <a href="/tags/读后感/"><li>读后感<small>1</small></li></a>
+  
+    <a href="/tags/思维方式/"><li>思维方式<small>1</small></li></a>
+  
+    <a href="/tags/分析/"><li>分析<small>1</small></li></a>
+  
+    <a href="/tags/学习/"><li>学习<small>1</small></li></a>
+  
+    <a href="/tags/全球化/"><li>全球化<small>1</small></li></a>
+  
+    <a href="/tags/泡沫/"><li>泡沫<small>1</small></li></a>
+  
+    <a href="/tags/经济,股市,发行审核制度/"><li>经济,股市,发行审核制度<small>1</small></li></a>
+  
+    <a href="/tags/编程, Ruby, slice, stackoverflow/"><li>编程, Ruby, slice, stackoverflow<small>1</small></li></a>
+  
+    <a href="/tags/IDE, Eclipse, Orion, Web/"><li>IDE, Eclipse, Orion, Web<small>1</small></li></a>
+  
+    <a href="/tags/IE7, bugs/"><li>IE7, bugs<small>1</small></li></a>
+  
+    <a href="/tags/javascript/"><li>javascript<small>4</small></li></a>
+  
+    <a href="/tags/synchronize/"><li>synchronize<small>1</small></li></a>
+  
+    <a href="/tags/git, customize/"><li>git, customize<small>1</small></li></a>
+  
+    <a href="/tags/nodejs, chil_process, spawn, exec/"><li>nodejs, chil_process, spawn, exec<small>1</small></li></a>
+  
+    <a href="/tags/type/"><li>type<small>1</small></li></a>
+  
+    <a href="/tags/prototype/"><li>prototype<small>1</small></li></a>
+  
+    <a href="/tags/javascript, ast, parse, minification/"><li>javascript, ast, parse, minification<small>1</small></li></a>
+  
+    <a href="/tags/emacs, auto-mode/"><li>emacs, auto-mode<small>1</small></li></a>
+  
+    <a href="/tags/mac, linux/"><li>mac, linux<small>1</small></li></a>
+  
+    <a href="/tags/hexo, interupt/"><li>hexo, interupt<small>1</small></li></a>
+  
+    <a href="/tags/svg, web, spec/"><li>svg, web, spec<small>1</small></li></a>
+  
+    <a href="/tags/javascript, Array.push, push, Range Error/"><li>javascript, Array.push, push, Range Error<small>1</small></li></a>
+  
+    <a href="/tags/passport/"><li>passport<small>1</small></li></a>
+  
+    <a href="/tags/openid/"><li>openid<small>1</small></li></a>
+  
+    <a href="/tags/nodejs/"><li>nodejs<small>1</small></li></a>
+  
+    <a href="/tags/cluster/"><li>cluster<small>1</small></li></a>
+  
+    <a href="/tags/mobile/"><li>mobile<small>1</small></li></a>
+  
+    <a href="/tags/android/"><li>android<small>1</small></li></a>
+  
+    <a href="/tags/iscroll/"><li>iscroll<small>1</small></li></a>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Villa Dora
+  
+  <br />
+  Powered by <a href="http://zespia.tw/hexo/">Hexo</a>
+</div>
+<div class="alignright license">
+<img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /> 本站作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh">知识共享署名-非商业性使用-相同方式共享 3.0 未本地化版本许可协议</a>进行许可。
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'villadora-blog';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
