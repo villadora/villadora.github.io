@@ -108,6 +108,187 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2009-03-19T16:00:00.000Z">3月 20 2009</time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/03/20/smart-pointer/">Smart Pointer</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>看了下Smart Pointer的实现，其实是对常规指针进行了封装</p>
+<p>牵涉到两个问题:</p>
+<ul>
+<li>1) 保证对象的唯一所有权，也就是说对于一个ptr，同一时刻只会有一个Smart Pointer拥有.</li>
+</ul>
+<p>如smart pointer的一个构造函数的实现:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="built_in">auto_ptr</span>(<span class="built_in">auto_ptr</span>& __a) __STL_NOTHROW : _M_ptr(__a.release()) {}
+</pre></td></tr></table></figure>
+
+<p>拷贝构造函数调用了 =__a= 的release方法， 所以实际上指针在两个 =auto_ptr= 传递了<br>在其他过程中也是这样，始终保持只有一个 =auto_ptr= 对 =_M_ptr= 保持所有权 </p>
+<ul>
+<li>2) 生命周期控制</li>
+</ul>
+<p>=auto_ptr= 是一个构建在栈上的object，这样当退出代码区时，程序会自动释放掉栈上的 =auto_ptr=，而 =auto_ptr= 的析构函数则调用了delete销毁了分装的 =_M_ptr= 指针<br>套用别人的原话：利用栈上对象的生命期控制堆上对象的生命期</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2009-03-11T16:00:00.000Z">3月 12 2009</time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/03/12/java-multi-thread/"></a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <hr>
+<p>title: “Notes on JAVA Multi-Thread”<br>categories: </p>
+<ul>
+<li>“Java”<br>comments: true<br>layout: post<br>published: true<br>status: publish<br>tags: [“java”, “multi-thread”]]<br>type: post</li>
+</ul>
+<hr>
+<h1 id="note:">note:</h1>
+<p>interface Lock: lock(), unlock(), newCondition()</p>
+<h2 id="class_ReentrantLock:">class ReentrantLock:</h2>
+<p>eentrantLock()</p>
+<h2 id="class_Condition,_ReentrantReadWriteLock">class Condition, ReentrantReadWriteLock</h2>
+<p>BlockingQueue in java.util.concurrent</p>
+<p>Callable and Future: for FutureTask<br>Executor: Thread Pool<br>Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
+<h2 id="With_Swing:">With Swing:</h2>
+<p>The swing will invoke a <span>event dispatch thread after the first graph has been shown.<br>All event notifications, such as calls to =actionPerformed= or =paintComponent=, run in the event dispatch thread.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2009-02-21T16:00:00.000Z">2月 22 2009</time>
+      
+      
+  
+    <h1 class="title"><a href="/2009/02/22/ssa-note/">SSA note</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Static Single Assignment, dominate frontier, dominate basic block</p>
+<p>SSA From&amp;def-use chain on wiki, Efficiently Computing Static Single Assignment Form and Control Dependence Graph 91’</p>
+<p>在gcc内部主要是在tree，gimple阶段，进行了dead code remove, use-def/def-use analysis, 以及许多在tree形态下需要多项式来完成的优化，在转化为ssa后，由于varriables都只有一个defination，所以只需要线性时间</p>
+<p>gcc中ssa ir和tree是同时存在的，在转化为rtl后，就不存在ssa结构了，在regrename pass中，倒是对每一条insn，做了分析，由build_def_use function 生成def-use chain，</p>
+<h2 id="主要流程:">主要流程:</h2>
+<ul>
+<li>recog_insn_type</li>
+<li>extract_insn<ul>
+<li>insn_extract</li>
+<li>fill the recog_data, including operand nums, operand types and operand modes.</li>
+</ul>
+</li>
+<li>prepare_constraints<ul>
+<li>check each operands</li>
+</ul>
+</li>
+<li>scan_rtx<ul>
+<li>scan_rtx, if it’s insn type, call scan_rtx recursively, if it’s reg, call scan_rtx_reg, if it’s mem, call scan_rtx_address.</li>
+<li>scan_rtx_reg, scan_rtx_address, check every rtx ( most are regs ), add new or close old chains created in previous stage.</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2009-02-19T16:00:00.000Z">2月 20 2009</time>
       
       
@@ -233,6 +414,8 @@
     <li><a href="/categories/Web/HTML5/">HTML5</a><small>1</small></li>
   
     <li><a href="/categories/Nodejs/">Nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>1</small></li>
   
   </ul>
 </div>
@@ -360,6 +543,16 @@
     <a href="/tags/android/"><li>android<small>1</small></li></a>
   
     <a href="/tags/iscroll/"><li>iscroll<small>1</small></li></a>
+  
+    <a href="/tags/java/"><li>java<small>1</small></li></a>
+  
+    <a href="/tags/cookie/"><li>cookie<small>1</small></li></a>
+  
+    <a href="/tags/version/"><li>version<small>1</small></li></a>
+  
+    <a href="/tags/ie, regexp, browsers/"><li>ie, regexp, browsers<small>1</small></li></a>
+  
+    <a href="/tags/AMD, CommonJS, require2commonjs, node/"><li>AMD, CommonJS, require2commonjs, node<small>1</small></li></a>
   
   </ul>
 </div>

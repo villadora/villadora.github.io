@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://villadora.github.io/2014/05/23/amd-define-and-how-to-translate-amd-to-commonjs/</loc>
+    <lastmod>2014-05-23T09:06:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://villadora.github.io/2014/05/21/regexptostring()/</loc>
+    <lastmod>2014-05-21T03:17:55.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://villadora.github.io/2014/05/06/cookie-version/</loc>
+    <lastmod>2014-05-06T05:34:00.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://villadora.github.io/2014/04/08/isroll-event-preventDefault/</loc>
     <lastmod>2014-04-08T02:18:00.000Z</lastmod>
   </url>
@@ -72,28 +87,13 @@
   </url>
   
   <url>
-    <loc>http://villadora.github.io/2012/05/14/shanghai-barcamp/</loc>
-    <lastmod>2012-05-14T04:53:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://villadora.github.io/2009/02/20/mo-fang-mo-fang--rubiks-cube/</loc>
-    <lastmod>2009-02-19T16:00:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://villadora.github.io/2009/02/20/rubilk-s-cube/</loc>
-    <lastmod>2009-02-19T16:00:00.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://villadora.github.io/2013/03/26/array-slice-in-ruby/</loc>
     <lastmod>2013-03-26T09:22:00.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://villadora.github.io/2013/04/03/orion-next-eclipse/</loc>
-    <lastmod>2013-04-03T02:28:00.000Z</lastmod>
+    <loc>http://villadora.github.io/2009/02/20/rubilk-s-cube/</loc>
+    <lastmod>2009-02-19T16:00:00.000Z</lastmod>
   </url>
   
   <url>
@@ -162,8 +162,23 @@
   </url>
   
   <url>
+    <loc>http://villadora.github.io/2012/05/14/shanghai-barcamp/</loc>
+    <lastmod>2012-05-14T04:53:00.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://villadora.github.io/2009/02/20/mo-fang-mo-fang--rubiks-cube/</loc>
+    <lastmod>2009-02-19T16:00:00.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://villadora.github.io/2013/03/01/boot-configuration-data/</loc>
     <lastmod>2013-03-01T05:18:00.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://villadora.github.io/2013/04/03/orion-next-eclipse/</loc>
+    <lastmod>2013-04-03T02:28:00.000Z</lastmod>
   </url>
   
 </urlset>

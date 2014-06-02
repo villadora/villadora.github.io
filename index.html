@@ -108,6 +108,236 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-05-23T09:06:59.000Z">5月 23 2014</time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/23/amd-define-and-how-to-translate-amd-to-commonjs/">AMD Define and how to translate AMD to CommonJS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
+<p><a href="http://www.npmjs.com/require2commonjs" target="_blank">require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href="http://nodejs.org" target="_blank">node</a> <a href="http://github.com/cortexjs/cortex" target="_blank">cortex</a> 等外部系统来使用。</p>
+<p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
+<p>1) Dependency-free module, simple object</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>define({
+    add: <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span> <span class="keyword">return</span> a + b; }
+});
+</pre></td></tr></table></figure>
+
+<p>没有任何依赖，直接定义模块的exports。这种情况下要将AMD转话为CommonJS模块，只需要变为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>module.exports = {
+    add: <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span> <span class="keyword">return</span> a + b; }
+};
+</pre></td></tr></table></figure>
+
+<p>语法树转换非常简单。</p>
+<p>2) Simplified CommonJS wrapping</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre> define(<span class="function"><span class="keyword">function</span> <span class="params">(require, exports, module)</span> {</span>
+     <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'a'</span>),
+         b = <span class="built_in">require</span>(<span class="string">'b'</span>);
+     exports.action = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>};
+ });
+</pre></td></tr></table></figure>
+
+<p>现在AMD提供CommonJS wrapping这种格式，更为简单。 只需要将factory函数中的函数体提取出来就可以了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'a'</span>),
+    b = <span class="built_in">require</span>(<span class="string">'b'</span>);
+    
+exports.action = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>};
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-21T03:17:55.000Z">5月 21 2014</time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/21/regexptostring()/">regexp.toString()</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Regexp.toString在不同浏览器下修辞符顺序不一致。</p>
+<p>Chrome, firefox</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>var re = <span class="regexp">/abc/gim</span>;
+re.toString(); <span class="regexp">//</span> <span class="keyword">return</span> <span class="string">'/abc/gim'</span>
+</pre></td></tr></table></figure>
+
+<p>IE 9.0</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>var re = <span class="regexp">/abc/gim</span>;
+re.toString(); <span class="regexp">//</span> <span class="keyword">return</span> <span class="string">'/abc/igm'</span>
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-05-06T05:34:00.000Z">5月 6 2014</time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/05/06/cookie-version/">Cookie Version in J2EE</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带”:”字符的值.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>Cookie[] cookies = request.getCookies();
+<span class="keyword">if</span> (cookies != <span class="keyword">null</span>) {
+    <span class="keyword">for</span> (Cookie cookie : cookies) {
+        <span class="keyword">if</span> (StringUtils.equalsIgnoreCase(cookie.getName(), name)) {
+            value = cookie.getValue(); <span class="comment">// if the value in cookie is 'http://example.com' then here it will get 'http'</span>
+            <span class="keyword">break</span>;
+        }
+    }
+}
+</pre></td></tr></table></figure>
+
+<p>这是因为目前Cookie有两个标准，一个是Version 0 (<a href="http://curl.haxx.se/rfc/cookie_spec.html" target="_blank">Netscape spec</a>)</p>
+<p>而J2EE的实现描述 Cookie#setValue 中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>With Version <span class="number">0</span> cookies, values should <span class="keyword">not</span> <span class="keyword">contain</span> white <span class="constant">space</span>, brackets, parentheses, <span class="keyword">equals</span> signs, commas, double quotes, slashes, question marks, <span class="keyword">at</span> signs, colons, <span class="keyword">and</span> semicolons. Empty values may <span class="keyword">not</span> behave <span class="keyword">the</span> same way <span class="function_start"><span class="keyword">on</span></span> all browsers.
+`
+</pre></td></tr></table></figure>
+
+<p>也就是说Version 0 是不能包含空格，括弧，等号，逗号， 双引号等字符的。 </p>
+<p>而Version 1 (<a href="http://www.ietf.org/rfc/rfc2109.txt" target="_blank">RFC 2109 spec</a>) 是可以的。</p>
+<p>但是javax.servlet.http.Cookie的实现时默认是使用 Version 0</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">By</span> <span class="keyword">default</span>, cookies are created according <span class="keyword">to</span> the Netscape cookie specification. The version can be changed <span class="keyword">with</span> the
+setVersion <span class="function"><span class="keyword">method</span>.</span>
+</pre></td></tr></table></figure>
+
+<p>而看起来container默认的选择也是使用了Version 0而没有去改变version。所以当Cookie值中带有’:’时，就无法读到colon后的内容。</p>
+<p>如果没有办法改container并且只能使用默认的request的话，暂时的解决方案是在写cookie的时候URLEncode, 然后在服务器端读的时候做URLDecode。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-04-08T02:18:00.000Z">4月 8 2014</time>
       
       
@@ -541,232 +771,6 @@ b.apply([], a);
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-29T01:53:00.000Z">5月 29 2013</time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/29/$-in-auto-mode-alist/">&#39;$&#39; in auto-mode-alist</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
-<p>“Note that \’ matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing newlines. (Should be pretty rare… )”</p>
-<p>也就是说”$”可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的”\.\(md\|markdown\)$”一直匹配不到,改成”\.\(md\|markdown\)\‘“就好了，好吧 这个正则够诡异的。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-24T01:34:00.000Z">5月 24 2013</time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/24/uglify-js-processing/">Uglify-js Processing</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="UglifyJs_1">UglifyJs 1</h2>
-<p>‘parse-js’:主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end<br>‘process.js’:在ast的IR上做优化, 其中包括:</p>
-<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等;<br>2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类;<br>3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。</p>
-<pre><code><span class="bullet">* </span>[]取值变成.操作符  <span class="smartquote">```foo['</span>bar'] =&gt; foo.bar<span class="code">```</span>
-<span class="bullet">* </span>去掉不必要的{}
-<span class="bullet">* </span>..etc.
-</code></pre><h2 id="UglifyJs_2">UglifyJs 2</h2>
-<p>在生成ast之后，在topLevel scope上定义了figure_out_scope方法，提供了额外的关于变量定义等node的其他关联信息，这样在之后做mangle和其他优化的时候有了更多信息。之后的优化和更改都放在了一些transform和walker中。</p>
-<p>只不过在设计的时候TreeWalker和ast定义在一起，不得不考虑ast结构来进行visit，而transform更是定义在walker之上，导致一个本来很简单的树遍历需要考虑很多复杂的情况，而且由于ast本身并没有父结点的ref，回溯的信息都放到了walker里面，而一些transform的操作在需要知道父结点相关信息的时候需要一个个的去定义不同node的情况。自己在deobfuscate中写了个travese.js，基本可以完成transform和walker的工作。还是觉得esprima这种纯json的ast比较简洁。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-22T02:51:00.000Z">5月 22 2013</time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/22/type-system-in-javascript/">Description on Function/Object and other things in Javascript</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="Pre-Knowledge">Pre-Knowledge</h2>
-<p>Function is a Object, Object has a constructor and a property called ‘__proto__‘, and also you know what happens during the ‘=new=’ keyword (allocate memory; set __proto__ to <em>Function</em>.prototype; apply <em>Function</em> to new created object;)</p>
-<h2 id="What’s_a_Function?">What’s a Function?</h2>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>    <span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> === <span class="literal">true</span> <span class="comment">// everything is a Object</span>
-    <span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span> <span class="comment">// Function is a Function, interesting, right?</span>
-    <span class="built_in">Function</span>.constructor === <span class="built_in">Function</span>  <span class="comment">// Function initialize by itself</span>
-    <span class="built_in">Function</span>.prototype === <span class="built_in">Function</span>:Empty  <span class="comment">// Function has prototype because it's a Function </span>
-    <span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>:Empty  <span class="comment">// Function has __proto__ because it's a Object</span>
-</pre></td></tr></table></figure>
-
-<p>From these above we can easily understand that Function is a Object (everything is Object), and also is a <em>Function</em>. as Object, its constructor is itself; and the prototype is the Empty Function(remember is not a</p>
-<figure class="highlight function()"><figcaption><span>{}```); and as an instance of _Function_; it's '\_\_proto\_\_' property is set to Function.prototype, which is the Empty Function.</span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>
-Here is something interesting:
-
-What is <span class="keyword">Function</span>:Empty? it's a empty <span class="keyword">function</span>? we can test it
-
-``` javascript
-    <span class="keyword">Function</span>.prototype instanceof Object === <span class="keyword">true</span> // <span class="keyword">Function</span>.prototype is a object, because everything is object
-    <span class="keyword">Function</span>.prototype instanceof <span class="keyword">Function</span> === <span class="keyword">false</span> // <span class="keyword">Function</span>.prototype Empty <span class="keyword">Function</span> is not a <span class="keyword">Function</span>! it can be called mother of all the functions, the Force!!
-    <span class="keyword">Function</span>.prototype.__proto__ === {].__proto__ === Object {} // the __proto__ of <span class="keyword">Function</span>:Empty is the same as a <span class="keyword">Function</span>
-    <span class="keyword">Function</span>.prototype.prototype === undefined // Because it's not a <span class="keyword">Function</span>, so it don't have prototype
-</pre></td></tr></table></figure>
-
-<p>So the Function:Empty is an Object rather than a Function, but it’s the mother of all the functions; That is said that all the functions are clone from this one.</p>
-<p>That’s make sense, right? Let’s go back to the prototype chain:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>     <span class="built_in">Function</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span>
-</pre></td></tr></table></figure>
-
-
-<p>Function is prototyped from Function, according to the object creating process: we allocate the memory first, then set ‘__proto__‘ to ‘Function.prototype’.. wait so ‘Function.prototype’ is also a Function, there is a cycling here, so we need something to break the cycle, that’s ‘Function.Empty’.</p>
-<p>What about new functions like</p>
-<figure class="highlight function"><figcaption><span>A() {}```? </span></figcaption><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>
-``` javascript
-    A instanceof <span class="keyword">Function</span> === true // A <span class="keyword">is</span> a <span class="attribute">'Function</span>' Object
-    A.__proto__ === <span class="keyword">Function</span>.prototype // A should has everything <span class="keyword">in</span> <span class="attribute">'Function</span>'
-    A.constructor === <span class="keyword">Function</span> // A <span class="keyword">is</span> constructed by <span class="attribute">'Function</span>'
-    A.prototype !== <span class="keyword">Function</span>.prototype // A.prototype <span class="keyword">is</span> a <span class="keyword">new</span> object, this <span class="keyword">is</span> belong <span class="keyword">to</span> A, <span class="keyword">and</span> should be initialized during <span class="keyword">Function</span>(). I believe that every <span class="keyword">new</span> <span class="keyword">function</span> has a <span class="keyword">new</span> object as its prototype, <span class="keyword">if</span> I<span class="attribute">'m</span> wrong correct me
-</pre></td></tr></table></figure>
-
-<h2 id="What’s_an_Object?">What’s an Object?</h2>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>    <span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span> === <span class="literal">true</span> <span class="comment">//everything is object</span>
-    <span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span> === <span class="literal">true</span> <span class="comment">// Object also is a Function</span>
-    <span class="built_in">Object</span>.constructor === <span class="built_in">Function</span> [native code] <span class="comment">//Object is initialized by vm</span>
-    <span class="built_in">Object</span>.prototype === <span class="built_in">Object</span> {} <span class="comment">// Object.prototype is the 'Object {}'</span>
-    <span class="built_in">Object</span>.prototype === <span class="built_in">Function</span>.prototype.__proto__ === {}.__proto__ <span class="comment">// the 'Object {}' is unique</span>
-    <span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span> <span class="comment">// 'Object {}' is not a Object in V8, it's a root object in native code</span>
-</pre></td></tr></table></figure>
-
-<p>Object is also an Object because ‘everything is an object’, and Object is also a Function; and just like cycling in ‘Function’, the Object also need a root, that is ‘Object {}’. </p>
-<p>Actually, objects are not an instance of Object,  they are objects whose prototype is ‘Object{}’, which is Object.prototype, when we create objects with Object Function, the Object.prototype is set to obj.__proto__.</p>
-<h2 id="New_is_a_mistake?">New is a mistake?</h2>
-<p>As already said by many people, seen in Douglas’s book, ‘=new=’ keyword done things that can be done with <code>Object.create</code> and <code>Function.apply</code>, see <a href="http://stackoverflow.com/questions/3650892/what-does-the-new-keyword-do-under-the-hood" target="_blank">StackOverflow:what does ‘new’ word do under the hook</a>.</p>
-<p>In class hierarchy, the Class and Instance are different things, but in prototype hierarchy, there is no class and instance things, there are only Objects. Just like rumor, the ‘new’ keyword added is because the Manager in Netscape ask them to make something looks like Java:-)</p>
-<h2 id="Ref:">Ref:</h2>
-<ol>
-<li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model" target="_blank">MDN Details of the Object Model</a></li>
-</ol>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -816,6 +820,8 @@ What is <span class="keyword">Function</span>:Empty? it's a empty <span class="k
     <li><a href="/categories/Web/HTML5/">HTML5</a><small>1</small></li>
   
     <li><a href="/categories/Nodejs/">Nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/Java/">Java</a><small>1</small></li>
   
   </ul>
 </div>
@@ -943,6 +949,16 @@ What is <span class="keyword">Function</span>:Empty? it's a empty <span class="k
     <a href="/tags/android/"><li>android<small>1</small></li></a>
   
     <a href="/tags/iscroll/"><li>iscroll<small>1</small></li></a>
+  
+    <a href="/tags/java/"><li>java<small>1</small></li></a>
+  
+    <a href="/tags/cookie/"><li>cookie<small>1</small></li></a>
+  
+    <a href="/tags/version/"><li>version<small>1</small></li></a>
+  
+    <a href="/tags/ie, regexp, browsers/"><li>ie, regexp, browsers<small>1</small></li></a>
+  
+    <a href="/tags/AMD, CommonJS, require2commonjs, node/"><li>AMD, CommonJS, require2commonjs, node<small>1</small></li></a>
   
   </ul>
 </div>
