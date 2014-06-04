@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://villadora.github.io/"/>
-  <updated>2014-06-02T11:00:04.126Z</updated>
+  <updated>2014-06-04T08:13:08.042Z</updated>
   <id>http://villadora.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://villadora.github.io/2014/05/23/amd-define-and-how-to-translate-amd-to-commonjs/"/>
     <id>http://villadora.github.io/2014/05/23/amd-define-and-how-to-translate-amd-to-commonjs/</id>
     <published>2014-05-23T09:06:59.000Z</published>
-    <updated>2014-05-23T09:22:11.000Z</updated>
+    <updated>2014-06-04T08:12:25.000Z</updated>
     <content type="html"><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
 <p><a href="http://www.npmjs.com/require2commonjs" target="_blank">require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href="http://nodejs.org" target="_blank">node</a> <a href="http://github.com/cortexjs/cortex" target="_blank">cortex</a> 等外部系统来使用。</p>
 <p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
@@ -64,6 +64,35 @@
     b = <span class="built_in">require</span>(<span class="string">'b'</span>);
     
 exports.action = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>};
+</pre></td></tr></table></figure>
+
+<p>3) Normalized</p>
+<p>这个是通常我们见到的AMD格式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>define([<span class="string">'backbone'</span>, <span class="string">'./util'</span>, <span class="string">'Buffer'</span>], <span class="function"><span class="keyword">function</span><span class="params">(Bakcbone, util)</span> {</span>
+    <span class="comment">// other process</span>
+    <span class="keyword">return</span> {
+       data: {}
+   };
+});
+</pre></td></tr></table></figure>
+
+<p>对于这种格式，处理有两个步骤 1) 将依赖转变为require的形式，中间要注意的是依赖申明和 factory 的参数并不一定一致； 2) 将 return 转变为 module.exports</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> Backbone = <span class="built_in">require</span>(<span class="string">'backbone'</span>);
+<span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'./util'</span>);
+<span class="built_in">require</span>(<span class="string">'Buffer'</span>);
+
+module.exports = { data: {} };
 </pre></td></tr></table></figure>
 
 ]]></content>

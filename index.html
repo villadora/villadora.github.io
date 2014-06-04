@@ -9,12 +9,13 @@
   
   <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
+  
   <meta property="og:site_name" content="时光屋"/>
 
   <link rel="alternate" href="atom.xml" title="时光屋" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
   
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -29,6 +30,7 @@
 </script>
 
 </head>
+
 
 <body>
   <header id="header" class="inner"><div class="alignleft">
@@ -161,6 +163,35 @@
     b = <span class="built_in">require</span>(<span class="string">'b'</span>);
     
 exports.action = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>};
+</pre></td></tr></table></figure>
+
+<p>3) Normalized</p>
+<p>这个是通常我们见到的AMD格式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>define([<span class="string">'backbone'</span>, <span class="string">'./util'</span>, <span class="string">'Buffer'</span>], <span class="function"><span class="keyword">function</span><span class="params">(Bakcbone, util)</span> {</span>
+    <span class="comment">// other process</span>
+    <span class="keyword">return</span> {
+       data: {}
+   };
+});
+</pre></td></tr></table></figure>
+
+<p>对于这种格式，处理有两个步骤 1) 将依赖转变为require的形式，中间要注意的是依赖申明和 factory 的参数并不一定一致； 2) 将 return 转变为 module.exports</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> Backbone = <span class="built_in">require</span>(<span class="string">'backbone'</span>);
+<span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'./util'</span>);
+<span class="built_in">require</span>(<span class="string">'Buffer'</span>);
+
+module.exports = { data: {} };
 </pre></td></tr></table></figure>
 
 
