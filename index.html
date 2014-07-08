@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>时光屋</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="The past is a ghost, the future a dream and all we ever have is now.">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="时光屋">
+    <meta name="twitter:description" content="The past is a ghost, the future a dream and all we ever have is now.">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="时光屋">
+    <meta property="og:description" content="The past is a ghost, the future a dream and all we ever have is now.">
+
+    
+<meta name="twitter:site" content="@villadora">
+
+
+<meta name="twitter:creator" content="@villadora">
+
+
+<meta name="google-site-verification" content="">
+
+
+<meta property="fb:admins" content="">
+
+
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/main.min.css?v=8e8b27b0a0"/>
+
+    <script type="text/javascript">
+      
+var ga_ua = 'UA-7622998-2';
+
+
+var disqus_shortname = 'example';
+
+
+var enable_pjax = true;
+
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="assets/js/head-scripts.min.js?v=8e8b27b0a0"></script>
+
+    <meta name="generator" content="Ghost 0.4" />
+<link rel="alternate" type="application/rss+xml" title="时光屋" href="rss/index.html">
+<link rel="canonical" href="http://villadora.me/" />
+  </head>
+  <body class="home-template">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+<nav tabindex="-1" class="drawer">
+  <div class="drawer-container">
+    <!--.drawer-search(role="search")-->
+    <ul role="navigation" class="drawer-list">
+      
+
+<li class="drawer-list-item">
+  <a href="index.html" data-pjax>
+    <i class="fa fa-home"></i>Home
+  </a>
+</li>
+<li class="drawer-list-item">
+  <a href="http://villadora.me/rss/">
+    <i class="fa fa-rss"></i>Subscribe to Feed
+  </a>
+</li>
+<li class="drawer-list-divider"></li>
+<li class="drawer-list-item drawer-list-title">
+  Follow me
+</li>
+<li class="drawer-list-item">
+  <a href="http://twitter.com/villadora" target="_blank">
+    <i class="fa fa-twitter"></i>Twitter
+  </a>
+</li>
+<li class="drawer-list-item">
+  <a href="http://github.com/villadora" target="_blank">
+    <i class="fa fa-github"></i>Github
+  </a>
+</li>
+
+    </ul>
+  </div>
+</nav>
+
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+
+<aside role="banner" class="cover">
+  <div data-load-image="/content/images/2014/Jul/sc.jpg" class="cover-image"></div>
+  <div class="cover-container">
+    
+      <a href="http://villadora.me" class="cover-logo" data-pjax>
+        <img src="content/images/2014/Jul/logo.jpeg" alt="Blog Logo">
+      </a>
+    
+    <h1 class="cover-title">时光屋</h1>
+    <p class="cover-description">The past is a ghost, the future a dream and all we ever have is now.</p>
+  </div>
+</aside>
+
+<section class="wrapper" tabindex="0">
+  <div class="wrapper-container">
+    
+
+
+    <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-amd-2 tag-commonjs-2">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/05/24/amd-define-and-how-to-translate-amd-to-co/index.html" itemprop="url" data-pjax title="AMD到CommonJS的转换">
+        AMD到CommonJS的转换
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
+
+<p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
+
+<p><a href="http://www.npmjs.com/require2commonjs">require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href="http://nodejs.org">node</a> <a href="http://github.com/cortexjs/cortex">cortex</a> 等外部系统来使用。</p>
+
+<p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
+
+<p>1) Dependency-free module, simple object</p>
+
+<pre><code class=" javascript">define({  
+    add: function(a, b) { return a + b; }
+});
+</code></pre>
+
+<p>没有任何依赖，直接定义模块的exports。这种情况下要将AMD转话为CommonJS模块，只需要变为</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-24" itemprop="datePublished">
+          2 months ago
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="tag/amd-2/index.html" data-pjax>amd</a>, 
+          
+            <a itemprop="keywords" href="tag/commonjs-2/index.html" data-pjax>commonjs</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/05/24/amd-define-and-how-to-translate-amd-to-co/index.html#disqus_thread" data-pjax data-disqus-identifier="135">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/05/21/regexptost/index.html" itemprop="url" data-pjax title="regexp.toString()">
+        regexp.toString()
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Regexp.toString在不同浏览器下修辞符顺序不一致。</p>
+
+<p>Chrome, firefox</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/gim'  
+</code></pre>
+
+<p>IE 9.0</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/igm'  
+</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-21" itemprop="datePublished">
+          2 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/05/21/regexptost/index.html#disqus_thread" data-pjax data-disqus-identifier="134">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/05/06/cookie-version/index.html" itemprop="url" data-pjax title="Cookie Version in J2EE">
+        Cookie Version in J2EE
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
+
+<pre><code class="java">Cookie[] cookies = request.getCookies();  
+if (cookies != null) {  
+    for (Cookie cookie : cookies) {
+        if (StringUtils.equalsIgnoreCase(cookie.getName(), name)) {
+            value = cookie.getValue(); // if the value in cookie is 'http://example.com' then here it</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-06" itemprop="datePublished">
+          2 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/05/06/cookie-version/index.html#disqus_thread" data-pjax data-disqus-identifier="133">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/04/08/isroll-event-preventdefault/index.html" itemprop="url" data-pjax title="Iscroll5的几个bug">
+        Iscroll5的几个bug
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
+
+<ol>
+<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
+</ol>
+
+<pre><code>this.fadeTimeout = setTimeout((function (val) {  
+    this.wrapperStyle.opacity = val;
+    this.visible = +val;
+}).bind(this, val), delay);
+</code></pre>
+
+<p>去掉bind, 改成closure解决问题</p>
+
+<pre><code>var selft = this;  
+self.fadetimeout = setTimeout</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-04-08" itemprop="datePublished">
+          3 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/04/08/isroll-event-preventdefault/index.html#disqus_thread" data-pjax data-disqus-identifier="132">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/03/06/passport-openid-nodejs/index.html" itemprop="url" data-pjax title="在cluster中使用passport openID">
+        在cluster中使用passport openID
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h1 id="passportopenidincluster">Passport openid in cluster</h1>
+
+<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
+
+<h2 id="session">session</h2>
+
+<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
+
+<h2 id="openidassociation">open id association</h2>
+
+<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
+但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
+
+<pre><code class=" js">    var passport = require('passport');
+    var</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-03-06" itemprop="datePublished">
+          4 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2013/08/09/arguments-exceed-javascript/index.html" itemprop="url" data-pjax title="javascript arguments长度限制">
+        javascript arguments长度限制
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>先看下这一段代码片段(in chrome):</p>
+
+<pre><code class="javascript">var a = [];  
+a[2&lt;&lt;16] = 1;  
+fucntion b() {}  
+b.apply([], a);  
+</code></pre>
+
+<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
+为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
+大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-09" itemprop="datePublished">
+          11 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2013/08/09/arguments-exceed-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="130">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2013/08/06/interupt-when-hexo-generating/index.html" itemprop="url" data-pjax title="interupt when hexo generating">
+        interupt when hexo generating
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+          11 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2013/08/06/interupt-when-hexo-generating/index.html#disqus_thread" data-pjax data-disqus-identifier="128">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2013/08/06/svg-spec/index.html" itemprop="url" data-pjax title="SVG Spec">
+        SVG Spec
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h3 id="svgpaintersmodel">SVG的Painters model</h3>
+
+<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
+
+<h3 id="renderingorder">Rendering Order</h3>
+
+<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
+
+<h3 id="groups">groups</h3>
+
+<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
+
+<h3 id="typesofgraphicselements">types of graphics elements</h3>
+
+<p>SVG支持三种基本的图形元素: <br />
+  * Shapes: 用到最多的，主要由各种线和填充构成
+  * Text: 字符的组合
+  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+          11 months ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2013/08/06/svg-spec/index.html#disqus_thread" data-pjax data-disqus-identifier="129">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2013/07/08/hostname-in-mac/index.html" itemprop="url" data-pjax title="hostname in mac">
+        hostname in mac
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
+
+<p>在prompt里面的%m hostname通过以下途径获得：</p>
+
+<ol>
+<li>/etc/hostconfig: 在这个配置文件中配置  </li>
+<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
+<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
+<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
+<li>最后如果这个也没查到，那就会返回localhost</li>
+</ol>
+
+<p>所以由于我hostconfig没配置</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-07-08" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2013/07/08/hostname-in-mac/index.html#disqus_thread" data-pjax data-disqus-identifier="127">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2013/05/31/html5/index.html" itemprop="url" data-pjax title="HTML5">
+        HTML5
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
+HTML5 各方角力又开始了</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-05-31" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2013/05/31/html5/index.html#disqus_thread" data-pjax data-disqus-identifier="109">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+    </section>
+
+    
+      <nav role="pagination" class="post-list-pagination">
+  
+  <span class="post-list-pagination-item post-list-pagination-item-current">Page 1 of 4</span>
+  
+    <a href="page/2/index.html" class="post-list-pagination-item post-list-pagination-item-next" data-pjax>
+      Older&nbsp;<i class="fa fa-angle-double-right"></i>
+    </a>
+  
+</nav>
+
+    
+
+    <footer role="contentinfo" class="footer">
+  <p><small>© 2014. All Rights Reserved.</small></p>
+  <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+  <p><small>Proudly published with <a href="http://ghost.org" target="_blank">Ghost</a></small></p>
+</footer>
+
+  </div>
+</section>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="public/jquery.js?v=8e8b27b0a0"></script>
+
+    <script src="assets/js/foot-scripts.min.js?v=8e8b27b0a0"></script>
+
+    <script type="text/javascript">
+
+      if(GHOSTIUM.haveGA) {
+        (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
+        function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
+        t=h.createElement(o);z=h.getElementsByTagName(o)[0];
+        t.src='//www.google-analytics.com/analytics.js';
+        z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
+        ga('create',ga_ua);ga('send','pageview');
+      }
+
+      if(GHOSTIUM.haveDisqus) {
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+      }
+    </script>
+  </body>
+</html>

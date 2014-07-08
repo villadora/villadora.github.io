@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Tue, 08 Jul 2014 07:47:31 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
+
+<p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
+
+<p><a href='http://www.npmjs.com/require2commonjs' >require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href='http://nodejs.org/' >node</a> <a href='http://github.com/cortexjs/cortex' >cortex</a> 等外部系统来使用。</p>
+
+<p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
+
+<p>1) Dependency-free module, simple object</p>
+
+<pre><code class=" javascript">define({  
+    add: function(a, b) { return a + b; }
+});
+</code></pre>
+
+<p>没有任何依赖，直接定义模块的exports。这种情况下要将AMD转话为CommonJS模块，只需要变为</p>
+
+<pre><code class=" javascript">module.exports = {  
+    add: function(a, b) { return a + b; }
+};
+</code></pre>
+
+<p>语法树转换非常简单。</p>
+
+<p>2) Simplified CommonJS wrapping</p>
+
+<pre><code class=" javascript"> define(function (require, exports, module) {
+     var a = require('a'),
+         b = require('b');
+     exports.action = function () {};
+ });
+</code></pre>
+
+<p>现在AMD提供CommonJS wrapping这种格式，更为简单。 只需要将factory函数中的函数体提取出来就可以了</p>
+
+<pre><code class=" javascript">var a = require('a'),  
+    b = require('b');
+
+exports.action = function () {};  
+</code></pre>
+
+<p>3) Normalized</p>
+
+<p>这个是通常我们见到的AMD格式</p>
+
+<pre><code class=" javascript">define(['backbone', './util', 'Buffer'], function(Bakcbone, util) {  
+    // other process
+    return {
+       data: {}
+   };
+});
+</code></pre>
+
+<p>对于这种格式，处理有两个步骤 1) 将依赖转变为require的形式，中间要注意的是依赖申明和 factory 的参数并不一定一致； 2) 将 return 转变为 module.exports</p>
+
+<pre><code class="javascript">var Backbone = require('backbone');  
+var util = require('./util');  
+require('Buffer');
+
+module.exports = { data: {} };  
+</code></pre>]]></description><link>http://villadora.me/2014/05/24/amd-define-and-how-to-translate-amd-to-co/</link><guid isPermaLink="false">458bef5d-b1cb-4223-8df8-153dee4f26c6</guid><category><![CDATA[javascript]]></category><category><![CDATA[amd]]></category><category><![CDATA[commonjs]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 23 May 2014 17:06:59 GMT</pubDate></item><item><title><![CDATA[regexp.toString()]]></title><description><![CDATA[<p>Regexp.toString在不同浏览器下修辞符顺序不一致。</p>
+
+<p>Chrome, firefox</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/gim'  
+</code></pre>
+
+<p>IE 9.0</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/igm'  
+</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item><item><title><![CDATA[Cookie Version in J2EE]]></title><description><![CDATA[<p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
+
+<pre><code class="java">Cookie[] cookies = request.getCookies();  
+if (cookies != null) {  
+    for (Cookie cookie : cookies) {
+        if (StringUtils.equalsIgnoreCase(cookie.getName(), name)) {
+            value = cookie.getValue(); // if the value in cookie is 'http://example.com' then here it will get 'http'
+            break;
+        }
+    }
+}
+</code></pre>
+
+<p>这是因为目前Cookie有两个标准，一个是Version 0 (<a href='http://curl.haxx.se/rfc/cookie_spec.html' >Netscape spec</a>)</p>
+
+<p>而J2EE的实现描述 Cookie#setValue 中</p>
+
+<pre><code>With Version 0 cookies, values should not contain white space, brackets, parentheses, equals signs, commas, double quotes, slashes, question marks, at signs, colons, and semicolons. Empty values may not behave the same way on all browsers.  
+</code></pre>
+
+<p>`</p>
+
+<p>也就是说Version 0 是不能包含空格，括弧，等号，逗号， 双引号等字符的。 </p>
+
+<p>而Version 1 (<a href='http://www.ietf.org/rfc/rfc2109.txt' >RFC 2109 spec</a>) 是可以的。</p>
+
+<p>但是javax.servlet.http.Cookie的实现时默认是使用 Version 0</p>
+
+<pre><code>By default, cookies are created according to the Netscape cookie specification. The version can be changed with the  
+setVersion method.  
+</code></pre>
+
+<p>而看起来container默认的选择也是使用了Version 0而没有去改变version。所以当Cookie值中带有':'时，就无法读到colon后的内容。</p>
+
+<p>如果没有办法改container并且只能使用默认的request的话，暂时的解决方案是在写cookie的时候URLEncode, 然后在服务器端读的时候做URLDecode。</p>]]></description><link>http://villadora.me/2014/05/06/cookie-version/</link><guid isPermaLink="false">a3c2a196-34b6-4c9b-bbd4-fa257e8f8135</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 May 2014 05:34:00 GMT</pubDate></item><item><title><![CDATA[Iscroll5的几个bug]]></title><description><![CDATA[<p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
+
+<ol>
+<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
+</ol>
+
+<pre><code>this.fadeTimeout = setTimeout((function (val) {  
+    this.wrapperStyle.opacity = val;
+    this.visible = +val;
+}).bind(this, val), delay);
+</code></pre>
+
+<p>去掉bind, 改成closure解决问题</p>
+
+<pre><code>var selft = this;  
+self.fadetimeout = setTimeout(function (val) {  
+    self.wrapperStyle.opacity = val;
+    self.visible = +val;
+}, delay);
+</code></pre>
+
+<p>这个修正已经有人发了 pullrequest 只不过暂时还没有merge到master分支中。</p>
+
+<ol>
+<li>click事件多次触发。在有些浏览器上会发现使用了iscroll的元素click事件会导致多次触发, 这是因为iscroll为了模拟滑动事件，屏蔽了scroll元素上的click事件，而自己通过touchend来决定是否触发模拟的click事件。但是在移动上的有些浏览器上e.preventDefault并不能阻止事件，因为click事件的cancelable为false。 这个时候只能检测e.cancelable属性，然后决定是否要产生模拟事件。</li>
+</ol>]]></description><link>http://villadora.me/2014/04/08/isroll-event-preventdefault/</link><guid isPermaLink="false">4d8523e9-1014-4618-9343-1f58b40abfe4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 08 Apr 2014 02:18:00 GMT</pubDate></item><item><title><![CDATA[在cluster中使用passport openID]]></title><description><![CDATA[<h1 id="passportopenidincluster">Passport openid in cluster</h1>
+
+<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
+
+<h2 id="session">session</h2>
+
+<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
+
+<h2 id="openidassociation">open id association</h2>
+
+<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
+但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
+
+<pre><code class=" js">    var passport = require('passport');
+    var strategy = new GoogleStrategy({
+        returnURL: callbackURL,
+        realm: realm,
+        stateless: true
+    };
+
+    // ...
+
+    strategy.saveAssociation(function(handle, provider, algorithm, secret, expiresIn, done) {
+        var assoc = {
+            handle: handle,
+            provider: provider,
+            algorithm: algorithm,
+            secret: secret,
+            expiresIn: expiresIn
+        };
+
+        // save to redis/mongodb
+        save(function(err) {
+            done(err);
+        });
+    });
+
+    strategy.loadAssociation(function(handle, done) {
+        // load from redis/mongodb
+        load(handle, function(err, assoc) {
+            if(err) return done(err);
+            done(err, assoc.provider, assoc.algorithm, assoc.secret);
+        });
+    });
+
+    passport.use(strategy);
+</code></pre>]]></description><link>http://villadora.me/2014/03/06/passport-openid-nodejs/</link><guid isPermaLink="false">85d3107e-eb1a-416a-b2ba-bf8f4ea63c08</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 06 Mar 2014 07:18:00 GMT</pubDate></item><item><title><![CDATA[javascript arguments长度限制]]></title><description><![CDATA[<p>先看下这一段代码片段(in chrome):</p>
+
+<pre><code class="javascript">var a = [];  
+a[2&lt;&lt;16] = 1;  
+fucntion b() {}  
+b.apply([], a);  
+</code></pre>
+
+<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
+为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
+大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
+
+<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。
+实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。从某种意义上来数arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用慢了！本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item><item><title><![CDATA[SVG Spec]]></title><description><![CDATA[<h3 id="svgpaintersmodel">SVG的Painters model</h3>
+
+<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
+
+<h3 id="renderingorder">Rendering Order</h3>
+
+<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
+
+<h3 id="groups">groups</h3>
+
+<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
+
+<h3 id="typesofgraphicselements">types of graphics elements</h3>
+
+<p>SVG支持三种基本的图形元素: <br />
+  * Shapes: 用到最多的，主要由各种线和填充构成
+  * Text: 字符的组合
+  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>
+
+<h4 id="shapesandtext">Shapes and Text</h4>
+
+<p>字符实际上最终也是形状的一种，由<strong>stroke</strong>和<strong>fill</strong>构成, 对于有一些形状, 比如path, 可以定义一些<strong>marker symbol</strong>,主要用来绘制箭头等。 
+其中<strong>fill</strong>首先被绘制，然后是<strong>stroke</strong>, 最后是<strong>marker symbol</strong>, <strong>marker</strong>的绘制顺序是沿着形状的outline来进行，从形状的起始点开始到结束点。</p>
+
+<p>Ref: <a href='http://www.w3.org/TR/SVG/render' >http://www.w3.org/TR/SVG/render.html</a></p>]]></description><link>http://villadora.me/2013/08/06/svg-spec/</link><guid isPermaLink="false">4220d788-80ac-4974-baf7-d41391ee2b58</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 11:34:06 GMT</pubDate></item><item><title><![CDATA[hostname in mac]]></title><description><![CDATA[<p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
+
+<p>在prompt里面的%m hostname通过以下途径获得：</p>
+
+<ol>
+<li>/etc/hostconfig: 在这个配置文件中配置  </li>
+<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
+<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
+<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
+<li>最后如果这个也没查到，那就会返回localhost</li>
+</ol>
+
+<p>所以由于我hostconfig没配置，然后就找到preferences.plist中的HostName，也就是第二项。</p>
+
+<p>而hostname命令就不一样了，好吧，这个过程是怎么样我也没找到，应该除了上述几个地方还有一些mac自己存放的配置文件，通过<code>scutil</code>来修改。只不过顺序和具体包含哪些不是很清楚。
+只不过其中DNS查询在去找preferences.plist之前，所以我的<code>hostname</code>会返回ip地址</p>
+
+<p>修改则可以通过</p>
+
+<pre><code>sudo scutil --set HostName &lt;hostname&gt;
+</code></pre>
+
+<p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>]]></description><link>http://villadora.me/2013/07/08/hostname-in-mac/</link><guid isPermaLink="false">6ce387ab-8e5d-4d3d-ab38-fb067510b1b1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 08 Jul 2013 01:30:00 GMT</pubDate></item><item><title><![CDATA[HTML5]]></title><description><![CDATA[<p><a href='http://dev.w3.org/html5/spec/Overview.html' #introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
+HTML5 各方角力又开始了</p>]]></description><link>http://villadora.me/2013/05/31/html5/</link><guid isPermaLink="false">b1709f0e-954b-4448-ba37-4673b03f3380</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 31 May 2013 06:30:00 GMT</pubDate></item><item><title><![CDATA['$' in auto-mode-alist]]></title><description><![CDATA[<p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
+
+<p>"Note that \' matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing newlines. (Should be pretty rare… )"</p>
+
+<p>也就是说"$"可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的"\.\(md\|markdown\)$"一直匹配不到,改成"\.\(md\|markdown\)\'"就好了，好吧 这个正则够诡异的。</p>]]></description><link>http://villadora.me/2013/05/29/-in-auto-mode-alist/</link><guid isPermaLink="false">1e47a6ce-3309-4f3a-a29f-d3edcfb6d4c1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 29 May 2013 01:53:00 GMT</pubDate></item><item><title><![CDATA[Uglify-js Processing]]></title><description><![CDATA[<p>UglifyJs 1</p>]]></description><link>http://villadora.me/2013/05/24/uglify-js-processing/</link><guid isPermaLink="false">47aa9a6e-b8cc-4a84-9176-13bc720e0f39</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 24 May 2013 01:34:00 GMT</pubDate></item><item><title><![CDATA[Description on Function/Object and other things in Javascript]]></title><description><![CDATA[<p>Pre-Knowledge</p>]]></description><link>http://villadora.me/2013/05/22/type-system-in-javascript/</link><guid isPermaLink="false">12317180-4bda-4934-aa6d-35dde1f06e9a</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 22 May 2013 02:51:00 GMT</pubDate></item><item><title><![CDATA[NodeJs中exec和spawn的差别]]></title><description><![CDATA[<p>在NodeJS中创建一个子进程有两种方式: <code>spawn</code>和<code>exec</code>；这两者都可以通过｀require('child_process')`来引入。那么这两个有什么区别呢？我应该使用哪一个呢？</p>
+
+<p>这两者的区别主要是在他们和父进程之间的IO处理上,<code>spawn</code>调用后返回的是一个流,可以对stdout上添加事件来响应流数据,如<code>stdout.on('data', function() {...})</code>；在这个过程中，子进程输出到stdout中的数据会调用callback，是处于一个流工作的模式下，有一点输出就处理。而<code>exec</code>则是将输出放到一个buffer里面，这个buffer的大小是可以通过maxBuffer这个option配置的，默认是200k.</p>
+
+<p>比较有趣的是实际上<code>exec</code>调用的是<code>execFile</code>，然后在<code>execFile</code>里面最终调用的还是<code>spawn</code>(see <a href='https://github.com/joyent/node/blob/master/lib/child_process.js' #L573">L573</a>, <a href='https://github.com/joyent/node/blob/master/lib/child_process.js' #L602">L602</a>).只不过在调用时<code>on('data',function(chunk){...}</code>是像一个string buffer里卖弄写chuck罢了。</p>
+
+<p>最后如果只是输出很小那么直接用<code>exec</code>就可以了，而如果子进程的输出很大，而分配一个那么大的buffer也不是很合时宜的时候，就是用<code>spawn</code>。</p>]]></description><link>http://villadora.me/2013/05/07/differences-between-exec-and-spawn/</link><guid isPermaLink="false">3963cbd3-9b4b-4bdd-9d32-f64f7126039d</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 07 May 2013 05:41:00 GMT</pubDate></item><item><title><![CDATA[自定义git命令, like git-flow, git-extras]]></title><description><![CDATA[<p>git flow和git extras很强大，原先以为是用一些git alias定义git命令去调用shell脚本，之后看了代码才发现完全不是那么回事。</p>
+
+<p>git的可扩展性非常强，去自定义一个git命令, 在unix环境下，你只需要在PATH中定义一个可执行的脚本，以"git="开头，然后剩余的部分就是你的sub command的名字了。比如如果有一个"git-mark"的脚本，那么在执行git mark命令时，实际上git会去调用git-mark这个脚本。是不是很简单？</p>
+
+<p>为了了解git对alias,builtin,custom command的执行顺序，弄了下脚本做测试。</p>
+
+<ol>
+<li>在有builtin的情况下，alias和custom command不起作用，就是说像log, status等这些命令是无法通过alias和custom command来覆盖的。  </li>
+<li>在没有builtin的情况下, custom command会先与alias之前，也就是说如果存在alias.try和git-try，那么在执行"git try"的时候始终会调用git-try而不是alias。</li>
+</ol>
+
+<p>这样顺序就是builtin > custom command > alias。</p>]]></description><link>http://villadora.me/2013/05/06/custom-git-command/</link><guid isPermaLink="false">ef7d7a5a-e053-4604-a72d-24a02dcf953f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 06 May 2013 03:56:00 GMT</pubDate></item></channel></rss>
