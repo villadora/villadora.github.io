@@ -42,14 +42,14 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=8e8b27b0a0"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=4eff0e2034"/>
 
     <script type="text/javascript">
       
 var ga_ua = 'UA-7622998-2';
 
 
-var disqus_shortname = 'example';
+var disqus_shortname = 'villadora';
 
 
 var enable_pjax = true;
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,75 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/07/08/hostname-in-mac/index.html" itemprop="url" data-pjax title="hostname in mac">
+        hostname in mac
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
+
+<p>在prompt里面的%m hostname通过以下途径获得：</p>
+
+<ol>
+<li>/etc/hostconfig: 在这个配置文件中配置  </li>
+<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
+<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
+<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
+<li>最后如果这个也没查到，那就会返回localhost</li>
+</ol>
+
+<p>所以由于我hostconfig没配置</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-07-08" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/07/08/hostname-in-mac/index.html#disqus_thread" data-pjax data-disqus-identifier="127">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/05/31/html5/index.html" itemprop="url" data-pjax title="HTML5">
+        HTML5
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
+HTML5 各方角力又开始了</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-05-31" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/05/31/html5/index.html#disqus_thread" data-pjax data-disqus-identifier="109">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -394,68 +463,6 @@ var enable_pjax = true;
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/03/26/array-slice-in-ruby/index.html" itemprop="url" data-pjax title="Array slice in Ruby">
-        Array slice in Ruby
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Ruby的文档实在太省略了,之前用slice不是很理解结果，在stackoverflow上面发现一个非常不错的<a href="http://stackoverflow.com/questions/3568222/array-slicing-in-ruby-looking-for-explanation-for-illogical-behaviour-taken-fr">解释</a>，也得到了confirm. </p>
-
-<p>可以看到ruby的array.slice的处理是用元素之间的space来标记index的。</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-03-26" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/03/26/array-slice-in-ruby/index.html#disqus_thread" data-pjax data-disqus-identifier="118">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/03/01/boot-configuration-data/index.html" itemprop="url" data-pjax title="Boot Configuration Data">
-        Boot Configuration Data
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Boot Configuration Data</p>
-
-<p>Boot Configuration Data (BCD) is a firmware-independent database for boot-time configuration data. It replaces the boot.ini that was used by NTLDR, and is used by Microsoft's new Windows Boot Manager.</p>
-
-<p>Boot</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-03-01" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/03/01/boot-configuration-data/index.html#disqus_thread" data-pjax data-disqus-identifier="117">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -489,9 +496,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=8e8b27b0a0"></script>
+    <script src="../../public/jquery.js?v=4eff0e2034"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
 
     <script type="text/javascript">
 

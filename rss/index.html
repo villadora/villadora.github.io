@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Tue, 08 Jul 2014 11:22:54 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 11 Jul 2014 15:22:50 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Http API设计]]></title><description><![CDATA[<p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
+地址:</p>
+
+<p><a href='https://github.com/interagent/http-api-design' >https://github.com/interagent/http-api-design</a></p>
+
+<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
+
+<p>其中很重要的几条抽出来：</p>
+
+<ul>
+<li>返回正确的状态代码</li>
+</ul>
+
+<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
+
+<ul>
+<li>以ISO8601格式来使用UTC时间</li>
+</ul>
+
+<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的。</p>
+
+<ul>
+<li>给出结构化的错误信息</li>
+</ul>
+
+<p>错误不要只返回给状态吗，能够给出一定错误信息的情况下要在body中返回统一的结构化的错误信息。这样客户端也可以做出正确的处理，是等待之后重试还是停止请求通知用户。</p>
+
+<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>]]></description><link>http://villadora.me/2014/07/11/http-apishe-ji/</link><guid isPermaLink="false">033dce8c-eb1c-4495-952e-25f49d004c44</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 11 Jul 2014 14:00:49 GMT</pubDate></item><item><title><![CDATA[迁移到Ghost]]></title><description><![CDATA[<p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
+
+<p>ghost要导入之前的博客需要进入 <em>'host/ghost/debug'</em> 来导入json文件，做了个小工具去扫 <code>_posts</code> 下面的 <code>*.md</code>和<code>*.mardown</code>文件, 最终生成 <code>exports.json</code> 可以导入ghost.</p>
+
+<p><a href='http://npmjs.org/oghost' >npmjs.org/oghost</a></p>
+
+<pre><code class="bash">npm install oghost -g  
+cd _posts  
+oghost &gt; exports.json  
+</code></pre>
+
+<p>导入的时候发现ghost的tag和post对应关系生成不了，报了</p>
+
+<pre><code>Unique Constraint failed in tag field  
+</code></pre>
+
+<p>但是tags里面是没有重复的，很奇怪，有人知道什么原因么？</p>]]></description><link>http://villadora.me/2014/07/09/qian-yi-dao-ghost/</link><guid isPermaLink="false">a242e3d8-ae82-4782-a22b-33fa3343a7c4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 09 Jul 2014 08:35:34 GMT</pubDate></item><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
 
 <p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
 
@@ -240,21 +283,4 @@ HTML5 各方角力又开始了</p>]]></description><link>http://villadora.me/201
 
 <p>"Note that \' matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing newlines. (Should be pretty rare… )"</p>
 
-<p>也就是说"$"可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的"\.\(md\|markdown\)$"一直匹配不到,改成"\.\(md\|markdown\)\'"就好了，好吧 这个正则够诡异的。</p>]]></description><link>http://villadora.me/2013/05/29/-in-auto-mode-alist/</link><guid isPermaLink="false">1e47a6ce-3309-4f3a-a29f-d3edcfb6d4c1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 29 May 2013 01:53:00 GMT</pubDate></item><item><title><![CDATA[Uglify-js Processing]]></title><description><![CDATA[<p>UglifyJs 1</p>]]></description><link>http://villadora.me/2013/05/24/uglify-js-processing/</link><guid isPermaLink="false">47aa9a6e-b8cc-4a84-9176-13bc720e0f39</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 24 May 2013 01:34:00 GMT</pubDate></item><item><title><![CDATA[Description on Function/Object and other things in Javascript]]></title><description><![CDATA[<p>Pre-Knowledge</p>]]></description><link>http://villadora.me/2013/05/22/type-system-in-javascript/</link><guid isPermaLink="false">12317180-4bda-4934-aa6d-35dde1f06e9a</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 22 May 2013 02:51:00 GMT</pubDate></item><item><title><![CDATA[NodeJs中exec和spawn的差别]]></title><description><![CDATA[<p>在NodeJS中创建一个子进程有两种方式: <code>spawn</code>和<code>exec</code>；这两者都可以通过｀require('child_process')`来引入。那么这两个有什么区别呢？我应该使用哪一个呢？</p>
-
-<p>这两者的区别主要是在他们和父进程之间的IO处理上,<code>spawn</code>调用后返回的是一个流,可以对stdout上添加事件来响应流数据,如<code>stdout.on('data', function() {...})</code>；在这个过程中，子进程输出到stdout中的数据会调用callback，是处于一个流工作的模式下，有一点输出就处理。而<code>exec</code>则是将输出放到一个buffer里面，这个buffer的大小是可以通过maxBuffer这个option配置的，默认是200k.</p>
-
-<p>比较有趣的是实际上<code>exec</code>调用的是<code>execFile</code>，然后在<code>execFile</code>里面最终调用的还是<code>spawn</code>(see <a href='https://github.com/joyent/node/blob/master/lib/child_process.js' #L573">L573</a>, <a href='https://github.com/joyent/node/blob/master/lib/child_process.js' #L602">L602</a>).只不过在调用时<code>on('data',function(chunk){...}</code>是像一个string buffer里卖弄写chuck罢了。</p>
-
-<p>最后如果只是输出很小那么直接用<code>exec</code>就可以了，而如果子进程的输出很大，而分配一个那么大的buffer也不是很合时宜的时候，就是用<code>spawn</code>。</p>]]></description><link>http://villadora.me/2013/05/07/differences-between-exec-and-spawn/</link><guid isPermaLink="false">3963cbd3-9b4b-4bdd-9d32-f64f7126039d</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 07 May 2013 05:41:00 GMT</pubDate></item><item><title><![CDATA[自定义git命令, like git-flow, git-extras]]></title><description><![CDATA[<p>git flow和git extras很强大，原先以为是用一些git alias定义git命令去调用shell脚本，之后看了代码才发现完全不是那么回事。</p>
-
-<p>git的可扩展性非常强，去自定义一个git命令, 在unix环境下，你只需要在PATH中定义一个可执行的脚本，以"git="开头，然后剩余的部分就是你的sub command的名字了。比如如果有一个"git-mark"的脚本，那么在执行git mark命令时，实际上git会去调用git-mark这个脚本。是不是很简单？</p>
-
-<p>为了了解git对alias,builtin,custom command的执行顺序，弄了下脚本做测试。</p>
-
-<ol>
-<li>在有builtin的情况下，alias和custom command不起作用，就是说像log, status等这些命令是无法通过alias和custom command来覆盖的。  </li>
-<li>在没有builtin的情况下, custom command会先与alias之前，也就是说如果存在alias.try和git-try，那么在执行"git try"的时候始终会调用git-try而不是alias。</li>
-</ol>
-
-<p>这样顺序就是builtin > custom command > alias。</p>]]></description><link>http://villadora.me/2013/05/06/custom-git-command/</link><guid isPermaLink="false">ef7d7a5a-e053-4604-a72d-24a02dcf953f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 06 May 2013 03:56:00 GMT</pubDate></item></channel></rss>
+<p>也就是说"$"可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的"\.\(md\|markdown\)$"一直匹配不到,改成"\.\(md\|markdown\)\'"就好了，好吧 这个正则够诡异的。</p>]]></description><link>http://villadora.me/2013/05/29/-in-auto-mode-alist/</link><guid isPermaLink="false">1e47a6ce-3309-4f3a-a29f-d3edcfb6d4c1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 29 May 2013 01:53:00 GMT</pubDate></item><item><title><![CDATA[Uglify-js Processing]]></title><description><![CDATA[<p>UglifyJs 1</p>]]></description><link>http://villadora.me/2013/05/24/uglify-js-processing/</link><guid isPermaLink="false">47aa9a6e-b8cc-4a84-9176-13bc720e0f39</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 24 May 2013 01:34:00 GMT</pubDate></item><item><title><![CDATA[Description on Function/Object and other things in Javascript]]></title><description><![CDATA[<p>Pre-Knowledge</p>]]></description><link>http://villadora.me/2013/05/22/type-system-in-javascript/</link><guid isPermaLink="false">12317180-4bda-4934-aa6d-35dde1f06e9a</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 22 May 2013 02:51:00 GMT</pubDate></item></channel></rss>

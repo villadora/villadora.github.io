@@ -42,14 +42,14 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=8e8b27b0a0"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=4eff0e2034"/>
 
     <script type="text/javascript">
       
 var ga_ua = 'UA-7622998-2';
 
 
-var disqus_shortname = 'example';
+var disqus_shortname = 'villadora';
 
 
 var enable_pjax = true;
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,84 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2009/07/03/c-sharp-note/index.html" itemprop="url" data-pjax title="c# note">
+        c# note
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>C#实现了完全的对象化，猜测实现机制和python估计很像，类型也分为值类型和引用类型，分别位于栈和堆上；还没看过MSIL，不过看过java和python的一些IL，机制也应该差不多。结合了很多新的特性，这点.net做的很不错的。</p>
+
+<p>.net框架下，可能被其他.net组件用到的变量使用Pascal case, 所有词的第一个字母都大写；是因为.net中包含的不同语言的需要，vb是大小写不敏感的，而c++,c#是大小写敏感的。</p>
+
+<p>和java一样有个System.Obejct, toString()也是所有类的标准，在asp.net中由于要和html控件交互，所以用的比较多。</p>
+
+<p>在线类浏览器:</p>
+
+<p><a href="http://quickstarts.asp.net/Quickstartv20/util/classbrowser.aspx">http://quickstarts.asp.net/Quickstartv20</a></p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2009-07-03" itemprop="datePublished">
+          5 years ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2009/07/03/c-sharp-note/index.html#disqus_thread" data-pjax data-disqus-identifier="107">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2009/03/20/smart-pointer/index.html" itemprop="url" data-pjax title="Smart Pointer">
+        Smart Pointer
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>看了下Smart Pointer的实现，其实是对常规指针进行了封装</p>
+
+<p>牵涉到两个问题:</p>
+
+<ul>
+<li>1) 保证对象的唯一所有权，也就是说对于一个ptr，同一时刻只会有一个Smart Pointer拥有.</li>
+</ul>
+
+<p>如smart pointer的一个构造函数的实现:</p>
+
+<pre><code class=" c++">auto_ptr(auto_ptr&amp; __a) __STL_NOTHROW : _M_ptr(__a.release()) {}  
+</code></pre>
+
+<p>拷贝构造函数调用了 =<em>_a= 的release方法， 所以实际上指针在两个 =auto</em>ptr= 传递了
+在其他过程中也是这样，始终保持只有一个 =auto<em>ptr= 对</em></p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2009-03-20" itemprop="datePublished">
+          5 years ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2009/03/20/smart-pointer/index.html#disqus_thread" data-pjax data-disqus-identifier="106">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -286,9 +364,9 @@ Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=8e8b27b0a0"></script>
+    <script src="../../public/jquery.js?v=4eff0e2034"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
 
     <script type="text/javascript">
 

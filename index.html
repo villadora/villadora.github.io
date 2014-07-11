@@ -42,14 +42,14 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/main.min.css?v=8e8b27b0a0"/>
+    <link rel="stylesheet" href="assets/css/main.min.css?v=4eff0e2034"/>
 
     <script type="text/javascript">
       
 var ga_ua = 'UA-7622998-2';
 
 
-var disqus_shortname = 'example';
+var disqus_shortname = 'villadora';
 
 
 var enable_pjax = true;
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="assets/js/head-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="assets/js/head-scripts.min.js?v=4eff0e2034"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="rss/index.html">
@@ -144,6 +144,94 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/11/http-apishe-ji/index.html" itemprop="url" data-pjax title="Http API设计">
+        Http API设计
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
+地址:</p>
+
+<p><a href="https://github.com/interagent/http-api-design">https://github.com/interagent/http-api-design</a></p>
+
+<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
+
+<p>其中很重要的几条抽出来：</p>
+
+<ul>
+<li>返回正确的状态代码</li>
+</ul>
+
+<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
+
+<ul>
+<li>以ISO8601格式来使用UTC时间</li>
+</ul>
+
+<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-11" itemprop="datePublished">
+          an hour ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/11/http-apishe-ji/index.html#disqus_thread" data-pjax data-disqus-identifier="139">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/09/qian-yi-dao-ghost/index.html" itemprop="url" data-pjax title="迁移到Ghost">
+        迁移到Ghost
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
+
+<p>ghost要导入之前的博客需要进入 <em>'host/ghost/debug'</em> 来导入json文件，做了个小工具去扫 <code>_posts</code> 下面的 <code>*.md</code>和<code>*.mardown</code>文件, 最终生成 <code>exports.json</code> 可以导入ghost.</p>
+
+<p><a href="http://npmjs.org/oghost">npmjs.org/oghost</a></p>
+
+<pre><code class="bash">npm install oghost -g  
+cd _posts  
+oghost &gt; exports.json  
+</code></pre>
+
+<p>导入的时候发现ghost的tag和post对应关系生成不了，报了</p>
+
+<pre><code>Unique</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-09" itemprop="datePublished">
+          2 days ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/09/qian-yi-dao-ghost/index.html#disqus_thread" data-pjax data-disqus-identifier="138">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-javascript tag-amd-2 tag-commonjs-2">
@@ -468,75 +556,6 @@ b.apply([], a);
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2013/07/08/hostname-in-mac/index.html" itemprop="url" data-pjax title="hostname in mac">
-        hostname in mac
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
-
-<p>在prompt里面的%m hostname通过以下途径获得：</p>
-
-<ol>
-<li>/etc/hostconfig: 在这个配置文件中配置  </li>
-<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
-<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
-<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
-<li>最后如果这个也没查到，那就会返回localhost</li>
-</ol>
-
-<p>所以由于我hostconfig没配置</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-07-08" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2013/07/08/hostname-in-mac/index.html#disqus_thread" data-pjax data-disqus-identifier="127">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2013/05/31/html5/index.html" itemprop="url" data-pjax title="HTML5">
-        HTML5
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
-HTML5 各方角力又开始了</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-31" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2013/05/31/html5/index.html#disqus_thread" data-pjax data-disqus-identifier="109">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -566,9 +585,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="public/jquery.js?v=8e8b27b0a0"></script>
+    <script src="public/jquery.js?v=4eff0e2034"></script>
 
-    <script src="assets/js/foot-scripts.min.js?v=8e8b27b0a0"></script>
+    <script src="assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
 
     <script type="text/javascript">
 

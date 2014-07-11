@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Array slice in Ruby</title>
+    <title>Http API设计</title>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,11 +16,11 @@
     <meta name="description" content="">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Array slice in Ruby">
+    <meta name="twitter:title" content="Http API设计">
     <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Array slice in Ruby">
+    <meta property="og:title" content="Http API设计">
     <meta property="og:description" content="">
 
     
@@ -77,7 +77,7 @@ var enable_pjax = true;
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
-<link rel="canonical" href="http://villadora.me/2013/03/26/array-slice-in-ruby/" />
+<link rel="canonical" href="http://villadora.me/2014/07/11/http-apishe-ji/" />
   </head>
   <body class="post-template">
 
@@ -133,16 +133,16 @@ var enable_pjax = true;
           <header class="post-header">
             <ul class="post-meta-list">
               <li class="post-meta-item">
-                <time datetime="2013-03-26" itemprop="datePublished">
-                  a year ago
+                <time datetime="2014-07-11" itemprop="datePublished">
+                  an hour ago
                 </time>
               </li>
               
               <li class="post-meta-item">
-                <a href="index.html#disqus_thread" data-disqus-identifier="118">Comments</a>
+                <a href="index.html#disqus_thread" data-disqus-identifier="139">Comments</a>
               </li>
             </ul>
-            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="Array slice in Ruby">Array slice in Ruby</a></h1>
+            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="Http API设计">Http API设计</a></h1>
             
             <!--h2 itemprop="about" class="post-subtitle"></h2-->
           </header>
@@ -162,9 +162,34 @@ var enable_pjax = true;
             </div>
           </aside>
           <div itemprop="articleBody" class="post-body">
-            <p>Ruby的文档实在太省略了,之前用slice不是很理解结果，在stackoverflow上面发现一个非常不错的<a href="http://stackoverflow.com/questions/3568222/array-slicing-in-ruby-looking-for-explanation-for-illogical-behaviour-taken-fr">解释</a>，也得到了confirm. </p>
+            <p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
+地址:</p>
 
-<p>可以看到ruby的array.slice的处理是用元素之间的space来标记index的。</p>
+<p><a href="https://github.com/interagent/http-api-design">https://github.com/interagent/http-api-design</a></p>
+
+<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
+
+<p>其中很重要的几条抽出来：</p>
+
+<ul>
+<li>返回正确的状态代码</li>
+</ul>
+
+<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
+
+<ul>
+<li>以ISO8601格式来使用UTC时间</li>
+</ul>
+
+<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的。</p>
+
+<ul>
+<li>给出结构化的错误信息</li>
+</ul>
+
+<p>错误不要只返回给状态吗，能够给出一定错误信息的情况下要在body中返回统一的结构化的错误信息。这样客户端也可以做出正确的处理，是等待之后重试还是停止请求通知用户。</p>
+
+<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>
           </div>
           <footer class="post-footer">
             <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
@@ -189,7 +214,7 @@ var enable_pjax = true;
                 
                 <p class="post-info">
                   <b class="post-info-title">Published on</b>
-                  <time class="post-date">March 26, 2013</time>
+                  <time class="post-date">July 11, 2014</time>
                 </p>
               </div>
             </div>
@@ -219,7 +244,7 @@ var enable_pjax = true;
 <script type="text/javascript">
   if(GHOSTIUM.haveDisqus) {
     
-    var disqus_identifier = '118';
+    var disqus_identifier = '139';
     
 
     if(typeof DISQUS !== 'object') {
