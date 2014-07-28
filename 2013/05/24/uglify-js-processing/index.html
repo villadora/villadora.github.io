@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,13 +73,13 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
 <link rel="canonical" href="http://villadora.me/2013/05/24/uglify-js-processing/" />
   </head>
-  <body class="post-template">
+  <body class="post-template tag-minification">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -127,7 +127,7 @@ var enable_pjax = true;
 
 <section class="wrapper wrapper-post">
   <div class="wrapper-container">
-    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-minification">
       
         <section class="post-container">
           <header class="post-header">
@@ -137,6 +137,12 @@ var enable_pjax = true;
                   a year ago
                 </time>
               </li>
+              
+                <li class="post-meta-item">
+                  
+                    <a itemprop="articleSection" href="../../../../tag/minification/index.html" data-pjax>minification</a> 
+                  
+                </li>
               
               <li class="post-meta-item">
                 <a href="index.html#disqus_thread" data-disqus-identifier="125">Comments</a>
@@ -162,7 +168,23 @@ var enable_pjax = true;
             </div>
           </aside>
           <div itemprop="articleBody" class="post-body">
-            <p>UglifyJs 1</p>
+            <h2 id="uglifyjs1">UglifyJs 1  </h2>
+
+<p>'parse-js':主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end <br />
+'process.js':在ast的IR上做优化, 其中包括:</p>
+
+<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等; <br />
+2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类; <br />
+3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。 <br />
+    * []取值变成.操作符  <code>foo['bar'] =&gt; foo.bar</code>
+    * 去掉不必要的{}
+    * ..etc.</p>
+
+<h2 id="uglifyjs2">UglifyJs 2  </h2>
+
+<p>在生成ast之后，在topLevel scope上定义了figure<em>out</em>scope方法，提供了额外的关于变量定义等node的其他关联信息，这样在之后做mangle和其他优化的时候有了更多信息。之后的优化和更改都放在了一些transform和walker中。</p>
+
+<p>只不过在设计的时候TreeWalker和ast定义在一起，不得不考虑ast结构来进行visit，而transform更是定义在walker之上，导致一个本来很简单的树遍历需要考虑很多复杂的情况，而且由于ast本身并没有父结点的ref，回溯的信息都放到了walker里面，而一些transform的操作在需要知道父结点相关信息的时候需要一个个的去定义不同node的情况。自己在deobfuscate中写了个travese.js，基本可以完成transform和walker的工作。还是觉得esprima这种纯json的ast比较简洁。</p>
           </div>
           <footer class="post-footer">
             <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
@@ -238,9 +260,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../../../public/jquery.js?v=4eff0e2034"></script>
+    <script src="../../../../public/jquery.js?v=a3385d4526"></script>
 
-    <script src="../../../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 

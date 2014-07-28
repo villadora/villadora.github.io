@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <meta name="description" content="The past is a ghost, the future a dream and all we ever have is now.">
-    <meta name="google-site-verification" content="eHUTxvevcs50AOvV2RansYqZmEjmPEocUWuc6w5AG2o" />
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="时光屋">
     <meta name="twitter:description" content="The past is a ghost, the future a dream and all we ever have is now.">
@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="rss/index.html">
@@ -126,7 +126,7 @@ var enable_pjax = true;
             
 
 <aside role="banner" class="cover">
-  <div data-load-image="/content/images/2014/Jul/sc-1.jpg" class="cover-image"></div>
+  <div data-load-image="/content/images/2014/Jul/scbg.jpg" class="cover-image"></div>
   <div class="cover-container">
     
       <a href="http://villadora.me" class="cover-logo" data-pjax>
@@ -147,6 +147,134 @@ var enable_pjax = true;
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/28/couchdb-1-6gai-dong/index.html" itemprop="url" data-pjax title="couchdb 1.5/1.6中的Proxy Authentication">
+        couchdb 1.5/1.6中的Proxy Authentication
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>因为最近要在<code>couchdb</code>中使用<a href="http://couchdb.readthedocs.org/en/latest/api/server/authn.html#api-auth-proxy"><strong>Proxy Authentication</strong></a></p>
+
+<p>于是参照文档，修改<em>local.ini</em>配置为:</p>
+
+<pre><code>authentication_handlers = {couch_httpd_auth, cookie_authentication_handler}, {couch_httpd_auth, proxy_authentication_handler}, {couch_httpd_auth, default_authentication_handler}  
+</code></pre>
+
+<p>但是参照文档中修改配置之后,启动服务，会出现如下错误：</p>
+
+<pre><code>{
+    error: "unknown</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-28" itemprop="datePublished">
+          2 minutes ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/28/couchdb-1-6gai-dong/index.html#disqus_thread" data-pjax data-disqus-identifier="145">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-flowing-mode tag-non-flowing-mode">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/index.html" itemprop="url" data-pjax title="node中的Readable - flowing/non-flowing mode">
+        node中的Readable - flowing/non-flowing mode
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>大家都知道在node中<code>Readable</code> Stream有两种模式: <code>flowing mode</code>和<code>non-flowing mode</code>。</p>
+
+<p>对于<code>flowing mode</code>的<code>Readable</code> Stream, 我们是没法控制它何时去读数据读多少的，它会去尽快的去消耗data,并emit出来。</p>
+
+<pre><code class="javascript">// in lib/_stream_readable.js
+if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {  
+        stream</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-24" itemprop="datePublished">
+          4 days ago
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/flowing-mode/index.html" data-pjax>flowing mode</a>, 
+          
+            <a itemprop="keywords" href="tag/non-flowing-mode/index.html" data-pjax>non-flowing mode</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/index.html#disqus_thread" data-pjax data-disqus-identifier="142">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-scale tag-da-xing-xiang-mu tag-lei-xing-jian-ce">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/index.html" itemprop="url" data-pjax title="扯扯Scala">
+        扯扯Scala
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在stackoverflow上看到一个关于<a href="http://stackoverflow.com/questions/3606591/why-does-intellij-idea-compile-scala-so-slowly">Why does IntelliJ IDEA compile Scala so slowly?</a>的问题，顿时感到scala在语法层面做的许多杰出的设计，但是为了和java兼容，最终在一定程度上限制了自己的发展。</p>
+
+<p>scala可能是为了快速的在各个公司里面推动，选择了完全和java现有代码兼容，而不是只在二进制层面上保持一致。</p>
+
+<p>scala的sdk和类型系统都建立在java的类型系统之上的，而目标是工业使用的scala语言需要提供大量的内置工具，而一个建立在java类型系统之上的更复杂的类型系统则不得不付出在编译时的开销。</p>
+
+<p>scala的类型检测对于大型项目非常重要，但是是否能够有选项使得能够某些时候能用来最快速开发，而不做类型检测？ 不过scala一开始就不是瞄准着脚本语言去做的，而脚本语言则更容易构建原型系统或执行轻量级的任务。</p>
+
+<p>没有过大型项目使用scala的经验。所以基本是随便扯扯。</p>
+
+<p>其实对于大型项目来说，一定是有多个部分（可能是一个人开发，更多的情况是由不同的团队开发）组成的，而组件之间的沟通与协作则是很容易出问题的地方。静态类型语言在大型项目开发上更有优势的地方是程序代替人对代码做了严格检测，以丧失灵活性为代价。这样可以避免一些错误</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-23" itemprop="datePublished">
+          5 days ago
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/scale/index.html" data-pjax>scale</a>, 
+          
+            <a itemprop="keywords" href="tag/da-xing-xiang-mu/index.html" data-pjax>大型项目</a>, 
+          
+            <a itemprop="keywords" href="tag/lei-xing-jian-ce/index.html" data-pjax>类型检测</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/index.html#disqus_thread" data-pjax data-disqus-identifier="140">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-http tag-rest tag-api">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="2014/07/11/http-apishe-ji/index.html" itemprop="url" data-pjax title="Http API设计">
@@ -180,9 +308,19 @@ var enable_pjax = true;
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-11" itemprop="datePublished">
-          an hour ago
+          17 days ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/http/index.html" data-pjax>http</a>, 
+          
+            <a itemprop="keywords" href="tag/rest/index.html" data-pjax>rest</a>, 
+          
+            <a itemprop="keywords" href="tag/api/index.html" data-pjax>api</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="2014/07/11/http-apishe-ji/index.html#disqus_thread" data-pjax data-disqus-identifier="139">Comments</a>
@@ -193,7 +331,7 @@ var enable_pjax = true;
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-ghost-tag tag-blog">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="2014/07/09/qian-yi-dao-ghost/index.html" itemprop="url" data-pjax title="迁移到Ghost">
@@ -221,9 +359,17 @@ oghost &gt; exports.json
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-09" itemprop="datePublished">
-          2 days ago
+          19 days ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/ghost-tag/index.html" data-pjax>ghost</a>, 
+          
+            <a itemprop="keywords" href="tag/blog/index.html" data-pjax>blog</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="2014/07/09/qian-yi-dao-ghost/index.html#disqus_thread" data-pjax data-disqus-identifier="138">Comments</a>
@@ -287,7 +433,7 @@ oghost &gt; exports.json
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-javascript tag-browsers">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="2014/05/21/regexptost/index.html" itemprop="url" data-pjax title="regexp.toString()">
@@ -317,6 +463,14 @@ re.toString(); // return '/abc/igm'
           2 months ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="tag/browsers/index.html" data-pjax>browsers</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="2014/05/21/regexptost/index.html#disqus_thread" data-pjax data-disqus-identifier="134">Comments</a>
@@ -348,7 +502,7 @@ if (cookies != null) {
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-06" itemprop="datePublished">
-          2 months ago
+          3 months ago
         </time>
       </li>
       
@@ -391,7 +545,7 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-04-08" itemprop="datePublished">
-          3 months ago
+          4 months ago
         </time>
       </li>
       
@@ -433,123 +587,12 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-03-06" itemprop="datePublished">
-          4 months ago
+          5 months ago
         </time>
       </li>
       
       <li class="post-item-meta-item">
         <a href="2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2013/08/09/arguments-exceed-javascript/index.html" itemprop="url" data-pjax title="javascript arguments长度限制">
-        javascript arguments长度限制
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>先看下这一段代码片段(in chrome):</p>
-
-<pre><code class="javascript">var a = [];  
-a[2&lt;&lt;16] = 1;  
-fucntion b() {}  
-b.apply([], a);  
-</code></pre>
-
-<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
-为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
-大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-08-09" itemprop="datePublished">
-          11 months ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2013/08/09/arguments-exceed-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="130">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2013/08/06/interupt-when-hexo-generating/index.html" itemprop="url" data-pjax title="interupt when hexo generating">
-        interupt when hexo generating
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-08-06" itemprop="datePublished">
-          11 months ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2013/08/06/interupt-when-hexo-generating/index.html#disqus_thread" data-pjax data-disqus-identifier="128">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2013/08/06/svg-spec/index.html" itemprop="url" data-pjax title="SVG Spec">
-        SVG Spec
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><h3 id="svgpaintersmodel">SVG的Painters model</h3>
-
-<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
-
-<h3 id="renderingorder">Rendering Order</h3>
-
-<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
-
-<h3 id="groups">groups</h3>
-
-<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
-
-<h3 id="typesofgraphicselements">types of graphics elements</h3>
-
-<p>SVG支持三种基本的图形元素: <br />
-  * Shapes: 用到最多的，主要由各种线和填充构成
-  * Text: 字符的组合
-  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-08-06" itemprop="datePublished">
-          11 months ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2013/08/06/svg-spec/index.html#disqus_thread" data-pjax data-disqus-identifier="129">Comments</a>
       </li>
     </ul>
   </footer>
@@ -585,9 +628,9 @@ b.apply([], a);
       </div>
     </main>
 
-    <script src="public/jquery.js?v=4eff0e2034"></script>
+    <script src="public/jquery.js?v=a3385d4526"></script>
 
-    <script src="assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 

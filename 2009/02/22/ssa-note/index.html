@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,13 +73,13 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
 <link rel="canonical" href="http://villadora.me/2009/02/22/ssa-note/" />
   </head>
-  <body class="post-template">
+  <body class="post-template tag-gcc tag-ssa-2">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -127,7 +127,7 @@ var enable_pjax = true;
 
 <section class="wrapper wrapper-post">
   <div class="wrapper-container">
-    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-gcc tag-ssa-2">
       
         <section class="post-container">
           <header class="post-header">
@@ -137,6 +137,14 @@ var enable_pjax = true;
                   5 years ago
                 </time>
               </li>
+              
+                <li class="post-meta-item">
+                  
+                    <a itemprop="articleSection" href="../../../../tag/gcc/index.html" data-pjax>gcc</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/ssa-2/index.html" data-pjax>ssa</a> 
+                  
+                </li>
               
               <li class="post-meta-item">
                 <a href="index.html#disqus_thread" data-disqus-identifier="104">Comments</a>
@@ -168,7 +176,7 @@ var enable_pjax = true;
 
 <p>在gcc内部主要是在tree，gimple阶段，进行了dead code remove, use-def/def-use analysis, 以及许多在tree形态下需要多项式来完成的优化，在转化为ssa后，由于varriables都只有一个defination，所以只需要线性时间</p>
 
-<p>gcc中ssa ir和tree是同时存在的，在转化为rtl后，就不存在ssa结构了，在regrename pass中，倒是对每一条insn，做了分析，由build<em>def</em>use function 生成def-use chain，</p>
+<p>gcc中ssa ir和tree是同时存在的，在转化为rtl后，就不存在ssa结构了，在regrename pass中，倒是对每一条insn，做了分析，由build_def_use function 生成def-use chain，</p>
 
 <h2 id="">主要流程:</h2>
 
@@ -258,9 +266,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../../../public/jquery.js?v=4eff0e2034"></script>
+    <script src="../../../../public/jquery.js?v=a3385d4526"></script>
 
-    <script src="../../../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 

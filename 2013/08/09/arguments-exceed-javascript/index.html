@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,13 +73,13 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
 <link rel="canonical" href="http://villadora.me/2013/08/09/arguments-exceed-javascript/" />
   </head>
-  <body class="post-template">
+  <body class="post-template tag-arguments">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -127,16 +127,22 @@ var enable_pjax = true;
 
 <section class="wrapper wrapper-post">
   <div class="wrapper-container">
-    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-arguments">
       
         <section class="post-container">
           <header class="post-header">
             <ul class="post-meta-list">
               <li class="post-meta-item">
                 <time datetime="2013-08-09" itemprop="datePublished">
-                  11 months ago
+                  a year ago
                 </time>
               </li>
+              
+                <li class="post-meta-item">
+                  
+                    <a itemprop="articleSection" href="../../../../tag/arguments/index.html" data-pjax>arguments</a> 
+                  
+                </li>
               
               <li class="post-meta-item">
                 <a href="index.html#disqus_thread" data-disqus-identifier="130">Comments</a>
@@ -174,8 +180,13 @@ b.apply([], a);
 为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
 大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
 
-<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。
-实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。从某种意义上来数arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用慢了！本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>
+<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。</p>
+
+<p>实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。</p>
+
+<p>从某种意义上来说arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用满了！</p>
+
+<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>
           </div>
           <footer class="post-footer">
             <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
@@ -251,9 +262,9 @@ b.apply([], a);
       </div>
     </main>
 
-    <script src="../../../../public/jquery.js?v=4eff0e2034"></script>
+    <script src="../../../../public/jquery.js?v=a3385d4526"></script>
 
-    <script src="../../../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 

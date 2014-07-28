@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -126,7 +126,7 @@ var enable_pjax = true;
             
 
 <aside role="banner" class="cover">
-  <div data-load-image="/content/images/2014/Jul/sc-1.jpg" class="cover-image"></div>
+  <div data-load-image="/content/images/2014/Jul/scbg.jpg" class="cover-image"></div>
   <div class="cover-container">
     
       <a href="http://villadora.me" class="cover-logo" data-pjax>
@@ -144,6 +144,104 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2011/10/04/virtualboxli-de-si-chong-networking-modes/index.html" itemprop="url" data-pjax title="VirtualBox里的四种networking modes">
+        VirtualBox里的四种networking modes
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>装了个virtualbox，现在的机器性能估计还可以带起2-3台虚拟机，装了个archlinux加个win8 折腾了半天了；虽然原来弄过虚拟机，知道bridge adapter这种模式最好但是并不了解具体的几种mode下的区别，今天学习了来分享下。</p>
+
+<!-- more -->
+
+<h2 id="nat">NAT</h2>
+
+<p>Network Address Transaction，主要是将虚拟机的虚拟网络地址转化成现实网络中的可用地址，主要有三种形式：静态转换Static Nat、动态转换Dynamic Nat 和端口多路复用OverLoad。</p>
+
+<p>静态转换和动态转换，顾名思义，就是转化地址映射表是静态还是动态的区别。而虚拟机实现的方式是端口多路复用，也就是说host machine的地址: ip1:port1, guest machine的地址ip2：port1在通过host machine的NAT转换后就变成了ip1:port2，从而与外界网络交流。</p>
+
+<p>这样的情形下，对于外界的网络而言</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2011-10-04" itemprop="datePublished">
+          3 years ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2011/10/04/virtualboxli-de-si-chong-networking-modes/index.html#disqus_thread" data-pjax data-disqus-identifier="111">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2011/09/25/shanghai-barcamp/index.html" itemprop="url" data-pjax title="Shanghai Barcamp">
+        Shanghai Barcamp
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>早上起来晚了，晚睡晚起的习惯很不好！总是有段时间会养成这样的不好习惯，过一段时间又会早睡早起。总结的说，去了还是有不少收获的，而且刚好就在前一段时间看了不少关于vc和初期投资培养方面的知识，结果这次居然就用到了，不然有几个就不知道在讲什么。</p>
+
+<p>早上一眼睁开就发现已经九点半了，然后打开电脑弄了半天才搞懂创智天地在那，知道了原来可以坐公交过去的。真正等到一身轻出门的时候已经是10：00了，可是去了才知道，时间刚刚好～ 哈哈 到的时候是10：40，还没有一个speech开始！大家都是很不守时，后来觉得忘带了笔记本（不是电脑！）和相机，只好依靠大脑记点东西，靠着不靠谱的手机拍个不清晰的照片。</p>
+
+<p>下面是今天听过的几个:</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2011-09-25" itemprop="datePublished">
+          3 years ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2011/09/25/shanghai-barcamp/index.html#disqus_thread" data-pjax data-disqus-identifier="110">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2010/05/30/multitasking-for-iphone/index.html" itemprop="url" data-pjax title="iphone的multitasking">
+        iphone的multitasking
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>虽然有很多优势，但是总体上来看还是巧妙的利用了移动设备的局限性：屏幕小；不可能同时有多个app同时在前台，实际上iphone上来说更加简化，屏幕图像渲染永远都只有一个app,提供的7个多任务API中根本就没有关于图像重绘的，所以即使显示了多个窗口也最多是系统保留切换前最后一刻的画面。所以iphone os的multitasking 能做到节省电能，不影响性能同时方便切换。<br><br>这是Apple很好的利用了移动设备的特性，准确的指向了用户的需求，所以i系列产品用户体验都首屈一指；不过ipad上如果不改观还是很难有所作为，只能说ipad就是苹果偷懒先弄出来占市场的。看之后魅族的Mbook到底怎样,google貌似也在做平板。<br><br><br><br><br></p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2010-05-30" itemprop="datePublished">
+          4 years ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2010/05/30/multitasking-for-iphone/index.html#disqus_thread" data-pjax data-disqus-identifier="108">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -270,7 +368,7 @@ Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-gcc tag-ssa-2">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="../../2009/02/22/ssa-note/index.html" itemprop="url" data-pjax title="SSA note">
@@ -292,6 +390,14 @@ Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
           5 years ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/gcc/index.html" data-pjax>gcc</a>, 
+          
+            <a itemprop="keywords" href="../../tag/ssa-2/index.html" data-pjax>ssa</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="../../2009/02/22/ssa-note/index.html#disqus_thread" data-pjax data-disqus-identifier="104">Comments</a>
@@ -364,9 +470,9 @@ Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=4eff0e2034"></script>
+    <script src="../../public/jquery.js?v=a3385d4526"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 

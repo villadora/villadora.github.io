@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 11 Jul 2014 15:22:50 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Http API设计]]></title><description><![CDATA[<p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 28 Jul 2014 08:50:22 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[couchdb 1.5/1.6中的Proxy Authentication]]></title><description><![CDATA[<p>因为最近要在<code>couchdb</code>中使用<a href='http://couchdb.readthedocs.org/en/latest/api/server/authn.html' #api-auth-proxy"><strong>Proxy Authentication</strong></a></p>
+
+<p>于是参照文档，修改<em>local.ini</em>配置为:</p>
+
+<pre><code>authentication_handlers = {couch_httpd_auth, cookie_authentication_handler}, {couch_httpd_auth, proxy_authentication_handler}, {couch_httpd_auth, default_authentication_handler}  
+</code></pre>
+
+<p>但是参照文档中修改配置之后,启动服务，会出现如下错误：</p>
+
+<pre><code>{
+    error: "unknown_error",
+    reason: "undef"
+}
+</code></pre>
+
+<p>最后查看了<a href='http://www.apache.org/dist/couchdb/notes/1.6.0/apache-couchdb-1.6.0.html' >couchdb 1.6 releae notes</a>发现, proxy_authentication_handler是之后加上的，而之前叫做proxy_authentification_handler。 当然了，我使用的couchdb还没那么潮的更新到1.6，还是1.5的版本。</p>
+
+<p>就想说升级不能够同样也保留老的名字吗，都1.x了还不注意兼容。</p>]]></description><link>http://villadora.me/2014/07/28/couchdb-1-6gai-dong/</link><guid isPermaLink="false">6ec04850-b704-495c-bd7a-9844c2e62bd0</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 28 Jul 2014 08:48:44 GMT</pubDate></item><item><title><![CDATA[node中的Readable - flowing/non-flowing mode]]></title><description><![CDATA[<p>大家都知道在node中<code>Readable</code> Stream有两种模式: <code>flowing mode</code>和<code>non-flowing mode</code>。</p>
+
+<p>对于<code>flowing mode</code>的<code>Readable</code> Stream, 我们是没法控制它何时去读数据读多少的，它会去尽快的去消耗data,并emit出来。</p>
+
+<pre><code class="javascript">// in lib/_stream_readable.js
+if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {  
+        stream.emit('data', chunk);
+        stream.read(0);
+</code></pre>
+
+<p>而<code>non-flowing mode</code>的Readable Stream, 则不会主动的去读数据，需要自己显示的去调用<code>read</code>方法才能得到数据。</p>
+
+<pre><code>// in lib/_stream_readable.js
+// update the buffer info.
+state.length += state.objectMode ? 1 : chunk.length;  
+if (addToFront)  
+  state.buffer.unshift(chunk);
+else  
+  state.buffer.push(chunk);
+</code></pre>
+
+<p>可以看到当有数据时，只是将数据放入buffer中，而不是直接emit。</p>
+
+<p>所以如果想控制stream的读取顺序，大小和时间，应该使用<code>non-flowing mode</code>，而当使用pipe有下游管道对数据进行处理时，这个时候数据的读取和处理应该交给下游管道处理，应该尽可能快的提供数据，所以要使用<code>flowing mode</code>。而这也是node会在attach 'data'事件之后，自动转变为<code>flowing mode</code>的原因，避免错误的使用或者忘记切换模式。</p>
+
+<p>而pipe时则会注册<code>data</code>事件，所以使用了pipe也会转换为<code>flowing mode</code>。</p>
+
+<pre><code class="javascript">var src = this;  
+...
+src.on('data', ondata);
+</code></pre>]]></description><link>http://villadora.me/2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/</link><guid isPermaLink="false">b4991594-e0f1-4c26-839e-36696dc5c618</guid><category><![CDATA[flowing mode]]></category><category><![CDATA[non-flowing mode]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 24 Jul 2014 02:15:47 GMT</pubDate></item><item><title><![CDATA[扯扯Scala]]></title><description><![CDATA[<p>在stackoverflow上看到一个关于<a href='http://stackoverflow.com/questions/3606591/why-does-intellij-idea-compile-scala-so-slowly' >Why does IntelliJ IDEA compile Scala so slowly?</a>的问题，顿时感到scala在语法层面做的许多杰出的设计，但是为了和java兼容，最终在一定程度上限制了自己的发展。</p>
+
+<p>scala可能是为了快速的在各个公司里面推动，选择了完全和java现有代码兼容，而不是只在二进制层面上保持一致。</p>
+
+<p>scala的sdk和类型系统都建立在java的类型系统之上的，而目标是工业使用的scala语言需要提供大量的内置工具，而一个建立在java类型系统之上的更复杂的类型系统则不得不付出在编译时的开销。</p>
+
+<p>scala的类型检测对于大型项目非常重要，但是是否能够有选项使得能够某些时候能用来最快速开发，而不做类型检测？ 不过scala一开始就不是瞄准着脚本语言去做的，而脚本语言则更容易构建原型系统或执行轻量级的任务。</p>
+
+<p>没有过大型项目使用scala的经验。所以基本是随便扯扯。</p>
+
+<p>其实对于大型项目来说，一定是有多个部分（可能是一个人开发，更多的情况是由不同的团队开发）组成的，而组件之间的沟通与协作则是很容易出问题的地方。静态类型语言在大型项目开发上更有优势的地方是程序代替人对代码做了严格检测，以丧失灵活性为代价。这样可以避免一些错误，可以降低程序员的标准，可以大规模的招人，以人海战术来实现企业目标。</p>
+
+<p>静态类型语言更适合一个牛人写出框架和核心代码，分离出接口，然后将接下来的工作用时间人力来填补。项目进度对于企业来说是可控的。</p>
+
+<p>而静态类型检测会强迫人以机器的方式去编写代码，实际上很多时候需要做类型转换，数据传递转移等，对于人来说，一些很明确的使用场景需要更复杂的操作来进行，好比写文章的时候有了更多的条条框框，导致笔跟不上大脑的速度。</p>
+
+<p>scala尝试去提供快速方便的语法糖，隐式的类型推导来方便程序员实现快速开发，然后使用静态类型检测和原有java代码的兼容来方便建立大型系统。</p>]]></description><link>http://villadora.me/2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/</link><guid isPermaLink="false">fb6b0fcd-f0a0-4523-86cc-20f0a59b2d1a</guid><category><![CDATA[scale]]></category><category><![CDATA[大型项目]]></category><category><![CDATA[类型检测]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 23 Jul 2014 13:57:59 GMT</pubDate></item><item><title><![CDATA[Http API设计]]></title><description><![CDATA[<p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
 地址:</p>
 
 <p><a href='https://github.com/interagent/http-api-design' >https://github.com/interagent/http-api-design</a></p>
@@ -26,7 +89,7 @@
 
 <p>错误不要只返回给状态吗，能够给出一定错误信息的情况下要在body中返回统一的结构化的错误信息。这样客户端也可以做出正确的处理，是等待之后重试还是停止请求通知用户。</p>
 
-<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>]]></description><link>http://villadora.me/2014/07/11/http-apishe-ji/</link><guid isPermaLink="false">033dce8c-eb1c-4495-952e-25f49d004c44</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 11 Jul 2014 14:00:49 GMT</pubDate></item><item><title><![CDATA[迁移到Ghost]]></title><description><![CDATA[<p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
+<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>]]></description><link>http://villadora.me/2014/07/11/http-apishe-ji/</link><guid isPermaLink="false">033dce8c-eb1c-4495-952e-25f49d004c44</guid><category><![CDATA[http]]></category><category><![CDATA[rest]]></category><category><![CDATA[api]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 11 Jul 2014 14:00:49 GMT</pubDate></item><item><title><![CDATA[迁移到Ghost]]></title><description><![CDATA[<p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
 
 <p>ghost要导入之前的博客需要进入 <em>'host/ghost/debug'</em> 来导入json文件，做了个小工具去扫 <code>_posts</code> 下面的 <code>*.md</code>和<code>*.mardown</code>文件, 最终生成 <code>exports.json</code> 可以导入ghost.</p>
 
@@ -42,7 +105,7 @@ oghost &gt; exports.json
 <pre><code>Unique Constraint failed in tag field  
 </code></pre>
 
-<p>但是tags里面是没有重复的，很奇怪，有人知道什么原因么？</p>]]></description><link>http://villadora.me/2014/07/09/qian-yi-dao-ghost/</link><guid isPermaLink="false">a242e3d8-ae82-4782-a22b-33fa3343a7c4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 09 Jul 2014 08:35:34 GMT</pubDate></item><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
+<p>但是tags里面是没有重复的，很奇怪，有人知道什么原因么？</p>]]></description><link>http://villadora.me/2014/07/09/qian-yi-dao-ghost/</link><guid isPermaLink="false">a242e3d8-ae82-4782-a22b-33fa3343a7c4</guid><category><![CDATA[ghost]]></category><category><![CDATA[blog]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 09 Jul 2014 08:35:34 GMT</pubDate></item><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
 
 <p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
 
@@ -114,7 +177,7 @@ re.toString(); // return '/abc/gim'
 
 <pre><code>var re = /abc/gim;  
 re.toString(); // return '/abc/igm'  
-</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item><item><title><![CDATA[Cookie Version in J2EE]]></title><description><![CDATA[<p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
+</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><category><![CDATA[javascript]]></category><category><![CDATA[browsers]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item><item><title><![CDATA[Cookie Version in J2EE]]></title><description><![CDATA[<p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
 
 <pre><code class="java">Cookie[] cookies = request.getCookies();  
 if (cookies != null) {  
@@ -231,8 +294,13 @@ b.apply([], a);
 为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
 大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
 
-<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。
-实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。从某种意义上来数arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用慢了！本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item><item><title><![CDATA[SVG Spec]]></title><description><![CDATA[<h3 id="svgpaintersmodel">SVG的Painters model</h3>
+<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。</p>
+
+<p>实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。</p>
+
+<p>从某种意义上来说arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用满了！</p>
+
+<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><category><![CDATA[arguments]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item><item><title><![CDATA[SVG Spec]]></title><description><![CDATA[<h3 id="svgpaintersmodel">SVG的Painters model</h3>
 
 <p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
 
@@ -279,8 +347,4 @@ b.apply([], a);
 </code></pre>
 
 <p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>]]></description><link>http://villadora.me/2013/07/08/hostname-in-mac/</link><guid isPermaLink="false">6ce387ab-8e5d-4d3d-ab38-fb067510b1b1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 08 Jul 2013 01:30:00 GMT</pubDate></item><item><title><![CDATA[HTML5]]></title><description><![CDATA[<p><a href='http://dev.w3.org/html5/spec/Overview.html' #introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
-HTML5 各方角力又开始了</p>]]></description><link>http://villadora.me/2013/05/31/html5/</link><guid isPermaLink="false">b1709f0e-954b-4448-ba37-4673b03f3380</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 31 May 2013 06:30:00 GMT</pubDate></item><item><title><![CDATA['$' in auto-mode-alist]]></title><description><![CDATA[<p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
-
-<p>"Note that \' matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing newlines. (Should be pretty rare… )"</p>
-
-<p>也就是说"$"可能回匹配一个换行前的空字符，那个文件由于是从程序中生成的，所以名字中有了奇怪的字符，这样导致我之前写的"\.\(md\|markdown\)$"一直匹配不到,改成"\.\(md\|markdown\)\'"就好了，好吧 这个正则够诡异的。</p>]]></description><link>http://villadora.me/2013/05/29/-in-auto-mode-alist/</link><guid isPermaLink="false">1e47a6ce-3309-4f3a-a29f-d3edcfb6d4c1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 29 May 2013 01:53:00 GMT</pubDate></item><item><title><![CDATA[Uglify-js Processing]]></title><description><![CDATA[<p>UglifyJs 1</p>]]></description><link>http://villadora.me/2013/05/24/uglify-js-processing/</link><guid isPermaLink="false">47aa9a6e-b8cc-4a84-9176-13bc720e0f39</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 24 May 2013 01:34:00 GMT</pubDate></item><item><title><![CDATA[Description on Function/Object and other things in Javascript]]></title><description><![CDATA[<p>Pre-Knowledge</p>]]></description><link>http://villadora.me/2013/05/22/type-system-in-javascript/</link><guid isPermaLink="false">12317180-4bda-4934-aa6d-35dde1f06e9a</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 22 May 2013 02:51:00 GMT</pubDate></item></channel></rss>
+HTML5 各方角力又开始了</p>]]></description><link>http://villadora.me/2013/05/31/html5/</link><guid isPermaLink="false">b1709f0e-954b-4448-ba37-4673b03f3380</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 31 May 2013 06:30:00 GMT</pubDate></item></channel></rss>

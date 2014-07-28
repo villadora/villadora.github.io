@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=4eff0e2034"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=a3385d4526"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -126,7 +126,7 @@ var enable_pjax = true;
             
 
 <aside role="banner" class="cover">
-  <div data-load-image="/content/images/2014/Jul/sc-1.jpg" class="cover-image"></div>
+  <div data-load-image="/content/images/2014/Jul/scbg.jpg" class="cover-image"></div>
   <div class="cover-container">
     
       <a href="http://villadora.me" class="cover-logo" data-pjax>
@@ -144,6 +144,123 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-arguments">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/09/arguments-exceed-javascript/index.html" itemprop="url" data-pjax title="javascript arguments长度限制">
+        javascript arguments长度限制
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>先看下这一段代码片段(in chrome):</p>
+
+<pre><code class="javascript">var a = [];  
+a[2&lt;&lt;16] = 1;  
+fucntion b() {}  
+b.apply([], a);  
+</code></pre>
+
+<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
+为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
+大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-09" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/arguments/index.html" data-pjax>arguments</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/09/arguments-exceed-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="130">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/06/interupt-when-hexo-generating/index.html" itemprop="url" data-pjax title="interupt when hexo generating">
+        interupt when hexo generating
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/06/interupt-when-hexo-generating/index.html#disqus_thread" data-pjax data-disqus-identifier="128">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/06/svg-spec/index.html" itemprop="url" data-pjax title="SVG Spec">
+        SVG Spec
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h3 id="svgpaintersmodel">SVG的Painters model</h3>
+
+<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
+
+<h3 id="renderingorder">Rendering Order</h3>
+
+<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
+
+<h3 id="groups">groups</h3>
+
+<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
+
+<h3 id="typesofgraphicselements">types of graphics elements</h3>
+
+<p>SVG支持三种基本的图形元素: <br />
+  * Shapes: 用到最多的，主要由各种线和填充构成
+  * Text: 字符的组合
+  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+          a year ago
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/06/svg-spec/index.html#disqus_thread" data-pjax data-disqus-identifier="129">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -215,7 +332,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-emacs tag-elisp">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="../../2013/05/29/-in-auto-mode-alist/index.html" itemprop="url" data-pjax title="'$' in auto-mode-alist">
@@ -236,6 +353,14 @@ HTML5 各方角力又开始了</p>&hellip;</p>
         </time>
       </li>
       
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/emacs/index.html" data-pjax>emacs</a>, 
+          
+            <a itemprop="keywords" href="../../tag/elisp/index.html" data-pjax>elisp</a> 
+          
+        </li>
+      
       <li class="post-item-meta-item">
         <a href="../../2013/05/29/-in-auto-mode-alist/index.html#disqus_thread" data-pjax data-disqus-identifier="126">Comments</a>
       </li>
@@ -245,7 +370,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-minification">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="../../2013/05/24/uglify-js-processing/index.html" itemprop="url" data-pjax title="Uglify-js Processing">
@@ -254,7 +379,15 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     </h2>
   </header>
   <section itemprop="description" class="post-item-excerpt">
-    <p><p>UglifyJs 1</p>&hellip;</p>
+    <p><h2 id="uglifyjs1">UglifyJs 1  </h2>
+
+<p>'parse-js':主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end <br />
+'process.js':在ast的IR上做优化, 其中包括:</p>
+
+<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等; <br />
+2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类; <br />
+3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。 <br />
+    * []取值变成.操作符</p>&hellip;</p>
   </section>
   <footer class="post-item-footer">
     <ul class="post-item-meta-list">
@@ -263,6 +396,12 @@ HTML5 各方角力又开始了</p>&hellip;</p>
           a year ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/minification/index.html" data-pjax>minification</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="../../2013/05/24/uglify-js-processing/index.html#disqus_thread" data-pjax data-disqus-identifier="125">Comments</a>
@@ -301,7 +440,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
+  role="article" class="post-item post tag-nodejs tag-spawn tag-exec">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
       <a href="../../2013/05/07/differences-between-exec-and-spawn/index.html" itemprop="url" data-pjax title="NodeJs中exec和spawn的差别">
@@ -323,6 +462,16 @@ HTML5 各方角力又开始了</p>&hellip;</p>
           a year ago
         </time>
       </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/nodejs/index.html" data-pjax>nodejs</a>, 
+          
+            <a itemprop="keywords" href="../../tag/spawn/index.html" data-pjax>spawn</a>, 
+          
+            <a itemprop="keywords" href="../../tag/exec/index.html" data-pjax>exec</a> 
+          
+        </li>
       
       <li class="post-item-meta-item">
         <a href="../../2013/05/07/differences-between-exec-and-spawn/index.html#disqus_thread" data-pjax data-disqus-identifier="123">Comments</a>
@@ -368,101 +517,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/26/usage-of-synchronize-tasks-in-javascript/index.html" itemprop="url" data-pjax title="同步调用在javascript中的应用">
-        同步调用在javascript中的应用
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在javascript中很多任务都是异步执行的，而在有些情况下，我们更希望利用同步的方式来组织：</p>
-
-<ol>
-<li>页面动画. 页面动画的执行现在即可以通过css也可以通过javascript来执行，理想的情况下自然是通过css来处理所有动画，但是在css并没有完全覆盖所有的动画并且设计总是在不断的涌现新的需求的情况下，很多时候我们的动画效果都是css和javascript混合执行的，而这个时候，我们希望在前一个css效果结束后才调用javascript之后的调用。或者两个javsacript的动画效果能够按照顺序执行。  </li>
-<li>page unload. 在执行page unload返回一些统计信息的时候，我们不希望函数被async的执行，否则在callback调用时页面已经被destory了，callback方法自然是没办法执行了。</li>
-</ol>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-26" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/26/usage-of-synchronize-tasks-in-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="121">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/index.html" itemprop="url" data-pjax title="IE7的两个兼容性问题">
-        IE7的两个兼容性问题
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><ol>
-<li>获取href的属性 getAttribute('href')</li>
-</ol>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-06" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/index.html#disqus_thread" data-pjax data-disqus-identifier="120">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/03/orion-next-eclipse/index.html" itemprop="url" data-pjax title="Orion: Next Eclipse?">
-        Orion: Next Eclipse?
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Orion是一个开源的online IDE，javascript的client和java的server,也是属于Eclipse Project下面的一个重要项目；希望打造一个online版的eclipse。</p>
-
-<p>比较好奇的是居然没有做成比较流行的SPA(Single Page Application)的形式，而是可以打开多个tab，并且允许你通过link共享，这是好处吧，不好的是这样每次做新的操作都要切换tab并且等待刷新，用户体验不是很好。就不能两者都结合起来么？</p>
-
-<p>Link: <a href="https://orionhub.org">https://orionhub.org</a></p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-03" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/03/orion-next-eclipse/index.html#disqus_thread" data-pjax data-disqus-identifier="119">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -496,9 +550,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=4eff0e2034"></script>
+    <script src="../../public/jquery.js?v=a3385d4526"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=4eff0e2034"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
 
     <script type="text/javascript">
 
