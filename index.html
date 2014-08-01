@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/main.min.css?v=a3385d4526"/>
+    <link rel="stylesheet" href="assets/css/main.min.css?v=f11d48f626"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="assets/js/head-scripts.min.js?v=a3385d4526"></script>
+    <script src="assets/js/head-scripts.min.js?v=f11d48f626"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="rss/index.html">
@@ -146,6 +146,58 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-nodejs tag-performance tag-v8">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/07/29/tofastproperties-in-bluebirds/index.html" itemprop="url" data-pjax title="toFastProperties in bluebirds">
+        toFastProperties in bluebirds
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927#24989927">ToFastProperties in bluebirds</a></p>
+
+<p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
+
+<pre><code class="javascript">function toFastProperties(obj) {  
+    /*jshint -W027*/
+    function f() {}
+    f.prototype = obj;
+    ASSERT("%HasFastProperties", true, obj);
+    return f;
+    eval(obj);
+}
+</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-29" itemprop="datePublished">
+           July 29, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="tag/nodejs/index.html" data-pjax>nodejs</a>, 
+          
+            <a itemprop="keywords" href="tag/performance/index.html" data-pjax>performance</a>, 
+          
+            <a itemprop="keywords" href="tag/v8/index.html" data-pjax>v8</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/07/29/tofastproperties-in-bluebirds/index.html#disqus_thread" data-pjax data-disqus-identifier="146">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -171,7 +223,7 @@ var enable_pjax = true;
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-28" itemprop="datePublished">
-          2 minutes ago
+           July 28, 2014
         </time>
       </li>
       
@@ -205,7 +257,7 @@ if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-24" itemprop="datePublished">
-          4 days ago
+           July 24, 2014
         </time>
       </li>
       
@@ -251,7 +303,7 @@ if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-23" itemprop="datePublished">
-          5 days ago
+           July 23, 2014
         </time>
       </li>
       
@@ -308,7 +360,7 @@ if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-11" itemprop="datePublished">
-          17 days ago
+           July 11, 2014
         </time>
       </li>
       
@@ -359,7 +411,7 @@ oghost &gt; exports.json
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-07-09" itemprop="datePublished">
-          19 days ago
+           July 09, 2014
         </time>
       </li>
       
@@ -410,7 +462,7 @@ oghost &gt; exports.json
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-24" itemprop="datePublished">
-          2 months ago
+           May 24, 2014
         </time>
       </li>
       
@@ -460,7 +512,7 @@ re.toString(); // return '/abc/igm'
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-21" itemprop="datePublished">
-          2 months ago
+           May 21, 2014
         </time>
       </li>
       
@@ -502,7 +554,7 @@ if (cookies != null) {
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-06" itemprop="datePublished">
-          3 months ago
+           May 06, 2014
         </time>
       </li>
       
@@ -545,54 +597,12 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-04-08" itemprop="datePublished">
-          4 months ago
+           April 08, 2014
         </time>
       </li>
       
       <li class="post-item-meta-item">
         <a href="2014/04/08/isroll-event-preventdefault/index.html#disqus_thread" data-pjax data-disqus-identifier="132">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2014/03/06/passport-openid-nodejs/index.html" itemprop="url" data-pjax title="在cluster中使用passport openID">
-        在cluster中使用passport openID
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><h1 id="passportopenidincluster">Passport openid in cluster</h1>
-
-<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
-
-<h2 id="session">session</h2>
-
-<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
-
-<h2 id="openidassociation">open id association</h2>
-
-<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
-但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
-
-<pre><code class=" js">    var passport = require('passport');
-    var</code></pre>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2014-03-06" itemprop="datePublished">
-          5 months ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
       </li>
     </ul>
   </footer>
@@ -628,9 +638,9 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
       </div>
     </main>
 
-    <script src="public/jquery.js?v=a3385d4526"></script>
+    <script src="public/jquery.js?v=f11d48f626"></script>
 
-    <script src="assets/js/foot-scripts.min.js?v=a3385d4526"></script>
+    <script src="assets/js/foot-scripts.min.js?v=f11d48f626"></script>
 
     <script type="text/javascript">
 

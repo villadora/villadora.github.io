@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Graphviz 几种layout的mode</title>
+    <title>toFastProperties in bluebirds</title>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,11 +16,11 @@
     <meta name="description" content="">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Graphviz 几种layout的mode">
+    <meta name="twitter:title" content="toFastProperties in bluebirds">
     <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Graphviz 几种layout的mode">
+    <meta property="og:title" content="toFastProperties in bluebirds">
     <meta property="og:description" content="">
 
     
@@ -77,9 +77,9 @@ var enable_pjax = true;
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
-<link rel="canonical" href="http://villadora.me/2012/07/14/graphviz-ji-chong-layoutde-mode/" />
+<link rel="canonical" href="http://villadora.me/2014/07/29/tofastproperties-in-bluebirds/" />
   </head>
-  <body class="post-template">
+  <body class="post-template tag-javascript tag-nodejs tag-performance tag-v8">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -127,22 +127,34 @@ var enable_pjax = true;
 
 <section class="wrapper wrapper-post">
   <div class="wrapper-container">
-    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-javascript tag-nodejs tag-performance tag-v8">
       
         <section class="post-container">
           <header class="post-header">
             <ul class="post-meta-list">
               <li class="post-meta-item">
-                <time datetime="2012-07-14" itemprop="datePublished">
-                  July 14, 2012
+                <time datetime="2014-07-29" itemprop="datePublished">
+                  July 29, 2014
                 </time>
               </li>
               
+                <li class="post-meta-item">
+                  
+                    <a itemprop="articleSection" href="../../../../tag/javascript/index.html" data-pjax>javascript</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/nodejs/index.html" data-pjax>nodejs</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/performance/index.html" data-pjax>performance</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/v8/index.html" data-pjax>v8</a> 
+                  
+                </li>
+              
               <li class="post-meta-item">
-                <a href="index.html#disqus_thread" data-disqus-identifier="112">Comments</a>
+                <a href="index.html#disqus_thread" data-disqus-identifier="146">Comments</a>
               </li>
             </ul>
-            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="Graphviz 几种layout的mode">Graphviz 几种layout的mode</a></h1>
+            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="toFastProperties in bluebirds">toFastProperties in bluebirds</a></h1>
             
             <!--h2 itemprop="about" class="post-subtitle"></h2-->
           </header>
@@ -162,23 +174,19 @@ var enable_pjax = true;
             </div>
           </aside>
           <div itemprop="articleBody" class="post-body">
-            <p>graphviz的工具dot主要有6种filter： <br />
-dot <br />
-neato <br />
-twopi <br />
-circo <br />
-fdp <br />
-sfdp <br />
-其中dot可以用来绘制有向图，但是似乎是要在原始graph里面有layout信息
-neato用来绘制无向图，layout的结果是根据force-directed algorithms也就是spring algorithms算出来的。spring layout是一个对现实进行模拟的很好例子，它利用胡克定律和库伦定律，node之间的作用力由node本身相互之间的吸引力和斥力以及edge上的弹力所决定。经过多次迭代，最终会达到一个力平衡的状态。之前在做training project时还写了一个javascript版的spring layout. <br />
-而nodes之间的力有库伦定律得出，edges上的力则有胡克定律得出。在这样一个算法中，各个参数和迭代次数的选择对于layout的结果是非常重要的。</p>
+            <p><a href="http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927#24989927">ToFastProperties in bluebirds</a></p>
 
-<p>twopi是一个绘制radial layout  (see G. Wills, Symposium on Graph Drawing GD’97, September, 1997)的filter，首先它会选择一个root node，然后根据其他nodes到root的步长来决定它们分布在那个环上，比如步长为1的就分布在离圆心最近的一个环上，步长为2就分布在离圆心第二远的环上，依次类推。</p>
+<p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
 
-<p>circo则是根据circular layout (see Six and Tollis, GD ’99 and ALENEX ’99, and Kaufmann and Wiese, GD ’02.)来绘制layout. 该算法和上面的radial layout类似，不同的是会尽量将有biconncted的node group放在一个环上，这样可以尽可能的减少环与环之间的edges. 当graph是一个outerplanar的时候，这个算法绘制出来的是一个plannar layout.
-  plannar就是平面图，也就是说存在一种绘制方法将graph画在一个平面上而没有边交叉。而outerplannar则是在绘制成为plannar之后，所有的node都处在graph的boundary上，即没有一个node被围在中心。</p>
-
-<p>fdp和sfdp两个filter都是利用了一种spring layout来绘制无向图，这种spring layout manual上说是 “a force-directed approach in the spirit of Fruchterman and Reingold (cf. Software-Practice &amp; Experience 21(11), 1991, pp. 1129-1164)”; 也没有看， 不知道和一般的spring layout有什么区别。后面sfdp实际上是scale-fdp，算法应该是可以多路同时计算的，因此更快，适合于large graphs.</p>
+<pre><code class="javascript">function toFastProperties(obj) {  
+    /*jshint -W027*/
+    function f() {}
+    f.prototype = obj;
+    ASSERT("%HasFastProperties", true, obj);
+    return f;
+    eval(obj);
+}
+</code></pre>
           </div>
           <footer class="post-footer">
             <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
@@ -203,7 +211,7 @@ neato用来绘制无向图，layout的结果是根据force-directed algorithms�
                 
                 <p class="post-info">
                   <b class="post-info-title">Published on</b>
-                  <time class="post-date">July 14, 2012</time>
+                  <time class="post-date">July 29, 2014</time>
                 </p>
               </div>
             </div>
@@ -233,7 +241,7 @@ neato用来绘制无向图，layout的结果是根据force-directed algorithms�
 <script type="text/javascript">
   if(GHOSTIUM.haveDisqus) {
     
-    var disqus_identifier = '112';
+    var disqus_identifier = '146';
     
 
     if(typeof DISQUS !== 'object') {

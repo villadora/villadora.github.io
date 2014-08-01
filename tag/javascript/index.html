@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=a3385d4526"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=f11d48f626"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=f11d48f626"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -148,6 +148,58 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-nodejs tag-performance tag-v8">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/29/tofastproperties-in-bluebirds/index.html" itemprop="url" data-pjax title="toFastProperties in bluebirds">
+        toFastProperties in bluebirds
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927#24989927">ToFastProperties in bluebirds</a></p>
+
+<p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
+
+<pre><code class="javascript">function toFastProperties(obj) {  
+    /*jshint -W027*/
+    function f() {}
+    f.prototype = obj;
+    ASSERT("%HasFastProperties", true, obj);
+    return f;
+    eval(obj);
+}
+</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-29" itemprop="datePublished">
+           July 29, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="../nodejs/index.html" data-pjax>nodejs</a>, 
+          
+            <a itemprop="keywords" href="../performance/index.html" data-pjax>performance</a>, 
+          
+            <a itemprop="keywords" href="../v8/index.html" data-pjax>v8</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/29/tofastproperties-in-bluebirds/index.html#disqus_thread" data-pjax data-disqus-identifier="146">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-javascript tag-amd-2 tag-commonjs-2">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -178,7 +230,7 @@ var enable_pjax = true;
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-24" itemprop="datePublished">
-          2 months ago
+           May 24, 2014
         </time>
       </li>
       
@@ -228,7 +280,7 @@ re.toString(); // return '/abc/igm'
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2014-05-21" itemprop="datePublished">
-          2 months ago
+           May 21, 2014
         </time>
       </li>
       
@@ -273,9 +325,9 @@ re.toString(); // return '/abc/igm'
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=a3385d4526"></script>
+    <script src="../../public/jquery.js?v=f11d48f626"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=f11d48f626"></script>
 
     <script type="text/javascript">
 

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 28 Jul 2014 08:50:22 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[couchdb 1.5/1.6中的Proxy Authentication]]></title><description><![CDATA[<p>因为最近要在<code>couchdb</code>中使用<a href='http://couchdb.readthedocs.org/en/latest/api/server/authn.html' #api-auth-proxy"><strong>Proxy Authentication</strong></a></p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 01 Aug 2014 13:50:06 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[toFastProperties in bluebirds]]></title><description><![CDATA[<p><a href='http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927' #24989927">ToFastProperties in bluebirds</a></p>
+
+<p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
+
+<pre><code class="javascript">function toFastProperties(obj) {  
+    /*jshint -W027*/
+    function f() {}
+    f.prototype = obj;
+    ASSERT("%HasFastProperties", true, obj);
+    return f;
+    eval(obj);
+}
+</code></pre>]]></description><link>http://villadora.me/2014/07/29/tofastproperties-in-bluebirds/</link><guid isPermaLink="false">4ec62de1-c8b3-460c-89ea-743b44e9bfde</guid><category><![CDATA[javascript]]></category><category><![CDATA[nodejs]]></category><category><![CDATA[performance]]></category><category><![CDATA[v8]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 29 Jul 2014 06:33:50 GMT</pubDate></item><item><title><![CDATA[couchdb 1.5/1.6中的Proxy Authentication]]></title><description><![CDATA[<p>因为最近要在<code>couchdb</code>中使用<a href='http://couchdb.readthedocs.org/en/latest/api/server/authn.html' #api-auth-proxy"><strong>Proxy Authentication</strong></a></p>
 
 <p>于是参照文档，修改<em>local.ini</em>配置为:</p>
 
@@ -346,5 +358,4 @@ b.apply([], a);
 <pre><code>sudo scutil --set HostName &lt;hostname&gt;
 </code></pre>
 
-<p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>]]></description><link>http://villadora.me/2013/07/08/hostname-in-mac/</link><guid isPermaLink="false">6ce387ab-8e5d-4d3d-ab38-fb067510b1b1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 08 Jul 2013 01:30:00 GMT</pubDate></item><item><title><![CDATA[HTML5]]></title><description><![CDATA[<p><a href='http://dev.w3.org/html5/spec/Overview.html' #introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
-HTML5 各方角力又开始了</p>]]></description><link>http://villadora.me/2013/05/31/html5/</link><guid isPermaLink="false">b1709f0e-954b-4448-ba37-4673b03f3380</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 31 May 2013 06:30:00 GMT</pubDate></item></channel></rss>
+<p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>]]></description><link>http://villadora.me/2013/07/08/hostname-in-mac/</link><guid isPermaLink="false">6ce387ab-8e5d-4d3d-ab38-fb067510b1b1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 08 Jul 2013 01:30:00 GMT</pubDate></item></channel></rss>

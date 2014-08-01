@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=a3385d4526"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=f11d48f626"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=a3385d4526"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=f11d48f626"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -146,6 +146,48 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/03/06/passport-openid-nodejs/index.html" itemprop="url" data-pjax title="在cluster中使用passport openID">
+        在cluster中使用passport openID
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h1 id="passportopenidincluster">Passport openid in cluster</h1>
+
+<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
+
+<h2 id="session">session</h2>
+
+<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
+
+<h2 id="openidassociation">open id association</h2>
+
+<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
+但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
+
+<pre><code class=" js">    var passport = require('passport');
+    var</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-03-06" itemprop="datePublished">
+           March 06, 2014
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-arguments">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -171,7 +213,7 @@ b.apply([], a);
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-08-09" itemprop="datePublished">
-          a year ago
+           August 09, 2013
         </time>
       </li>
       
@@ -205,7 +247,7 @@ b.apply([], a);
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-08-06" itemprop="datePublished">
-          a year ago
+           August 06, 2013
         </time>
       </li>
       
@@ -250,7 +292,7 @@ b.apply([], a);
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-08-06" itemprop="datePublished">
-          a year ago
+           August 06, 2013
         </time>
       </li>
       
@@ -290,7 +332,7 @@ b.apply([], a);
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-07-08" itemprop="datePublished">
-          a year ago
+           July 08, 2013
         </time>
       </li>
       
@@ -319,7 +361,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-05-31" itemprop="datePublished">
-          a year ago
+           May 31, 2013
         </time>
       </li>
       
@@ -349,7 +391,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-05-29" itemprop="datePublished">
-          a year ago
+           May 29, 2013
         </time>
       </li>
       
@@ -393,7 +435,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-05-24" itemprop="datePublished">
-          a year ago
+           May 24, 2013
         </time>
       </li>
       
@@ -427,7 +469,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-05-22" itemprop="datePublished">
-          a year ago
+           May 22, 2013
         </time>
       </li>
       
@@ -459,7 +501,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
         <time datetime="2013-05-07" itemprop="datePublished">
-          a year ago
+           May 07, 2013
         </time>
       </li>
       
@@ -475,42 +517,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       
       <li class="post-item-meta-item">
         <a href="../../2013/05/07/differences-between-exec-and-spawn/index.html#disqus_thread" data-pjax data-disqus-identifier="123">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/06/custom-git-command/index.html" itemprop="url" data-pjax title="自定义git命令, like git-flow, git-extras">
-        自定义git命令, like git-flow, git-extras
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>git flow和git extras很强大，原先以为是用一些git alias定义git命令去调用shell脚本，之后看了代码才发现完全不是那么回事。</p>
-
-<p>git的可扩展性非常强，去自定义一个git命令, 在unix环境下，你只需要在PATH中定义一个可执行的脚本，以"git="开头，然后剩余的部分就是你的sub command的名字了。比如如果有一个"git-mark"的脚本，那么在执行git mark命令时，实际上git会去调用git-mark这个脚本。是不是很简单？</p>
-
-<p>为了了解git对alias,builtin,custom command的执行顺序，弄了下脚本做测试。</p>
-
-<ol>
-<li>在有builtin的情况下，alias和custom command不起作用，就是说像log, status等这些命令是无法通过alias和custom command来覆盖的。  </li>
-<li>在没有builtin的情况下, custom</li></ol>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-06" itemprop="datePublished">
-          a year ago
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/06/custom-git-command/index.html#disqus_thread" data-pjax data-disqus-identifier="122">Comments</a>
       </li>
     </ul>
   </footer>
@@ -550,9 +556,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=a3385d4526"></script>
+    <script src="../../public/jquery.js?v=f11d48f626"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=a3385d4526"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=f11d48f626"></script>
 
     <script type="text/javascript">
 
