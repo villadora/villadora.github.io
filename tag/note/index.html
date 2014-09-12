@@ -148,6 +148,61 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-android tag-note tag-learning">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/09/12/androidxue-xi-bi-ji-1/index.html" itemprop="url" data-pjax title="Android学习笔记(1)">
+        Android学习笔记(1)
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h4 id="securitysandbox">Security Sandbox 安全沙盒</h4>
+
+<p>Android操作系统是基于多用户的iinux系统上的，从他的系统架构图就中可以看得很明显:</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Android-System-Architecture.svg/1000px-Android-System-Architecture.svg.png" alt="Android System Architecture" /></p>
+
+<p>所以很多地方Android都直接利用了linux的特性。</p>
+
+<ul>
+<li>Android里面每个应用都被当作linux系统中的一个用户，被赋予一个唯一的user ID。这个user ID只有操作系统知道，应用自己是不知道的(当然通过root之后没有什么不可能)。这样应用的文件也就很简单的可以通过user permission来设定。</li>
+<li>每个应用都运行在独立的进程里，这样的好处是Android系统对应用的管理可以简化到对进程的管理，如挂起恢复等都可以直接用进程的特性。而内存管理也变得简单，因为不同的应用就是不同的进程，不会相互影响。</li>
+<li>另外，每个京城都有着自己独立的虚拟机dvm，也就意味着应用都是运行在独立的虚拟机里的，虚拟机相当于沙盒，互相之间的影响非常小。</li>
+</ul>
+
+<p>当然应用之间不可能完全没有交流，Android提供了如下几种方式:</p>
+
+<ul>
+<li>两个应用如果是同一个组织个人开发，并且有着同样的签名，那么他们可以要求系统赋予他们一样的user ID，这样他们可以互相访问文件；而android在设计时为了节省系统资源，则认为既然你们都已经有一样的user</li></ul>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-09-12" itemprop="datePublished">
+           September 12, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../android/index.html" data-pjax>android</a>, 
+          
+            <a itemprop="keywords" href="index.html" data-pjax>note</a>, 
+          
+            <a itemprop="keywords" href="../learning/index.html" data-pjax>learning</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/09/12/androidxue-xi-bi-ji-1/index.html#disqus_thread" data-pjax data-disqus-identifier="150">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-gralde tag-note tag-learning">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">

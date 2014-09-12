@@ -149,6 +149,40 @@ var enable_pjax = true;
   role="article" class="post-item post">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/05/06/cookie-version/index.html" itemprop="url" data-pjax title="Cookie Version in J2EE">
+        Cookie Version in J2EE
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
+
+<pre><code class="java">Cookie[] cookies = request.getCookies();  
+if (cookies != null) {  
+    for (Cookie cookie : cookies) {
+        if (StringUtils.equalsIgnoreCase(cookie.getName(), name)) {
+            value = cookie.getValue(); // if the value in cookie is 'http://example.com' then here it</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-06" itemprop="datePublished">
+           May 06, 2014
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/05/06/cookie-version/index.html#disqus_thread" data-pjax data-disqus-identifier="133">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
       <a href="../../2014/04/08/isroll-event-preventdefault/index.html" itemprop="url" data-pjax title="Iscroll5的几个bug">
         Iscroll5的几个bug
       </a>
@@ -496,34 +530,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/22/type-system-in-javascript/index.html" itemprop="url" data-pjax title="Description on Function/Object and other things in Javascript">
-        Description on Function/Object and other things in Javascript
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Pre-Knowledge</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-22" itemprop="datePublished">
-           May 22, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/22/type-system-in-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="124">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -533,7 +539,7 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       <i class="fa fa-angle-double-left"></i>&nbsp;Newer
     </a>
   
-  <span class="post-list-pagination-item post-list-pagination-item-current">Page 2 of 4</span>
+  <span class="post-list-pagination-item post-list-pagination-item-current">Page 2 of 5</span>
   
     <a href="../3/index.html" class="post-list-pagination-item post-list-pagination-item-next" data-pjax>
       Older&nbsp;<i class="fa fa-angle-double-right"></i>

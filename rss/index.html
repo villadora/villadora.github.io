@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 12 Sep 2014 03:28:34 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Gralde Note]]></title><description><![CDATA[<ul>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 12 Sep 2014 03:35:32 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Android学习笔记(1)]]></title><description><![CDATA[<h4 id="securitysandbox">Security Sandbox 安全沙盒</h4>
+
+<p>Android操作系统是基于多用户的iinux系统上的，从他的系统架构图就中可以看得很明显:</p>
+
+<p><img src='http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Android-System-Architecture.svg/1000px-Android-System-Architecture.svg.png'  alt="Android System Architecture" /></p>
+
+<p>所以很多地方Android都直接利用了linux的特性。</p>
+
+<ul>
+<li>Android里面每个应用都被当作linux系统中的一个用户，被赋予一个唯一的user ID。这个user ID只有操作系统知道，应用自己是不知道的(当然通过root之后没有什么不可能)。这样应用的文件也就很简单的可以通过user permission来设定。</li>
+<li>每个应用都运行在独立的进程里，这样的好处是Android系统对应用的管理可以简化到对进程的管理，如挂起恢复等都可以直接用进程的特性。而内存管理也变得简单，因为不同的应用就是不同的进程，不会相互影响。</li>
+<li>另外，每个京城都有着自己独立的虚拟机dvm，也就意味着应用都是运行在独立的虚拟机里的，虚拟机相当于沙盒，互相之间的影响非常小。</li>
+</ul>
+
+<p>当然应用之间不可能完全没有交流，Android提供了如下几种方式:</p>
+
+<ul>
+<li>两个应用如果是同一个组织个人开发，并且有着同样的签名，那么他们可以要求系统赋予他们一样的user ID，这样他们可以互相访问文件；而android在设计时为了节省系统资源，则认为既然你们都已经有一样的user ID，那么也在也没有必要把这两个应用区分到不同的进程和虚拟机中，所以有着一样的user id的应用会共享一样的linux process和虚拟机。</li>
+<li>应用可以访问储存在各种设备上的数据，比如联系人，短信或者sd卡等。这些权限必须在安装时分配user ID的时候就给予之后是不能更改的，而一个应用需要哪些权限，需要通过manifest.xml来声明。</li>
+<li>还有一种更通用的方法就是通过系统提供的广播机制，后面会提到的广播，相当于一个系统级的Message Bus。可以通过subscribe和send消息(Intent)来向其他应用程序发布消息。</li>
+</ul>
+
+<h4 id="applicationcomponents">Application Components 程序组件</h4>
+
+<p>在Android系统中一个应用主要是由下面四种组件构成的:</p>
+
+<ol>
+<li>Activity: Activity代表了一个单独的screen，是能够响应外界事件的一个最小单位(还不是很清楚activity里面的view的结构，但是感觉很多软件都滥用了Activity,导致在Activities之间切换时每个Activity都需要消耗时间做初始化)。从文档历来看,Activity不应该是UI上的结构，而应该是一个程序逻辑上的结构，程序的Entry point,意味着外部可以不通过应用的其他部分直接访问到这个界面。而如果一个Activity是“私有的”，即不为外界所知也不响应外部消息的，那么应该整合进另一个Activity。  </li>
+<li>Service: Service是一个后台服务，多用来执行一些长期运行的操作或者需要在另一个进程里执行的操作以避免当前应用进程阻塞。而Service是没有用户界面的。  </li>
+<li>Content Provider:Content Provider提供了一组可以共享的数据，其他的应用程序可以访问甚至修改。而后面数据可以储存在文件系统，SQLLite数据库或者网络上。同样也Content Provider也可以被设置为私有。  </li>
+<li>Broadcast Receiver:前面讲到了广播，而Broadcast receiver就是应用响应广播时间的组建，许多广播使用系统发出的，比如:锁频，电池没电等。而应用也可以发布广播，这样应用就可以通过广播相互交流。</li>
+</ol>
+
+<h4 id="intent">Intent消息</h4>
+
+<p>在Android系统设计中，任何一个应用都可以启动其他应用的组件，可以是activity，也可以是service, broadcast receiver。在android中，应用的entry point并不是唯一的。样程序之间的整合能做的很好，但是现在这样看到的非常少，因为除了基础的功能，很多大家都愿意自己做一套新的而不是利用现有的。</p>
+
+<p>每个应用都是不一样的，而且你也不知道这些应用是否已经安装，因此直接在代码中调用其他的应用是不现实的。这个时候就需要用到之前提到的message bus，而这个message bus做的还不仅仅是广播。通过向系统发送Intent，系统可以根据Intent的内容执行一定的操作，帮你激活应用。</p>
+
+<p>Intent可以在components之间发送，不管是在一个应用内还是多个应用之间。对于activities和services，Intent会定义要做什么和对什么数据(通过URL),而对于broadcast receivers，intent则只定义一个一直的动作。而content providerz则是由contentResolver来激活的。</p>
+
+<ul>
+<li>start activity: <a href='http://developer.android.com/reference/android/content/Context.html' #startActivity(android.content.Intent)">startActivity()</a> <a href='http://developer.android.com/reference/android/app/Activity.html' #startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></li>
+<li>start service: <a href='http://developer.android.com/reference/android/content/Context.html' #startService(android.content.Intent)">startService()</a> <a href='http://developer.android.com/reference/android/content/Context.html' #bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></li>
+<li>initial broadcast: <a href='http://developer.android.com/reference/android/content/Context.html' #sendBroadcast(android.content.Intent)">sendBroadcast()</a> <a href='http://developer.android.com/reference/android/content/Context.html' #sendOrderedBroadcast(android.content.Intent, java.lang.String)">sendOrderedBroadcast()</a> <a href='http://developer.android.com/reference/android/content/Context.html' #sendStickyBroadcast(android.content.Intent)">sendStickBroadcast()</a></li>
+<li>query content provider: <a href='http://developer.android.com/reference/android/content/ContentProvider.html' #query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentResolver.query()</a></li>
+</ul>
+
+<h4 id="manifestfile">Manifest File</h4>
+
+<p>Android应用的根目录下都有一个文件*AndroidManifest.xml“， 而他主要做几件事情：</p>
+
+<ol>
+<li>申明应用所包含的components，这样系统就知道这个应用有多少components，能够对什么消息作出相应，能够如何被激活。同时也会在里面包含这些components能做什么的信息，这样当系统受到一个Intent说要执行actionA的时候，系统就知道要去找谁了。  </li>
+<li>申明应用所需的权限，如果没有这些权限应用就无法正常工作，所以在安装是系统就根据=manifest file=里的内容告知用户应用需要这些权限，否则就不给安装。这个步骤不能逐个控制经被诟病蛮久了，很多无关的应用都要求访问联系人短信等权限，你只有不装或者忍受两种选择。  </li>
+<li>申明最低系统需求，这个是通过<a href='http://developer.android.com/guide/topics/manifest/uses-sdk-element.html' #ApiLevels">API Level</a> API Level就是一个数字，越新的版本数字越大，所以只要系统的数字大于应用所申明的数字，那么这个应用就可以运行。  </li>
+<li>申明需要的硬件和软件功能，如蓝牙，摄像头等。也包含屏幕尺寸啊输入的要求之类的信息  </li>
+<li>需要的而外的libraries</li>
+</ol>
+
+<h4 id="applicationresources">Application Resources</h4>
+
+<p>一个应用除了代码还会有图片音效视频的资源文件，这些文件都被统一管理了起来放在res/目录下。而Android sdk build tools则对每一个资源都生成一个unique ID，并在R.java里面生成这些ID的reference。这样你在代码里就能够直接引用这些资源。并且对于不同的密度，资源也是不一样的。</p>]]></description><link>http://villadora.me/2014/09/12/androidxue-xi-bi-ji-1/</link><guid isPermaLink="false">861b100f-86e1-4d00-a669-cc55bc770842</guid><category><![CDATA[android]]></category><category><![CDATA[note]]></category><category><![CDATA[learning]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 12 Sep 2014 03:34:58 GMT</pubDate></item><item><title><![CDATA[Gralde Note]]></title><description><![CDATA[<ul>
 <li>使用groovy语法,定义在build.gralde中</li>
 </ul>
 
@@ -363,28 +425,4 @@ b.apply([], a);
 
 <p>从某种意义上来说arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用满了！</p>
 
-<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><category><![CDATA[arguments]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item><item><title><![CDATA[SVG Spec]]></title><description><![CDATA[<h3 id="svgpaintersmodel">SVG的Painters model</h3>
-
-<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
-
-<h3 id="renderingorder">Rendering Order</h3>
-
-<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
-
-<h3 id="groups">groups</h3>
-
-<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
-
-<h3 id="typesofgraphicselements">types of graphics elements</h3>
-
-<p>SVG支持三种基本的图形元素: <br />
-  * Shapes: 用到最多的，主要由各种线和填充构成
-  * Text: 字符的组合
-  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>
-
-<h4 id="shapesandtext">Shapes and Text</h4>
-
-<p>字符实际上最终也是形状的一种，由<strong>stroke</strong>和<strong>fill</strong>构成, 对于有一些形状, 比如path, 可以定义一些<strong>marker symbol</strong>,主要用来绘制箭头等。 
-其中<strong>fill</strong>首先被绘制，然后是<strong>stroke</strong>, 最后是<strong>marker symbol</strong>, <strong>marker</strong>的绘制顺序是沿着形状的outline来进行，从形状的起始点开始到结束点。</p>
-
-<p>Ref: <a href='http://www.w3.org/TR/SVG/render' >http://www.w3.org/TR/SVG/render.html</a></p>]]></description><link>http://villadora.me/2013/08/06/svg-spec/</link><guid isPermaLink="false">4220d788-80ac-4974-baf7-d41391ee2b58</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 11:34:06 GMT</pubDate></item></channel></rss>
+<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><category><![CDATA[arguments]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item></channel></rss>
