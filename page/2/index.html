@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=f11d48f626"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=aed4c6769f"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=f11d48f626"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=aed4c6769f"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,49 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/04/08/isroll-event-preventdefault/index.html" itemprop="url" data-pjax title="Iscroll5的几个bug">
+        Iscroll5的几个bug
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
+
+<ol>
+<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
+</ol>
+
+<pre><code>this.fadeTimeout = setTimeout((function (val) {  
+    this.wrapperStyle.opacity = val;
+    this.visible = +val;
+}).bind(this, val), delay);
+</code></pre>
+
+<p>去掉bind, 改成closure解决问题</p>
+
+<pre><code>var selft = this;  
+self.fadetimeout = setTimeout</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-04-08" itemprop="datePublished">
+           April 08, 2014
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/04/08/isroll-event-preventdefault/index.html#disqus_thread" data-pjax data-disqus-identifier="132">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -481,48 +524,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-nodejs tag-spawn tag-exec">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/07/differences-between-exec-and-spawn/index.html" itemprop="url" data-pjax title="NodeJs中exec和spawn的差别">
-        NodeJs中exec和spawn的差别
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在NodeJS中创建一个子进程有两种方式: <code>spawn</code>和<code>exec</code>；这两者都可以通过｀require('child_process')`来引入。那么这两个有什么区别呢？我应该使用哪一个呢？</p>
-
-<p>这两者的区别主要是在他们和父进程之间的IO处理上,<code>spawn</code>调用后返回的是一个流,可以对stdout上添加事件来响应流数据,如<code>stdout.on('data', function() {...})</code>；在这个过程中，子进程输出到stdout中的数据会调用callback，是处于一个流工作的模式下，有一点输出就处理。而<code>exec</code>则是将输出放到一个buffer里面，这个buffer的大小是可以通过maxBuffer这个option配置的，默认是200k.</p>
-
-<p>比较有趣的是实际上<code>exec</code>调用的是<code>execFile</code>，然后在<code>execFile</code></p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-07" itemprop="datePublished">
-           May 07, 2013
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="../../tag/nodejs/index.html" data-pjax>nodejs</a>, 
-          
-            <a itemprop="keywords" href="../../tag/spawn/index.html" data-pjax>spawn</a>, 
-          
-            <a itemprop="keywords" href="../../tag/exec/index.html" data-pjax>exec</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/07/differences-between-exec-and-spawn/index.html#disqus_thread" data-pjax data-disqus-identifier="123">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -556,9 +557,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=f11d48f626"></script>
+    <script src="../../public/jquery.js?v=aed4c6769f"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=f11d48f626"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
 
     <script type="text/javascript">
 

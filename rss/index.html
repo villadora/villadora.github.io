@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 01 Aug 2014 13:50:06 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[toFastProperties in bluebirds]]></title><description><![CDATA[<p><a href='http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927' #24989927">ToFastProperties in bluebirds</a></p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 12 Sep 2014 03:28:34 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Gralde Note]]></title><description><![CDATA[<ul>
+<li>使用groovy语法,定义在build.gralde中</li>
+</ul>
+
+<pre><code>println "hello"  
+</code></pre>
+
+<ul>
+<li>和makefile，ant一样定义task</li>
+</ul>
+
+<pre><code>task hello {  
+    doLast {
+        println "my task"
+    }
+}
+
+task hello &lt;&lt; {  
+   println "shortcut for task"
+}
+</code></pre>
+
+<ul>
+<li>同样可以定义依赖，生成DAG</li>
+</ul>
+
+<pre><code>task next(dependsOn: first) &lt;&lt; {  
+    println "my next task"
+}
+</code></pre>
+
+<ul>
+<li>能够在DAG上挂载hook</li>
+</ul>
+
+<pre><code>gradle.taskGraph.beforeTask { Task task -&gt;  
+    println "executing $task ..."
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state -&gt;  
+    if (state.failure) {
+        println "FAILED"
+    }
+    else {
+        println "done"
+    }
+}
+</code></pre>
+
+<ul>
+<li>通过settings.gradle来配置common behavior，对套嵌的projects进行配置。依赖方式相反，内部project依赖外部的project tasks</li>
+</ul>]]></description><link>http://villadora.me/2014/09/12/gralde-note/</link><guid isPermaLink="false">054f4468-11c1-4eb2-bc2d-00fc6955911d</guid><category><![CDATA[gralde]]></category><category><![CDATA[note]]></category><category><![CDATA[learning]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 12 Sep 2014 03:26:25 GMT</pubDate></item><item><title><![CDATA[toFastProperties in bluebirds]]></title><description><![CDATA[<p><a href='http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927' #24989927">ToFastProperties in bluebirds</a></p>
 
 <p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
 
@@ -336,26 +387,4 @@ b.apply([], a);
 <p>字符实际上最终也是形状的一种，由<strong>stroke</strong>和<strong>fill</strong>构成, 对于有一些形状, 比如path, 可以定义一些<strong>marker symbol</strong>,主要用来绘制箭头等。 
 其中<strong>fill</strong>首先被绘制，然后是<strong>stroke</strong>, 最后是<strong>marker symbol</strong>, <strong>marker</strong>的绘制顺序是沿着形状的outline来进行，从形状的起始点开始到结束点。</p>
 
-<p>Ref: <a href='http://www.w3.org/TR/SVG/render' >http://www.w3.org/TR/SVG/render.html</a></p>]]></description><link>http://villadora.me/2013/08/06/svg-spec/</link><guid isPermaLink="false">4220d788-80ac-4974-baf7-d41391ee2b58</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 11:34:06 GMT</pubDate></item><item><title><![CDATA[hostname in mac]]></title><description><![CDATA[<p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
-
-<p>在prompt里面的%m hostname通过以下途径获得：</p>
-
-<ol>
-<li>/etc/hostconfig: 在这个配置文件中配置  </li>
-<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
-<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
-<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
-<li>最后如果这个也没查到，那就会返回localhost</li>
-</ol>
-
-<p>所以由于我hostconfig没配置，然后就找到preferences.plist中的HostName，也就是第二项。</p>
-
-<p>而hostname命令就不一样了，好吧，这个过程是怎么样我也没找到，应该除了上述几个地方还有一些mac自己存放的配置文件，通过<code>scutil</code>来修改。只不过顺序和具体包含哪些不是很清楚。
-只不过其中DNS查询在去找preferences.plist之前，所以我的<code>hostname</code>会返回ip地址</p>
-
-<p>修改则可以通过</p>
-
-<pre><code>sudo scutil --set HostName &lt;hostname&gt;
-</code></pre>
-
-<p>具体命令其他用法可以查看scutil(8) man page,可以看到 这个命令可以用来设置ComputerName LocalHostName和HostName。</p>]]></description><link>http://villadora.me/2013/07/08/hostname-in-mac/</link><guid isPermaLink="false">6ce387ab-8e5d-4d3d-ab38-fb067510b1b1</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 08 Jul 2013 01:30:00 GMT</pubDate></item></channel></rss>
+<p>Ref: <a href='http://www.w3.org/TR/SVG/render' >http://www.w3.org/TR/SVG/render.html</a></p>]]></description><link>http://villadora.me/2013/08/06/svg-spec/</link><guid isPermaLink="false">4220d788-80ac-4974-baf7-d41391ee2b58</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 11:34:06 GMT</pubDate></item></channel></rss>

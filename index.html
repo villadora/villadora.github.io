@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/main.min.css?v=f11d48f626"/>
+    <link rel="stylesheet" href="assets/css/main.min.css?v=aed4c6769f"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="assets/js/head-scripts.min.js?v=f11d48f626"></script>
+    <script src="assets/js/head-scripts.min.js?v=aed4c6769f"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="rss/index.html">
@@ -144,6 +144,79 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-gralde tag-note tag-learning">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/09/12/gralde-note/index.html" itemprop="url" data-pjax title="Gralde Note">
+        Gralde Note
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><ul>
+<li>使用groovy语法,定义在build.gralde中</li>
+</ul>
+
+<pre><code>println "hello"  
+</code></pre>
+
+<ul>
+<li>和makefile，ant一样定义task</li>
+</ul>
+
+<pre><code>task hello {  
+    doLast {
+        println "my task"
+    }
+}
+
+task hello &lt;&lt; {  
+   println "shortcut for task"
+}
+</code></pre>
+
+<ul>
+<li>同样可以定义依赖，生成DAG</li>
+</ul>
+
+<pre><code>task next(dependsOn: first) &lt;&lt; {  
+    println "my next task"
+}
+</code></pre>
+
+<ul>
+<li>能够在DAG上挂载hook</li>
+</ul>
+
+<pre><code>gradle</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-09-12" itemprop="datePublished">
+           September 12, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/gralde/index.html" data-pjax>gralde</a>, 
+          
+            <a itemprop="keywords" href="tag/note/index.html" data-pjax>note</a>, 
+          
+            <a itemprop="keywords" href="tag/learning/index.html" data-pjax>learning</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/09/12/gralde-note/index.html#disqus_thread" data-pjax data-disqus-identifier="149">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-javascript tag-nodejs tag-performance tag-v8">
@@ -566,49 +639,6 @@ if (cookies != null) {
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2014/04/08/isroll-event-preventdefault/index.html" itemprop="url" data-pjax title="Iscroll5的几个bug">
-        Iscroll5的几个bug
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
-
-<ol>
-<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
-</ol>
-
-<pre><code>this.fadeTimeout = setTimeout((function (val) {  
-    this.wrapperStyle.opacity = val;
-    this.visible = +val;
-}).bind(this, val), delay);
-</code></pre>
-
-<p>去掉bind, 改成closure解决问题</p>
-
-<pre><code>var selft = this;  
-self.fadetimeout = setTimeout</code></pre>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2014-04-08" itemprop="datePublished">
-           April 08, 2014
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2014/04/08/isroll-event-preventdefault/index.html#disqus_thread" data-pjax data-disqus-identifier="132">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -638,9 +668,9 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
       </div>
     </main>
 
-    <script src="public/jquery.js?v=f11d48f626"></script>
+    <script src="public/jquery.js?v=aed4c6769f"></script>
 
-    <script src="assets/js/foot-scripts.min.js?v=f11d48f626"></script>
+    <script src="assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
 
     <script type="text/javascript">
 

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>javascript arguments长度限制</title>
+    <title>Gralde Note</title>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,11 +16,11 @@
     <meta name="description" content="">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="javascript arguments长度限制">
+    <meta name="twitter:title" content="Gralde Note">
     <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="javascript arguments长度限制">
+    <meta property="og:title" content="Gralde Note">
     <meta property="og:description" content="">
 
     
@@ -77,9 +77,9 @@ var enable_pjax = true;
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
-<link rel="canonical" href="http://villadora.me/2013/08/09/arguments-exceed-javascript/" />
+<link rel="canonical" href="http://villadora.me/2014/09/12/gralde-note/" />
   </head>
-  <body class="post-template tag-arguments">
+  <body class="post-template tag-gralde tag-note tag-learning">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -127,28 +127,32 @@ var enable_pjax = true;
 
 <section class="wrapper wrapper-post">
   <div class="wrapper-container">
-    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-arguments">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-gralde tag-note tag-learning">
       
         <section class="post-container">
           <header class="post-header">
             <ul class="post-meta-list">
               <li class="post-meta-item">
-                <time datetime="2013-08-09" itemprop="datePublished">
-                  August 09, 2013
+                <time datetime="2014-09-12" itemprop="datePublished">
+                  September 12, 2014
                 </time>
               </li>
               
                 <li class="post-meta-item">
                   
-                    <a itemprop="articleSection" href="../../../../tag/arguments/index.html" data-pjax>arguments</a> 
+                    <a itemprop="articleSection" href="../../../../tag/gralde/index.html" data-pjax>gralde</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/note/index.html" data-pjax>note</a>, 
+                  
+                    <a itemprop="keywords" href="../../../../tag/learning/index.html" data-pjax>learning</a> 
                   
                 </li>
               
               <li class="post-meta-item">
-                <a href="index.html#disqus_thread" data-disqus-identifier="130">Comments</a>
+                <a href="index.html#disqus_thread" data-disqus-identifier="149">Comments</a>
               </li>
             </ul>
-            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="javascript arguments长度限制">javascript arguments长度限制</a></h1>
+            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="Gralde Note">Gralde Note</a></h1>
             
             <!--h2 itemprop="about" class="post-subtitle"></h2-->
           </header>
@@ -168,25 +172,58 @@ var enable_pjax = true;
             </div>
           </aside>
           <div itemprop="articleBody" class="post-body">
-            <p>先看下这一段代码片段(in chrome):</p>
+            <ul>
+<li>使用groovy语法,定义在build.gralde中</li>
+</ul>
 
-<pre><code class="javascript">var a = [];  
-a[2&lt;&lt;16] = 1;  
-fucntion b() {}  
-b.apply([], a);  
+<pre><code>println "hello"  
 </code></pre>
 
-<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
-为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
-大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
+<ul>
+<li>和makefile，ant一样定义task</li>
+</ul>
 
-<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。</p>
+<pre><code>task hello {  
+    doLast {
+        println "my task"
+    }
+}
 
-<p>实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。</p>
+task hello &lt;&lt; {  
+   println "shortcut for task"
+}
+</code></pre>
 
-<p>从某种意义上来说arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用满了！</p>
+<ul>
+<li>同样可以定义依赖，生成DAG</li>
+</ul>
 
-<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>
+<pre><code>task next(dependsOn: first) &lt;&lt; {  
+    println "my next task"
+}
+</code></pre>
+
+<ul>
+<li>能够在DAG上挂载hook</li>
+</ul>
+
+<pre><code>gradle.taskGraph.beforeTask { Task task -&gt;  
+    println "executing $task ..."
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state -&gt;  
+    if (state.failure) {
+        println "FAILED"
+    }
+    else {
+        println "done"
+    }
+}
+</code></pre>
+
+<ul>
+<li>通过settings.gradle来配置common behavior，对套嵌的projects进行配置。依赖方式相反，内部project依赖外部的project tasks</li>
+</ul>
           </div>
           <footer class="post-footer">
             <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
@@ -211,7 +248,7 @@ b.apply([], a);
                 
                 <p class="post-info">
                   <b class="post-info-title">Published on</b>
-                  <time class="post-date">August 09, 2013</time>
+                  <time class="post-date">September 12, 2014</time>
                 </p>
               </div>
             </div>
@@ -241,7 +278,7 @@ b.apply([], a);
 <script type="text/javascript">
   if(GHOSTIUM.haveDisqus) {
     
-    var disqus_identifier = '130';
+    var disqus_identifier = '149';
     
 
     if(typeof DISQUS !== 'object') {

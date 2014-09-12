@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>http - 时光屋</title>
+    <title>note - 时光屋</title>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,11 +16,11 @@
     <meta name="description" content="">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="http - 时光屋">
+    <meta name="twitter:title" content="note - 时光屋">
     <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="http - 时光屋">
+    <meta property="og:title" content="note - 时光屋">
     <meta property="og:description" content="">
 
     
@@ -77,9 +77,9 @@ var enable_pjax = true;
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
-<link rel="canonical" href="http://villadora.me/tag/http/" />
+<link rel="canonical" href="http://villadora.me/tag/note/" />
   </head>
-  <body class="tag-template tag-http">
+  <body class="tag-template tag-note">
 
     <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
 <nav tabindex="-1" class="drawer">
@@ -141,63 +141,79 @@ var enable_pjax = true;
 <section class="wrapper" tabindex="0">
   <div class="wrapper-container">
     <header>
-      <p><h2>Posts tagged with <i>http</i></h2></p>
+      <p><h2>Posts tagged with <i>note</i></h2></p>
       <hr>
     </header>
 
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-http tag-rest tag-api">
+  role="article" class="post-item post tag-gralde tag-note tag-learning">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
-      <a href="../../2014/07/11/http-apishe-ji/index.html" itemprop="url" data-pjax title="Http API设计">
-        Http API设计
+      <a href="../../2014/09/12/gralde-note/index.html" itemprop="url" data-pjax title="Gralde Note">
+        Gralde Note
       </a>
     </h2>
   </header>
   <section itemprop="description" class="post-item-excerpt">
-    <p><p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
-地址:</p>
-
-<p><a href="https://github.com/interagent/http-api-design">https://github.com/interagent/http-api-design</a></p>
-
-<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
-
-<p>其中很重要的几条抽出来：</p>
-
-<ul>
-<li>返回正确的状态代码</li>
+    <p><ul>
+<li>使用groovy语法,定义在build.gralde中</li>
 </ul>
 
-<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
+<pre><code>println "hello"  
+</code></pre>
 
 <ul>
-<li>以ISO8601格式来使用UTC时间</li>
+<li>和makefile，ant一样定义task</li>
 </ul>
 
-<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的</p>&hellip;</p>
+<pre><code>task hello {  
+    doLast {
+        println "my task"
+    }
+}
+
+task hello &lt;&lt; {  
+   println "shortcut for task"
+}
+</code></pre>
+
+<ul>
+<li>同样可以定义依赖，生成DAG</li>
+</ul>
+
+<pre><code>task next(dependsOn: first) &lt;&lt; {  
+    println "my next task"
+}
+</code></pre>
+
+<ul>
+<li>能够在DAG上挂载hook</li>
+</ul>
+
+<pre><code>gradle</code></pre>&hellip;</p>
   </section>
   <footer class="post-item-footer">
     <ul class="post-item-meta-list">
       <li class="post-item-meta-item">
-        <time datetime="2014-07-11" itemprop="datePublished">
-           July 11, 2014
+        <time datetime="2014-09-12" itemprop="datePublished">
+           September 12, 2014
         </time>
       </li>
       
         <li class="post-item-meta-item">
           
-            <a itemprop="articleSection" href="index.html" data-pjax>http</a>, 
+            <a itemprop="articleSection" href="../gralde/index.html" data-pjax>gralde</a>, 
           
-            <a itemprop="keywords" href="../rest/index.html" data-pjax>rest</a>, 
+            <a itemprop="keywords" href="index.html" data-pjax>note</a>, 
           
-            <a itemprop="keywords" href="../api/index.html" data-pjax>api</a> 
+            <a itemprop="keywords" href="../learning/index.html" data-pjax>learning</a> 
           
         </li>
       
       <li class="post-item-meta-item">
-        <a href="../../2014/07/11/http-apishe-ji/index.html#disqus_thread" data-pjax data-disqus-identifier="139">Comments</a>
+        <a href="../../2014/09/12/gralde-note/index.html#disqus_thread" data-pjax data-disqus-identifier="149">Comments</a>
       </li>
     </ul>
   </footer>
