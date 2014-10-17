@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=aed4c6769f"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,115 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/05/31/html5/index.html" itemprop="url" data-pjax title="HTML5">
+        HTML5
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
+HTML5 各方角力又开始了</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-05-31" itemprop="datePublished">
+           May 31, 2013
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/05/31/html5/index.html#disqus_thread" data-pjax data-disqus-identifier="109">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-emacs tag-elisp">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/05/29/-in-auto-mode-alist/index.html" itemprop="url" data-pjax title="'$' in auto-mode-alist">
+        '$' in auto-mode-alist
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
+
+<p>"Note that \' matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-05-29" itemprop="datePublished">
+           May 29, 2013
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/emacs/index.html" data-pjax>emacs</a>, 
+          
+            <a itemprop="keywords" href="../../tag/elisp/index.html" data-pjax>elisp</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/05/29/-in-auto-mode-alist/index.html#disqus_thread" data-pjax data-disqus-identifier="126">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-minification">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/05/24/uglify-js-processing/index.html" itemprop="url" data-pjax title="Uglify-js Processing">
+        Uglify-js Processing
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h2 id="uglifyjs1">UglifyJs 1  </h2>
+
+<p>'parse-js':主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end <br />
+'process.js':在ast的IR上做优化, 其中包括:</p>
+
+<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等; <br />
+2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类; <br />
+3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。 <br />
+    * []取值变成.操作符</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-05-24" itemprop="datePublished">
+           May 24, 2013
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/minification/index.html" data-pjax>minification</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/05/24/uglify-js-processing/index.html#disqus_thread" data-pjax data-disqus-identifier="125">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -388,109 +497,6 @@ var enable_pjax = true;
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/03/01/boot-configuration-data/index.html" itemprop="url" data-pjax title="Boot Configuration Data">
-        Boot Configuration Data
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Boot Configuration Data</p>
-
-<p>Boot Configuration Data (BCD) is a firmware-independent database for boot-time configuration data. It replaces the boot.ini that was used by NTLDR, and is used by Microsoft's new Windows Boot Manager.</p>
-
-<p>Boot</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-03-01" itemprop="datePublished">
-           March 01, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/03/01/boot-configuration-data/index.html#disqus_thread" data-pjax data-disqus-identifier="117">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2012/07/14/comments-on-ipo-system-in-china/index.html" itemprop="url" data-pjax title="原尚书记对发行审核制度改革的评价">
-        原尚书记对发行审核制度改革的评价
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在位的可以说不能做，大家都看得到问题所在，但是谁会去动这一下呢?</p>
-
-<p>"发行审核制度改革最先推的是保荐人制度，就是整体上讲，要让发行制度更加市场化。市场化的核心是让市场的主体发挥作用，让他们归位尽责。如果市场主体该做的事情不去做，市场化就是缘木求鱼，方向就不对。因此，最早推的是保荐人制度。保荐人制度推出，就是让保荐人在公司上市过程中承担更大责任。这样，保荐人帮助公司做好做细上市前的工作，促使它在上市前就完成改制，按照股份制公司、公众公司的标准去改造；而不是对它进行包装，包装之后让它来过关。我曾经把这个变化比喻为：过去是过一个关，现在把它变成了一个管子；公司要想过这个关，就必须按照公众公司的标准去改造，才能过这个关，前期工作应该做得更好些。所以保荐制度是最先改革的，然后才是发审委的改革。</p>
-
-<p>　　发审委的改革，就是让它更加阳光化，更加专业化。过去有一个发审委的名单</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2012-07-14" itemprop="datePublished">
-           July 14, 2012
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2012/07/14/comments-on-ipo-system-in-china/index.html#disqus_thread" data-pjax data-disqus-identifier="116">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2012/07/14/graphviz-ji-chong-layoutde-mode/index.html" itemprop="url" data-pjax title="Graphviz 几种layout的mode">
-        Graphviz 几种layout的mode
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>graphviz的工具dot主要有6种filter： <br />
-dot <br />
-neato <br />
-twopi <br />
-circo <br />
-fdp <br />
-sfdp <br />
-其中dot可以用来绘制有向图，但是似乎是要在原始graph里面有layout信息
-neato用来绘制无向图，layout的结果是根据force-directed algorithms也就是spring algorithms算出来的。spring layout是一个对现实进行模拟的很好例子，它利用胡克定律和库伦定律，node之间的作用力由node本身相互之间的吸引力和斥力以及edge上的弹力所决定。经过多次迭代，最终会达到一个力平衡的状态。之前在做training project时还写了一个javascript版的spring layout. <br />
-而nodes之间的力有库伦定律得出，edges上的力则有胡克定律得出。在这样一个算法中，各个参数和迭代次数的选择对于layout的结果是非常重要的。</p>
-
-<p>twopi是一个绘制radial layout  (see G. Wills, Symposium on Graph Drawing</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2012-07-14" itemprop="datePublished">
-           July 14, 2012
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2012/07/14/graphviz-ji-chong-layoutde-mode/index.html#disqus_thread" data-pjax data-disqus-identifier="112">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -524,9 +530,9 @@ neato用来绘制无向图，layout的结果是根据force-directed algorithms�
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=aed4c6769f"></script>
+    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
 
     <script type="text/javascript">
 

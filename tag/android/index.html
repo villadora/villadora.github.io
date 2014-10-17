@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=aed4c6769f"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -146,6 +146,96 @@ var enable_pjax = true;
     </header>
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-android tag-development tag-network">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/10/11/androidmo-ni-qi-zhong-lian-jie-kai-fa-ji-qi/index.html" itemprop="url" data-pjax title="android模拟器中连接开发机器">
+        android模拟器中连接开发机器
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>在模拟器中localhost已经被设置为虚拟机的机器，需要在本地调试的时候，通常需要在app里面连接本地起的server来调试连接和访问。但是localhost已经不能用了，而模拟器是绑定在一个虚拟的网络上的，在android开发网站上有<a href='http://developer.android.com/tools/devices/emulator.html#networkaddresses'>http://developer.android.com/tools/devices/emulator.html#networkaddresses</a>, 说明把10.0.2.2这个地址绑定到了开发机器的localhost。就不用去尝试别的地址了。</p>
+
+<p>而genymotion则是bind在10.0.3.2这个地址。</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-10-11" itemprop="datePublished">
+           October 11, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="index.html" data-pjax>android</a>, 
+          
+            <a itemprop="keywords" href="../development/index.html" data-pjax>development</a>, 
+          
+            <a itemprop="keywords" href="../network/index.html" data-pjax>network</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/10/11/androidmo-ni-qi-zhong-lian-jie-kai-fa-ji-qi/index.html#disqus_thread" data-pjax data-disqus-identifier="152">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-android tag-build tag-source">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/09/28/android-xue-xi-bi-ji-2/index.html" itemprop="url" data-pjax title="Android 学习笔记(2)">
+        Android 学习笔记(2)
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h3 id="buildfromsource">build from source</h3>
+
+<p>Android是一个开源系统，源码都是公开的， 可以到<a href='http://source.android.com/上去下载源码。'>http://source.android.com/上去下载源码。</a></p>
+
+<p>具体的操作都在官网上这了：<a href='http://source.android.com/source/building.html'>http://source.android.com/source/building.html</a></p>
+
+<p>首先，需要的是一个unix环境，window就装虚拟机装ubuntu吧，很多build的工具也只能在unix环境下用。</p>
+
+<p>然后是装各种需要的工具和依赖库，包括bison，gmake之类。</p>
+
+<p>在macos上要注意的一点是mac默认安装的时候都是大小写不敏感的文件系统，而android framework的文件是区分大小写的，官方的说法是大小写不敏感会影响git对文件的处理。所以我们需要一块大消息区分的磁盘区域。</p>
+
+<p>有些老教程做法是用mac自带的工具去分了一块新的大小写区分的磁盘。千万不要这么做！虽然mac的磁盘工具不会影响你的数据，但新磁盘分区设计到老磁盘分区的大小调整</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-09-28" itemprop="datePublished">
+           September 28, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="index.html" data-pjax>android</a>, 
+          
+            <a itemprop="keywords" href="../build/index.html" data-pjax>build</a>, 
+          
+            <a itemprop="keywords" href="../source/index.html" data-pjax>source</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/09/28/android-xue-xi-bi-ji-2/index.html#disqus_thread" data-pjax data-disqus-identifier="151">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-android tag-note tag-learning">
@@ -227,9 +317,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=aed4c6769f"></script>
+    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
 
     <script type="text/javascript">
 

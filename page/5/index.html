@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=aed4c6769f"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -149,6 +149,134 @@ var enable_pjax = true;
   role="article" class="post-item post">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
+      <a href="../../2009/03/20/smart-pointer/index.html" itemprop="url" data-pjax title="Smart Pointer">
+        Smart Pointer
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>看了下Smart Pointer的实现，其实是对常规指针进行了封装</p>
+
+<p>牵涉到两个问题:</p>
+
+<ul>
+<li>1) 保证对象的唯一所有权，也就是说对于一个ptr，同一时刻只会有一个Smart Pointer拥有.</li>
+</ul>
+
+<p>如smart pointer的一个构造函数的实现:</p>
+
+<pre><code class=" c++">auto_ptr(auto_ptr&amp; __a) __STL_NOTHROW : _M_ptr(__a.release()) {}  
+</code></pre>
+
+<p>拷贝构造函数调用了 =<em>_a= 的release方法， 所以实际上指针在两个 =auto</em>ptr= 传递了
+在其他过程中也是这样，始终保持只有一个 =auto<em>ptr= 对</em></p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2009-03-20" itemprop="datePublished">
+           March 20, 2009
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2009/03/20/smart-pointer/index.html#disqus_thread" data-pjax data-disqus-identifier="106">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2009/03/12/java-multi-thread/index.html" itemprop="url" data-pjax title="Notes on JAVA Multi-Thread">
+        Notes on JAVA Multi-Thread
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h1 id="note">note:</h1>
+
+<p>interface Lock: lock(), unlock(), newCondition()</p>
+
+<h2 id="classreentrantlock">class ReentrantLock:</h2>
+
+<p>eentrantLock()</p>
+
+<h2 id="classconditionreentrantreadwritelock">class Condition, ReentrantReadWriteLock</h2>
+
+<p>BlockingQueue in java.util.concurrent</p>
+
+<p>Callable and Future: for FutureTask <br />
+Executor: Thread Pool <br />
+Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
+
+<h2 id="withswing">With Swing:</h2>
+
+<p>The swing will</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2009-03-12" itemprop="datePublished">
+           March 12, 2009
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2009/03/12/java-multi-thread/index.html#disqus_thread" data-pjax data-disqus-identifier="105">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-gcc tag-ssa-2">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2009/02/22/ssa-note/index.html" itemprop="url" data-pjax title="SSA note">
+        SSA note
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Static Single Assignment, dominate frontier, dominate basic block</p>
+
+<p>SSA From&amp;def-use chain on wiki, Efficiently Computing Static Single Assignment Form and Control Dependence Graph 91'</p>
+
+<p>在gcc内部主要是在tree，gimple阶段，进行了dead code remove, use-def/def-use analysis, 以及许多在tree形态下需要多项式来完成的优化</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2009-02-22" itemprop="datePublished">
+           February 22, 2009
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/gcc/index.html" data-pjax>gcc</a>, 
+          
+            <a itemprop="keywords" href="../../tag/ssa-2/index.html" data-pjax>ssa</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2009/02/22/ssa-note/index.html#disqus_thread" data-pjax data-disqus-identifier="104">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
       <a href="../../2009/02/20/rubilk-s-cube/index.html" itemprop="url" data-pjax title="魔方魔方 Rubik's cube">
         魔方魔方 Rubik's cube
       </a>
@@ -208,9 +336,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=aed4c6769f"></script>
+    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
 
     <script type="text/javascript">
 

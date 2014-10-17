@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=aed4c6769f"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,156 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-ghost-tag tag-blog">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/09/qian-yi-dao-ghost/index.html" itemprop="url" data-pjax title="迁移到Ghost">
+        迁移到Ghost
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
+
+<p>ghost要导入之前的博客需要进入 <em>'host/ghost/debug'</em> 来导入json文件，做了个小工具去扫 <code>_posts</code> 下面的 <code>*.md</code>和<code>*.mardown</code>文件, 最终生成 <code>exports.json</code> 可以导入ghost.</p>
+
+<p><a href="http://npmjs.org/oghost">npmjs.org/oghost</a></p>
+
+<pre><code class="bash">npm install oghost -g  
+cd _posts  
+oghost &gt; exports.json  
+</code></pre>
+
+<p>导入的时候发现ghost的tag和post对应关系生成不了，报了</p>
+
+<pre><code>Unique</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-09" itemprop="datePublished">
+           July 09, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/ghost-tag/index.html" data-pjax>ghost</a>, 
+          
+            <a itemprop="keywords" href="../../tag/blog/index.html" data-pjax>blog</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/09/qian-yi-dao-ghost/index.html#disqus_thread" data-pjax data-disqus-identifier="138">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-amd-2 tag-commonjs-2">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/05/24/amd-define-and-how-to-translate-amd-to-co/index.html" itemprop="url" data-pjax title="AMD到CommonJS的转换">
+        AMD到CommonJS的转换
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
+
+<p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
+
+<p><a href="http://www.npmjs.com/require2commonjs">require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href="http://nodejs.org">node</a> <a href="http://github.com/cortexjs/cortex">cortex</a> 等外部系统来使用。</p>
+
+<p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
+
+<p>1) Dependency-free module, simple object</p>
+
+<pre><code class=" javascript">define({  
+    add: function(a, b) { return a + b; }
+});
+</code></pre>
+
+<p>没有任何依赖，直接定义模块的exports。这种情况下要将AMD转话为CommonJS模块，只需要变为</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-24" itemprop="datePublished">
+           May 24, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="../../tag/amd-2/index.html" data-pjax>amd</a>, 
+          
+            <a itemprop="keywords" href="../../tag/commonjs-2/index.html" data-pjax>commonjs</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/05/24/amd-define-and-how-to-translate-amd-to-co/index.html#disqus_thread" data-pjax data-disqus-identifier="135">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-browsers">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/05/21/regexptost/index.html" itemprop="url" data-pjax title="regexp.toString()">
+        regexp.toString()
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Regexp.toString在不同浏览器下修辞符顺序不一致。</p>
+
+<p>Chrome, firefox</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/gim'  
+</code></pre>
+
+<p>IE 9.0</p>
+
+<pre><code>var re = /abc/gim;  
+re.toString(); // return '/abc/igm'  
+</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-05-21" itemprop="datePublished">
+           May 21, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="../../tag/browsers/index.html" data-pjax>browsers</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/05/21/regexptost/index.html#disqus_thread" data-pjax data-disqus-identifier="134">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -421,115 +571,6 @@ b.apply([], a);
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/31/html5/index.html" itemprop="url" data-pjax title="HTML5">
-        HTML5
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p><a href="http://dev.w3.org/html5/spec/Overview.html#introduction">http://dev.w3.org/html5/spec/Overview.html#introduction</a>
-HTML5 各方角力又开始了</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-31" itemprop="datePublished">
-           May 31, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/31/html5/index.html#disqus_thread" data-pjax data-disqus-identifier="109">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-emacs tag-elisp">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/29/-in-auto-mode-alist/index.html" itemprop="url" data-pjax title="'$' in auto-mode-alist">
-        '$' in auto-mode-alist
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>之前发现一个markdown文件载入之后一直要手动切换markdown-mode, 还要一遍遍的激活mode-hook上的flyspell-mode，实在很烦, 找了下原因，发现EmacsWiki:Auto-Mode-Alist上说:</p>
-
-<p>"Note that \' matches the end of a string, where as $ matches the empty string before a newline. Thus, $ may lead to unexpected behavior when dealing with filenames containing</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-29" itemprop="datePublished">
-           May 29, 2013
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="../../tag/emacs/index.html" data-pjax>emacs</a>, 
-          
-            <a itemprop="keywords" href="../../tag/elisp/index.html" data-pjax>elisp</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/29/-in-auto-mode-alist/index.html#disqus_thread" data-pjax data-disqus-identifier="126">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-minification">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/24/uglify-js-processing/index.html" itemprop="url" data-pjax title="Uglify-js Processing">
-        Uglify-js Processing
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><h2 id="uglifyjs1">UglifyJs 1  </h2>
-
-<p>'parse-js':主要用来做词法和语法分析，把js文件转化成abstract syntax tree，方便后面的程序处理。相当于编译器中的front-end <br />
-'process.js':在ast的IR上做优化, 其中包括:</p>
-
-<p>1.重新从ast生成javascript（真心觉得这个应该放到下一个stage，而不是整合在process.js中,这个已经是属于编译器生成目标码的阶段了， 然后发现在UglifyJs2中作者完全改变了这些设计），这个过程中就可以去掉不必要的空白字符等; <br />
-2.缩短变量名，猜想应该是用类似于寄存器分配的算法来分配变量名，中间会对一些global scope的变量做一些特殊处理，比如DOM暴露的接口啊,其他的库中export的变量啊之类; <br />
-3.其他的一些优化， 这些都是一些为了性能，和缩减字符做的一些小优化，并不会改动语义和影响到可读性。 <br />
-    * []取值变成.操作符</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-24" itemprop="datePublished">
-           May 24, 2013
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="../../tag/minification/index.html" data-pjax>minification</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/24/uglify-js-processing/index.html#disqus_thread" data-pjax data-disqus-identifier="125">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -563,9 +604,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=aed4c6769f"></script>
+    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=aed4c6769f"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
 
     <script type="text/javascript">
 

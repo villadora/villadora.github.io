@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Programmer's Enemy - Dependency Hell</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Programmer's Enemy - Dependency Hell">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Programmer's Enemy - Dependency Hell">
+    <meta property="og:description" content="">
+
+    
+<meta name="twitter:site" content="@villadora">
+
+
+<meta name="twitter:creator" content="@villadora">
+
+
+<meta name="google-site-verification" content="">
+
+
+<meta property="fb:admins" content="">
+
+
+    <link href="../../../../favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="../../../../apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../../../assets/css/main.min.css?v=2e5cd82aa2"/>
+
+    <script type="text/javascript">
+      
+var ga_ua = 'UA-7622998-2';
+
+
+var disqus_shortname = 'villadora';
+
+
+var enable_pjax = true;
+
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="../../../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
+
+    <meta name="generator" content="Ghost 0.4" />
+<link rel="alternate" type="application/rss+xml" title="时光屋" href="../../../../rss/index.html">
+<link rel="canonical" href="http://villadora.me/2014/10/17/our-enemy-dependency-hell/" />
+  </head>
+  <body class="post-template tag-dependency">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+<nav tabindex="-1" class="drawer">
+  <div class="drawer-container">
+    <!--.drawer-search(role="search")-->
+    <ul role="navigation" class="drawer-list">
+      
+
+<li class="drawer-list-item">
+  <a href="../../../../index.html" data-pjax>
+    <i class="fa fa-home"></i>Home
+  </a>
+</li>
+<li class="drawer-list-item">
+  <a href="http://villadora.me/rss/">
+    <i class="fa fa-rss"></i>Subscribe to Feed
+  </a>
+</li>
+<li class="drawer-list-divider"></li>
+<li class="drawer-list-item drawer-list-title">
+  Follow me
+</li>
+<li class="drawer-list-item">
+  <a href="http://twitter.com/villadora" target="_blank">
+    <i class="fa fa-twitter"></i>Twitter
+  </a>
+</li>
+<li class="drawer-list-item">
+  <a href="http://github.com/villadora" target="_blank">
+    <i class="fa fa-github"></i>Github
+  </a>
+</li>
+
+    </ul>
+  </div>
+</nav>
+
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+
+<section class="wrapper wrapper-post">
+  <div class="wrapper-container">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-dependency">
+      
+        <section class="post-container">
+          <header class="post-header">
+            <ul class="post-meta-list">
+              <li class="post-meta-item">
+                <time datetime="2014-10-17" itemprop="datePublished">
+                  October 17, 2014
+                </time>
+              </li>
+              
+                <li class="post-meta-item">
+                  
+                    <a itemprop="articleSection" href="../../../../tag/dependency/index.html" data-pjax>dependency</a> 
+                  
+                </li>
+              
+              <li class="post-meta-item">
+                <a href="index.html#disqus_thread" data-disqus-identifier="136">Comments</a>
+              </li>
+            </ul>
+            <h1 itemprop="name headline" class="post-title"><a href="index.html" itemprop="url" data-pjax title="Programmer's Enemy - Dependency Hell">Programmer's Enemy - Dependency Hell</a></h1>
+            
+            <!--h2 itemprop="about" class="post-subtitle"></h2-->
+          </header>
+          <aside class="post-side">
+            <div class="post-author">
+              
+                <a href="http://villadora.me" class="post-author-avatar">
+                  <img src="http://www.gravatar.com/avatar/2b105a464934e243b13c442427c20674?d=404" alt="villadora">
+                </a>
+              
+              <div class="post-author-info">
+                <a href="http://villadora.me" class="post-author-name">
+                  villadora
+                </a>
+                <p class="post-author-bio"></p>
+              </div>
+            </div>
+          </aside>
+          <div itemprop="articleBody" class="post-body">
+            <p>In a modular programming world, we have component-based software design, modular programming, etc. </p>
+
+<p>There are a planty of articles talking about the benifits we can get from the good component design, I'm not going to talk in here. </p>
+
+<ul>
+<li><a href="http://requirejs.org/docs/why.html#1">requirejs: Why we need webmodule?</a></li>
+</ul>
+
+<p>When we do modular design, just as we have already done in programming world decades, there is an enemy in our world: <strong>dependency hell</strong>.</p>
+
+<p>You should heard of '<a href="http://en.wikipedia.org/wiki/DLL_Hell">DLL Hell</a>'. A common cause is that apps shares libraries in the same location, so once there are two app depended on the same library with different versions, the former one breaks.</p>
+
+<p><img src="../../../../content/images/2014/Jul/Sketch82142220.png" alt="share the same library" /></p>
+
+<p>To avoid that, programmers add versions to their libs and many package systems now don't store only one file in the shares folder, they add versions. </p>
+
+<p>So there are more than one version of lib in the system. That's what <a href="http://bundler.io/">bundle</a>, <a href="http://maven.apache.org/">maven</a> do, the libraries will be stored in '.m2/', 'gems/'. That will looks like this:</p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch82223133.png" alt="with version" /></p>
+
+<p>Or another solution is: instead of using shared lib path, using different lib path for each project, like using <strong>LD_LIBRARY_PATH</strong>, <strong>CLASS_PATH</strong>.</p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch105132532-1.png" alt="with custom path for each project" /></p>
+
+<p>Now we have versions, but developers are lazy, people don't like to update their code every time one dependency update, but people want to enjoy the benefits of bug fixes, and in some cases, update your own file helps nothing:</p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch105132634.png" alt="upgrade chain" /></p>
+
+<p>To make people get auto update for a bug fix, many package managers introduce version range, includes <strong>npm</strong>, <strong>rubygem</strong>, <strong>maven</strong>, etc.</p>
+
+<p>Great, now if a lib my project depends on get a bug fix, I just do a simple upgrade or reinstall via <code>npm install</code>, <code>mvn install</code>, I get bug fixed without any code change.</p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch10513308.png" alt="upgrade nice" /></p>
+
+<p>Great! We are now don't worried some one overwrite my libs! Are we in a safe world? <strong>NO</strong>.</p>
+
+<p>Let us take a look at following story: </p>
+
+<p>Your great project depended on <strong>X</strong>(1.0.0) and <strong>Y</strong>, <strong>Y</strong> also depended on <strong>X</strong> (1.0.0). Things works fine now, someday, <strong>X</strong> get upgraded to 1.1.0; it provides a wonderfull feature you have! But, you can not use it, until <strong>Y</strong> get upgraded. </p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch105133130.png" alt="deps hell" /></p>
+
+<p>What about there are complex dependency tree here.</p>
+
+<p><img src="../../../../content/images/2014/Oct/Sketch105133256.png" alt="worse deps hell" /></p>
+
+<p>So people have no choice to re-build the wheel. Wheels can not match each other. I see no package system get ride of that except <strong>node/npm</strong>.</p>
+
+<p>Let see how node get ride of dependency hell in next article.</p>
+          </div>
+          <footer class="post-footer">
+            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+              
+                <a href="http://villadora.me" class="post-author-avatar">
+                  <img itemprop="image" src="http://www.gravatar.com/avatar/2b105a464934e243b13c442427c20674?d=404" alt="villadora">
+                </a>
+              
+              <div class="post-author-info">
+                <h4 class="post-footer-heading">Written By</h4>
+                <a href="http://villadora.me" itemprop="url" class="post-author-name">
+                  <span itemprop="name">villadora</span>
+                </a>
+                <p itemprop="description" class="post-author-bio"></p>
+                
+                  <p class="post-author-location">Shanghai</p>
+                
+                
+                  <p class="post-author-website">
+                    <a href="http://villadora.me" rel="nofollow">http://villadora.me</a>
+                  </p>
+                
+                <p class="post-info">
+                  <b class="post-info-title">Published on</b>
+                  <time class="post-date">October 17, 2014</time>
+                </p>
+              </div>
+            </div>
+            <div class="post-social">
+              <h4 class="post-footer-heading">Spread the word</h4>
+              <a href="index.html#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+              <a href="index.html#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+              <a href="index.html#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+            </div>
+          </footer>
+        </section>
+      
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+    </article>
+
+    <footer role="contentinfo" class="footer">
+  <p><small>© 2014. All Rights Reserved.</small></p>
+  <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+  <p><small>Proudly published with <a href="http://ghost.org" target="_blank">Ghost</a></small></p>
+</footer>
+
+  </div>
+</section>
+
+<script type="text/javascript">
+  if(GHOSTIUM.haveDisqus) {
+    
+    var disqus_identifier = '136';
+    
+
+    if(typeof DISQUS !== 'object') {
+      (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+      }());
+    }
+  } else {
+    document.querySelector('.post-comments').remove();
+  }
+</script>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../../../../public/jquery.js?v=2e5cd82aa2"></script>
+
+    <script src="../../../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
+
+    <script type="text/javascript">
+
+      if(GHOSTIUM.haveGA) {
+        (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
+        function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
+        t=h.createElement(o);z=h.getElementsByTagName(o)[0];
+        t.src='//www.google-analytics.com/analytics.js';
+        z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
+        ga('create',ga_ua);ga('send','pageview');
+      }
+
+      if(GHOSTIUM.haveDisqus) {
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+      }
+    </script>
+  </body>
+</html>

@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 12 Sep 2014 03:35:32 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Android学习笔记(1)]]></title><description><![CDATA[<h4 id="securitysandbox">Security Sandbox 安全沙盒</h4>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 17 Oct 2014 02:25:56 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Programmer's Enemy - Dependency Hell]]></title><description><![CDATA[<p>In a modular programming world, we have component-based software design, modular programming, etc. </p>
+
+<p>There are a planty of articles talking about the benifits we can get from the good component design, I'm not going to talk in here. </p>
+
+<ul>
+<li><a href='http://requirejs.org/docs/why.html' #1">requirejs: Why we need webmodule?</a></li>
+</ul>
+
+<p>When we do modular design, just as we have already done in programming world decades, there is an enemy in our world: <strong>dependency hell</strong>.</p>
+
+<p>You should heard of '<a href='http://en.wikipedia.org/wiki/DLL_Hell' >DLL Hell</a>'. A common cause is that apps shares libraries in the same location, so once there are two app depended on the same library with different versions, the former one breaks.</p>
+
+<p><img src='http://villadora.me/content/images/2014/Jul/Sketch82142220.png'  alt="share the same library" /></p>
+
+<p>To avoid that, programmers add versions to their libs and many package systems now don't store only one file in the shares folder, they add versions. </p>
+
+<p>So there are more than one version of lib in the system. That's what <a href='http://bundler.io/' >bundle</a>, <a href='http://maven.apache.org/' >maven</a> do, the libraries will be stored in '.m2/', 'gems/'. That will looks like this:</p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch82223133.png'  alt="with version" /></p>
+
+<p>Or another solution is: instead of using shared lib path, using different lib path for each project, like using <strong>LD_LIBRARY_PATH</strong>, <strong>CLASS_PATH</strong>.</p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch105132532-1.png'  alt="with custom path for each project" /></p>
+
+<p>Now we have versions, but developers are lazy, people don't like to update their code every time one dependency update, but people want to enjoy the benefits of bug fixes, and in some cases, update your own file helps nothing:</p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch105132634.png'  alt="upgrade chain" /></p>
+
+<p>To make people get auto update for a bug fix, many package managers introduce version range, includes <strong>npm</strong>, <strong>rubygem</strong>, <strong>maven</strong>, etc.</p>
+
+<p>Great, now if a lib my project depends on get a bug fix, I just do a simple upgrade or reinstall via <code>npm install</code>, <code>mvn install</code>, I get bug fixed without any code change.</p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch10513308.png'  alt="upgrade nice" /></p>
+
+<p>Great! We are now don't worried some one overwrite my libs! Are we in a safe world? <strong>NO</strong>.</p>
+
+<p>Let us take a look at following story: </p>
+
+<p>Your great project depended on <strong>X</strong>(1.0.0) and <strong>Y</strong>, <strong>Y</strong> also depended on <strong>X</strong> (1.0.0). Things works fine now, someday, <strong>X</strong> get upgraded to 1.1.0; it provides a wonderfull feature you have! But, you can not use it, until <strong>Y</strong> get upgraded. </p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch105133130.png'  alt="deps hell" /></p>
+
+<p>What about there are complex dependency tree here.</p>
+
+<p><img src='http://villadora.me/content/images/2014/Oct/Sketch105133256.png'  alt="worse deps hell" /></p>
+
+<p>So people have no choice to re-build the wheel. Wheels can not match each other. I see no package system get ride of that except <strong>node/npm</strong>.</p>
+
+<p>Let see how node get ride of dependency hell in next article.</p>]]></description><link>http://villadora.me/2014/10/17/our-enemy-dependency-hell/</link><guid isPermaLink="false">2e1c53da-35cd-40c3-848b-64e947a1c8e8</guid><category><![CDATA[dependency]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 17 Oct 2014 01:26:28 GMT</pubDate></item><item><title><![CDATA[android模拟器中连接开发机器]]></title><description><![CDATA[<p>在模拟器中localhost已经被设置为虚拟机的机器，需要在本地调试的时候，通常需要在app里面连接本地起的server来调试连接和访问。但是localhost已经不能用了，而模拟器是绑定在一个虚拟的网络上的，在android开发网站上有<a href='http://developer.android.com/tools/devices/emulator.html' #networkaddresses'>http://developer.android.com/tools/devices/emulator.html#networkaddresses</a>, 说明把10.0.2.2这个地址绑定到了开发机器的localhost。就不用去尝试别的地址了。</p>
+
+<p>而genymotion则是bind在10.0.3.2这个地址。</p>]]></description><link>http://villadora.me/2014/10/11/androidmo-ni-qi-zhong-lian-jie-kai-fa-ji-qi/</link><guid isPermaLink="false">4788ac02-ab8a-441d-944f-55e3f58b7ce8</guid><category><![CDATA[android]]></category><category><![CDATA[development]]></category><category><![CDATA[network]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Sat, 11 Oct 2014 01:31:01 GMT</pubDate></item><item><title><![CDATA[Android 学习笔记(2)]]></title><description><![CDATA[<h3 id="buildfromsource">build from source</h3>
+
+<p>Android是一个开源系统，源码都是公开的， 可以到<a href='http://source.android.com/' 上去下载源码。'>http://source.android.com/上去下载源码。</a></p>
+
+<p>具体的操作都在官网上这了：<a href='http://source.android.com/source/building.html' >http://source.android.com/source/building.html</a></p>
+
+<p>首先，需要的是一个unix环境，window就装虚拟机装ubuntu吧，很多build的工具也只能在unix环境下用。</p>
+
+<p>然后是装各种需要的工具和依赖库，包括bison，gmake之类。</p>
+
+<p>在macos上要注意的一点是mac默认安装的时候都是大小写不敏感的文件系统，而android framework的文件是区分大小写的，官方的说法是大小写不敏感会影响git对文件的处理。所以我们需要一块大消息区分的磁盘区域。</p>
+
+<p>有些老教程做法是用mac自带的工具去分了一块新的大小写区分的磁盘。千万不要这么做！虽然mac的磁盘工具不会影响你的数据，但新磁盘分区设计到老磁盘分区的大小调整，速度是非常非常慢。中间如果出现断电或者其他异常，就哭吧。 现在官方的推荐做法是新建一个磁盘镜像.dmg文件，对就是你平时看到的软件安装文件，然后再把这个镜像文件挂载到自己的目录下。</p>
+
+<pre><code>hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 40g ~/android.dmg  
+</code></pre>
+
+<p>上面的命令会创建一个大小为40g的大小写区分的磁盘镜像。这个大小是对4.+以上系统的要求，有些老教程会分20G，等到编译的时候就哭了。（是的，我之前就是看了一篇老教程=.= 还是官方的靠谱）</p>
+
+<p>对于mac上来说，还一个就是设置下文件句柄的数量限制,印象中mac默认设置是256,而在并行编译的过程中打开的文件数很可能超过，所以官方也是建议提高上限：</p>
+
+<pre><code>ulimit -S -n 1024  
+</code></pre>
+
+<p>接下来我们就可以去下载源码了。</p>
+
+<p>AOSP(Android Open Source Project)的源码管理也是用的git, 理论上来说你只要用git也就能clone项目了，但是你还是要去下一个小python脚本<code>repo</code>来帮助你管理源码。为什么？ 因为aosp下面的项目实在是太多了,从list上来看目前有684个项目，如果用git来一个个下载管理的话，要多麻烦有多麻烦。</p>
+
+<pre><code>$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
+$ chmod a+x ~/bin/repo
+</code></pre>
+
+<p>下载repo，然后执行</p>
+
+<pre><code>repo init -u https://android.googlesource.com/platform/manifest  
+</code></pre>
+
+<p>可以看到这是去访问了一个manifest路径，实际上就是把aosp的项目列表拉了下来,之后还会下载和生成一系列的辅助脚本。执行</p>
+
+<pre><code>$ repo sync
+</code></pre>
+
+<p>下载就开始了，repo默认是使用并行下载，也支持断点续传,看起来是基于git branch的。</p>
+
+<p>之后就是默默的等待代码下好了。</p>
+
+<h3 id="defaultapps">default apps</h3>
+
+<p>系统默认的app都在android源码里面可以找到，如果只想看这些app的代码的话，可以去<a href='https://github.com/android' >https://github.com/android</a> 里面找, 搜索apps的项目就好了。</p>
+
+<p>比如找Launcher，可以搜到<code>platform_packages_apps_launcer</code>这就是系统自带的默认启动launcher：</p>
+
+<p><a href='https://github.com/android/platform_packages_apps_launcher' >https://github.com/android/platform<em>packages</em>apps_launcher</a></p>]]></description><link>http://villadora.me/2014/09/28/android-xue-xi-bi-ji-2/</link><guid isPermaLink="false">d632eaa4-6a5a-4c7e-91a3-12336bdf01ed</guid><category><![CDATA[android]]></category><category><![CDATA[build]]></category><category><![CDATA[source]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Sun, 28 Sep 2014 04:00:34 GMT</pubDate></item><item><title><![CDATA[Android学习笔记(1)]]></title><description><![CDATA[<h4 id="securitysandbox">Security Sandbox 安全沙盒</h4>
 
 <p>Android操作系统是基于多用户的iinux系统上的，从他的系统架构图就中可以看得很明显:</p>
 
@@ -361,68 +463,4 @@ self.fadetimeout = setTimeout(function (val) {
 
 <ol>
 <li>click事件多次触发。在有些浏览器上会发现使用了iscroll的元素click事件会导致多次触发, 这是因为iscroll为了模拟滑动事件，屏蔽了scroll元素上的click事件，而自己通过touchend来决定是否触发模拟的click事件。但是在移动上的有些浏览器上e.preventDefault并不能阻止事件，因为click事件的cancelable为false。 这个时候只能检测e.cancelable属性，然后决定是否要产生模拟事件。</li>
-</ol>]]></description><link>http://villadora.me/2014/04/08/isroll-event-preventdefault/</link><guid isPermaLink="false">4d8523e9-1014-4618-9343-1f58b40abfe4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 08 Apr 2014 02:18:00 GMT</pubDate></item><item><title><![CDATA[在cluster中使用passport openID]]></title><description><![CDATA[<h1 id="passportopenidincluster">Passport openid in cluster</h1>
-
-<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
-
-<h2 id="session">session</h2>
-
-<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
-
-<h2 id="openidassociation">open id association</h2>
-
-<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
-但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
-
-<pre><code class=" js">    var passport = require('passport');
-    var strategy = new GoogleStrategy({
-        returnURL: callbackURL,
-        realm: realm,
-        stateless: true
-    };
-
-    // ...
-
-    strategy.saveAssociation(function(handle, provider, algorithm, secret, expiresIn, done) {
-        var assoc = {
-            handle: handle,
-            provider: provider,
-            algorithm: algorithm,
-            secret: secret,
-            expiresIn: expiresIn
-        };
-
-        // save to redis/mongodb
-        save(function(err) {
-            done(err);
-        });
-    });
-
-    strategy.loadAssociation(function(handle, done) {
-        // load from redis/mongodb
-        load(handle, function(err, assoc) {
-            if(err) return done(err);
-            done(err, assoc.provider, assoc.algorithm, assoc.secret);
-        });
-    });
-
-    passport.use(strategy);
-</code></pre>]]></description><link>http://villadora.me/2014/03/06/passport-openid-nodejs/</link><guid isPermaLink="false">85d3107e-eb1a-416a-b2ba-bf8f4ea63c08</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 06 Mar 2014 07:18:00 GMT</pubDate></item><item><title><![CDATA[javascript arguments长度限制]]></title><description><![CDATA[<p>先看下这一段代码片段(in chrome):</p>
-
-<pre><code class="javascript">var a = [];  
-a[2&lt;&lt;16] = 1;  
-fucntion b() {}  
-b.apply([], a);  
-</code></pre>
-
-<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
-为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
-大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已，这点和lua是一样的。所以当我们在执行<code>a[2&lt;&lt;16] = 1</code>的时候，其实这生成的只不过是一个只有一个键值<em>2&lt;&lt;16</em>的表，空间只有1，这是没有任何问题的。</p>
-
-<p>但当我们把一个数组作为arguments传递给一个函数时，情况就变了；同样，大家都知道arguments不是真的数组，它没有Array.push/pop等方法。但是我们可以把一个数组作为参数传递给apply方法，作为argumetns去调用一个函数。</p>
-
-<p>实际的情况是，在这个时候你的数组虽然是一个table，但是在这个时候只能一个个的传递到栈上，没错,因为arguments是分配在Stack上的，而Array是分配在Heap上的。</p>
-
-<p>从某种意义上来说arguments才是真正的数组: 线性空间排序, 顺序访问。而Array更像上是Hash Table。接下来发生什么？javascript vm尝试去读取arguments中的参数，一个一个的把它放到调用栈上，传递给之后调用的函数,于是<code>for(var i = 0; i &lt; (2&lt;&lt;16); ++)...</code>，调用栈都被使用满了！</p>
-
-<p>本来只占据Heap中一个位置，现在占据了整个栈的空间。而调用栈空间满了之后，会发生什么错误？就是我们开头看到的<em>RangeError: Maximum call stack size exceed.</em>， 而实际上叫做<em>Function arguments exceed the maximun limit.</em>更好些.</p>]]></description><link>http://villadora.me/2013/08/09/arguments-exceed-javascript/</link><guid isPermaLink="false">488317f1-8bb3-4a52-9247-c2b900d2200f</guid><category><![CDATA[arguments]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 08 Aug 2013 16:00:19 GMT</pubDate></item><item><title><![CDATA[interupt when hexo generating]]></title><description><![CDATA[<p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>]]></description><link>http://villadora.me/2013/08/06/interupt-when-hexo-generating/</link><guid isPermaLink="false">da89da35-754f-4a0c-b95b-75ef057fccd9</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 Aug 2013 13:51:11 GMT</pubDate></item></channel></rss>
+</ol>]]></description><link>http://villadora.me/2014/04/08/isroll-event-preventdefault/</link><guid isPermaLink="false">4d8523e9-1014-4618-9343-1f58b40abfe4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 08 Apr 2014 02:18:00 GMT</pubDate></item></channel></rss>
