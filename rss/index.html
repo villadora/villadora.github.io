@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 27 Oct 2014 01:28:00 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[fix/spdylay编译过程中碰到'undefined marcos: AM_PATH_XML2']]></title><description><![CDATA[<p>发现编译fix和spdylay的时候经常会碰到这样的问题。</p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 27 Oct 2014 01:58:58 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Package xxx was not found in pkg-config search path]]></title><description><![CDATA[<p>这个是<code>pkg-config</code>没有在自己的路径中找到对应的<code>*.pc</code>文件。</p>
+
+<p>可以通过以下命令查看<code>pkg-config</code>的路径:</p>
+
+<pre><code>pkg-config --variable pc_path pkg-config  
+</code></pre>
+
+<p>会列出<code>pkg-config</code>找<code>*.pc</code>文件的路径，找到正在使用的对应的目录。</p>
+
+<p>对于使用<strong>Homebrew</strong>安装的lib, 去<code>/usr/local/Cellar/**/&lt;version&gt;/lib/pkgconfig</code>下面找到对应的pc文件，然后软链接到之前的路径中。</p>]]></description><link>http://villadora.me/2014/10/27/package-xxx-was-not-found-in-pkg-config-search-path/</link><guid isPermaLink="false">eab4f788-fe93-4744-8c7e-78397d05e1ee</guid><category><![CDATA[c++]]></category><category><![CDATA[pkg-config]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 27 Oct 2014 01:43:58 GMT</pubDate></item><item><title><![CDATA[fix/spdylay编译过程中碰到'undefined marcos: AM_PATH_XML2']]></title><description><![CDATA[<p>发现编译fix和spdylay的时候经常会碰到这样的问题。</p>
 
 <p>在ubuntu下面安装过libxml2-dev后没碰到这个问题，但在mac上即使用<code>brew install libxml2</code>之后继续<code>autoconf -i</code>还是会碰到这个问题。</p>
 
@@ -423,38 +432,4 @@ re.toString(); // return '/abc/gim'
 
 <pre><code>var re = /abc/gim;  
 re.toString(); // return '/abc/igm'  
-</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><category><![CDATA[javascript]]></category><category><![CDATA[browsers]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item><item><title><![CDATA[Cookie Version in J2EE]]></title><description><![CDATA[<p>在处理Cookie的时候发现不能处理servlet request中不能获取cookie中的带":"字符的值.</p>
-
-<pre><code class="java">Cookie[] cookies = request.getCookies();  
-if (cookies != null) {  
-    for (Cookie cookie : cookies) {
-        if (StringUtils.equalsIgnoreCase(cookie.getName(), name)) {
-            value = cookie.getValue(); // if the value in cookie is 'http://example.com' then here it will get 'http'
-            break;
-        }
-    }
-}
-</code></pre>
-
-<p>这是因为目前Cookie有两个标准，一个是Version 0 (<a href='http://curl.haxx.se/rfc/cookie_spec.html' >Netscape spec</a>)</p>
-
-<p>而J2EE的实现描述 Cookie#setValue 中</p>
-
-<pre><code>With Version 0 cookies, values should not contain white space, brackets, parentheses, equals signs, commas, double quotes, slashes, question marks, at signs, colons, and semicolons. Empty values may not behave the same way on all browsers.  
-</code></pre>
-
-<p>`</p>
-
-<p>也就是说Version 0 是不能包含空格，括弧，等号，逗号， 双引号等字符的。 </p>
-
-<p>而Version 1 (<a href='http://www.ietf.org/rfc/rfc2109.txt' >RFC 2109 spec</a>) 是可以的。</p>
-
-<p>但是javax.servlet.http.Cookie的实现时默认是使用 Version 0</p>
-
-<pre><code>By default, cookies are created according to the Netscape cookie specification. The version can be changed with the  
-setVersion method.  
-</code></pre>
-
-<p>而看起来container默认的选择也是使用了Version 0而没有去改变version。所以当Cookie值中带有':'时，就无法读到colon后的内容。</p>
-
-<p>如果没有办法改container并且只能使用默认的request的话，暂时的解决方案是在写cookie的时候URLEncode, 然后在服务器端读的时候做URLDecode。</p>]]></description><link>http://villadora.me/2014/05/06/cookie-version/</link><guid isPermaLink="false">a3c2a196-34b6-4c9b-bbd4-fa257e8f8135</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 May 2014 05:34:00 GMT</pubDate></item></channel></rss>
+</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><category><![CDATA[javascript]]></category><category><![CDATA[browsers]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item></channel></rss>

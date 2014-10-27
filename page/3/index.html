@@ -149,6 +149,51 @@ var enable_pjax = true;
   role="article" class="post-item post">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/06/svg-spec/index.html" itemprop="url" data-pjax title="SVG Spec">
+        SVG Spec
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h3 id="svgpaintersmodel">SVG的Painters model</h3>
+
+<p>每个操作都会向输出设备修改某块区域的绘图，而不管之前在这块区域内的绘制是什么。这和很多的绘图或现实模型相似，接近底层容易实现。没有透明度的情况下，新的绘制会直接覆盖原来的区域，而有透明度的设置时，最终结果则按照Alpha Blending来计算。</p>
+
+<h3 id="renderingorder">Rendering Order</h3>
+
+<p>元素在svg内的排列顺序暗含了元素的绘制顺序，svg document fragment的第一个元素将会首先被绘制到输出设备上。</p>
+
+<h3 id="groups">groups</h3>
+
+<p>'g'元素实际上是穿件了一个临时的独立的背景色为黑色但是背景透明的画布,'g'的子元素则在这块画布上进行绘制</p>
+
+<h3 id="typesofgraphicselements">types of graphics elements</h3>
+
+<p>SVG支持三种基本的图形元素: <br />
+  * Shapes: 用到最多的，主要由各种线和填充构成
+  * Text: 字符的组合
+  * Raster images: 类似于bitmap,是一组包含了颜色，透明度信息的数组</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+           August 06, 2013
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/06/svg-spec/index.html#disqus_thread" data-pjax data-disqus-identifier="129">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
       <a href="../../2013/07/08/hostname-in-mac/index.html" itemprop="url" data-pjax title="hostname in mac">
         hostname in mac
       </a>
@@ -469,38 +514,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       
       <li class="post-item-meta-item">
         <a href="../../2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/index.html#disqus_thread" data-pjax data-disqus-identifier="120">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/03/orion-next-eclipse/index.html" itemprop="url" data-pjax title="Orion: Next Eclipse?">
-        Orion: Next Eclipse?
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Orion是一个开源的online IDE，javascript的client和java的server,也是属于Eclipse Project下面的一个重要项目；希望打造一个online版的eclipse。</p>
-
-<p>比较好奇的是居然没有做成比较流行的SPA(Single Page Application)的形式，而是可以打开多个tab，并且允许你通过link共享，这是好处吧，不好的是这样每次做新的操作都要切换tab并且等待刷新，用户体验不是很好。就不能两者都结合起来么？</p>
-
-<p>Link: <a href="https://orionhub.org">https://orionhub.org</a></p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-03" itemprop="datePublished">
-           April 03, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/03/orion-next-eclipse/index.html#disqus_thread" data-pjax data-disqus-identifier="119">Comments</a>
       </li>
     </ul>
   </footer>

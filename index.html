@@ -146,6 +146,51 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-c tag-pkg-config">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/10/27/package-xxx-was-not-found-in-pkg-config-search-path/index.html" itemprop="url" data-pjax title="Package xxx was not found in pkg-config search path">
+        Package xxx was not found in pkg-config search path
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>这个是<code>pkg-config</code>没有在自己的路径中找到对应的<code>*.pc</code>文件。</p>
+
+<p>可以通过以下命令查看<code>pkg-config</code>的路径:</p>
+
+<pre><code>pkg-config --variable pc_path pkg-config  
+</code></pre>
+
+<p>会列出<code>pkg-config</code>找<code>*.pc</code>文件的路径，找到正在使用的对应的目录。</p>
+
+<p>对于使用<strong>Homebrew</strong>安装的lib, 去<code>/usr/local/Cellar/**/&lt;version&gt;/lib/pkgconfig</code>下面找到对应的pc文件，然后软链接到之前的路径中。</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-10-27" itemprop="datePublished">
+           October 27, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/c/index.html" data-pjax>c++</a>, 
+          
+            <a itemprop="keywords" href="tag/pkg-config/index.html" data-pjax>pkg-config</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/10/27/package-xxx-was-not-found-in-pkg-config-search-path/index.html#disqus_thread" data-pjax data-disqus-identifier="155">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-brew tag-libxml2 tag-am_path_xml2">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -571,54 +616,6 @@ if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {
       
       <li class="post-item-meta-item">
         <a href="2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/index.html#disqus_thread" data-pjax data-disqus-identifier="142">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-scale tag-da-xing-xiang-mu tag-lei-xing-jian-ce">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/index.html" itemprop="url" data-pjax title="扯扯Scala">
-        扯扯Scala
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在stackoverflow上看到一个关于<a href="http://stackoverflow.com/questions/3606591/why-does-intellij-idea-compile-scala-so-slowly">Why does IntelliJ IDEA compile Scala so slowly?</a>的问题，顿时感到scala在语法层面做的许多杰出的设计，但是为了和java兼容，最终在一定程度上限制了自己的发展。</p>
-
-<p>scala可能是为了快速的在各个公司里面推动，选择了完全和java现有代码兼容，而不是只在二进制层面上保持一致。</p>
-
-<p>scala的sdk和类型系统都建立在java的类型系统之上的，而目标是工业使用的scala语言需要提供大量的内置工具，而一个建立在java类型系统之上的更复杂的类型系统则不得不付出在编译时的开销。</p>
-
-<p>scala的类型检测对于大型项目非常重要，但是是否能够有选项使得能够某些时候能用来最快速开发，而不做类型检测？ 不过scala一开始就不是瞄准着脚本语言去做的，而脚本语言则更容易构建原型系统或执行轻量级的任务。</p>
-
-<p>没有过大型项目使用scala的经验。所以基本是随便扯扯。</p>
-
-<p>其实对于大型项目来说，一定是有多个部分（可能是一个人开发，更多的情况是由不同的团队开发）组成的，而组件之间的沟通与协作则是很容易出问题的地方。静态类型语言在大型项目开发上更有优势的地方是程序代替人对代码做了严格检测，以丧失灵活性为代价。这样可以避免一些错误</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2014-07-23" itemprop="datePublished">
-           July 23, 2014
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="tag/scale/index.html" data-pjax>scale</a>, 
-          
-            <a itemprop="keywords" href="tag/da-xing-xiang-mu/index.html" data-pjax>大型项目</a>, 
-          
-            <a itemprop="keywords" href="tag/lei-xing-jian-ce/index.html" data-pjax>类型检测</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/index.html#disqus_thread" data-pjax data-disqus-identifier="140">Comments</a>
       </li>
     </ul>
   </footer>
