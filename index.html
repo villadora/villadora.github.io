@@ -146,6 +146,52 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-brew tag-libxml2 tag-am_path_xml2">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="2014/10/27/fixspdylaybian-yi-guo-cheng-zhong-peng-dao-undefined-marcos-am_path_xml2/index.html" itemprop="url" data-pjax title="fix/spdylay编译过程中碰到'undefined marcos: AM_PATH_XML2'">
+        fix/spdylay编译过程中碰到'undefined marcos: AM_PATH_XML2'
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>发现编译fix和spdylay的时候经常会碰到这样的问题。</p>
+
+<p>在ubuntu下面安装过libxml2-dev后没碰到这个问题，但在mac上即使用<code>brew install libxml2</code>之后继续<code>autoconf -i</code>还是会碰到这个问题。</p>
+
+<p>主要是libxml2在brew安装之后没有把自己的<code>libxml2.m4</code>放到<code>/usr/local/share/aclocal</code>里面。</p>
+
+<p>这个时候我尝试<code>brew link libxml2</code>把<strong>libxml2</strong>中的<code>share</code>里面的东西都link过来，但是出现信息是：</p>
+
+<pre><code>warning: libxml2 is keg-only and must</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-10-27" itemprop="datePublished">
+           October 27, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="tag/brew/index.html" data-pjax>brew</a>, 
+          
+            <a itemprop="keywords" href="tag/libxml2/index.html" data-pjax>libxml2</a>, 
+          
+            <a itemprop="keywords" href="tag/am_path_xml2/index.html" data-pjax>AM_PATH_XML2</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="2014/10/27/fixspdylaybian-yi-guo-cheng-zhong-peng-dao-undefined-marcos-am_path_xml2/index.html#disqus_thread" data-pjax data-disqus-identifier="154">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-dependency">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -573,63 +619,6 @@ if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {
       
       <li class="post-item-meta-item">
         <a href="2014/07/23/scalaxing-neng-he-lei-xing-jian-ce/index.html#disqus_thread" data-pjax data-disqus-identifier="140">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-http tag-rest tag-api">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="2014/07/11/http-apishe-ji/index.html" itemprop="url" data-pjax title="Http API设计">
-        Http API设计
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
-地址:</p>
-
-<p><a href="https://github.com/interagent/http-api-design">https://github.com/interagent/http-api-design</a></p>
-
-<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
-
-<p>其中很重要的几条抽出来：</p>
-
-<ul>
-<li>返回正确的状态代码</li>
-</ul>
-
-<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
-
-<ul>
-<li>以ISO8601格式来使用UTC时间</li>
-</ul>
-
-<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2014-07-11" itemprop="datePublished">
-           July 11, 2014
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="tag/http/index.html" data-pjax>http</a>, 
-          
-            <a itemprop="keywords" href="tag/rest/index.html" data-pjax>rest</a>, 
-          
-            <a itemprop="keywords" href="tag/api/index.html" data-pjax>api</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="2014/07/11/http-apishe-ji/index.html#disqus_thread" data-pjax data-disqus-identifier="139">Comments</a>
       </li>
     </ul>
   </footer>

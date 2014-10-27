@@ -146,6 +146,63 @@ var enable_pjax = true;
     <section class="post-list">
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-http tag-rest tag-api">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/11/http-apishe-ji/index.html" itemprop="url" data-pjax title="Http API设计">
+        Http API设计
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>Heroku团队根据heroku platform api和他们自己内部系统的实践经验总结了一些http api设计的准则，发布到了github上。 <br />
+地址:</p>
+
+<p><a href="https://github.com/interagent/http-api-design">https://github.com/interagent/http-api-design</a></p>
+
+<p>鉴于见到太多公司的http接口没有按照标准规范来实施，推荐做服务接口设计和前端的同学都看看。</p>
+
+<p>其中很重要的几条抽出来：</p>
+
+<ul>
+<li>返回正确的状态代码</li>
+</ul>
+
+<p>不要始终使用200! 201,202对应不同的<strong>METHOD</strong>是很有意义的。 出现错误是应该返回正确的状态码，是请求参数错误请返回400，是服务器内部出错请返回500，服务器压力过大需要kill连接请返回503，对于行为错误而不是权限问题不要使用401而要用403。这些状态代码本身都有意义，不需要去而外的创建代码或者用额外的属性。</p>
+
+<ul>
+<li>以ISO8601格式来使用UTC时间</li>
+</ul>
+
+<p>记得使用UTC,同时格式统一，真的需要在每个项目里面去引用moment.js来处理时间？时区和格式足够头痛了，moment.js也不是万能的</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-11" itemprop="datePublished">
+           July 11, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/http/index.html" data-pjax>http</a>, 
+          
+            <a itemprop="keywords" href="../../tag/rest/index.html" data-pjax>rest</a>, 
+          
+            <a itemprop="keywords" href="../../tag/api/index.html" data-pjax>api</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/11/http-apishe-ji/index.html#disqus_thread" data-pjax data-disqus-identifier="139">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-ghost-tag tag-blog">
   <header class="post-item-header">
     <h2 itemprop="name" class="post-item-title">
@@ -525,46 +582,6 @@ b.apply([], a);
       
       <li class="post-item-meta-item">
         <a href="../../2013/08/06/svg-spec/index.html#disqus_thread" data-pjax data-disqus-identifier="129">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/07/08/hostname-in-mac/index.html" itemprop="url" data-pjax title="hostname in mac">
-        hostname in mac
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在改写一个保存tmux状态的脚本(tmux-resurrect)的时候发现<code>hostname</code>这个命令拿到的是ip地址而不是我PROMPT里面的命令，这两个怎么会不一样呢？</p>
-
-<p>在prompt里面的%m hostname通过以下途径获得：</p>
-
-<ol>
-<li>/etc/hostconfig: 在这个配置文件中配置  </li>
-<li>如果没找到就去/Library/Preferences/SystemConfiguration/preferences.plist中的'System>System>HostName'值  </li>
-<li>如果这个值为空，则通过逆向DNS查询找到ip地址  </li>
-<li>如果查询没找到才会用/Library/Preferences/SystemConfiguration/preferences.plist中的'System>Network>HostNames>LocalHOstName'，这个也是用户在系统配置中的共享里配置的名字  </li>
-<li>最后如果这个也没查到，那就会返回localhost</li>
-</ol>
-
-<p>所以由于我hostconfig没配置</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-07-08" itemprop="datePublished">
-           July 08, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/07/08/hostname-in-mac/index.html#disqus_thread" data-pjax data-disqus-identifier="127">Comments</a>
       </li>
     </ul>
   </footer>

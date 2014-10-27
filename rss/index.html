@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Fri, 17 Oct 2014 02:25:56 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Programmer's Enemy - Dependency Hell]]></title><description><![CDATA[<p>In a modular programming world, we have component-based software design, modular programming, etc. </p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 27 Oct 2014 01:28:00 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[fix/spdylay编译过程中碰到'undefined marcos: AM_PATH_XML2']]></title><description><![CDATA[<p>发现编译fix和spdylay的时候经常会碰到这样的问题。</p>
+
+<p>在ubuntu下面安装过libxml2-dev后没碰到这个问题，但在mac上即使用<code>brew install libxml2</code>之后继续<code>autoconf -i</code>还是会碰到这个问题。</p>
+
+<p>主要是libxml2在brew安装之后没有把自己的<code>libxml2.m4</code>放到<code>/usr/local/share/aclocal</code>里面。</p>
+
+<p>这个时候我尝试<code>brew link libxml2</code>把<strong>libxml2</strong>中的<code>share</code>里面的东西都link过来，但是出现信息是：</p>
+
+<pre><code>warning: libxml2 is keg-only and must be linked with --force  
+</code></pre>
+
+<p>这就是说libxml2是一个<code>keg-only</code>的包,只会放在brew自己的Cellar地窖里，不会对外面的环境进行修改，如果需要修改就要使用<code>--force</code>。估计是因为多个版本共存的关系，否则一升级会破坏之前的所有的依赖包。</p>
+
+<p>既然我这是第一次装，我就直接手动aclocal了，<code>brew link</code>还会link man/doc/gtk-doc这些。</p>
+
+<p>手动就直接把<code>libxml2/&lt;version&gt;/share/aclocal/libxml.m4</code>软链接到<code>/usr/local/share/aclocal</code>下面就好了。</p>
+
+<p>之后果然<code>autoreconf -i</code>顺利通过。</p>
+
+<p>至于brew的包是怎么定义自己是<code>keg-only</code>的就不知道了。</p>]]></description><link>http://villadora.me/2014/10/27/fixspdylaybian-yi-guo-cheng-zhong-peng-dao-undefined-marcos-am_path_xml2/</link><guid isPermaLink="false">c8f39fe8-aff9-47ab-a9e1-5791ddb13a1d</guid><category><![CDATA[brew]]></category><category><![CDATA[libxml2]]></category><category><![CDATA[AM_PATH_XML2]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Mon, 27 Oct 2014 01:26:16 GMT</pubDate></item><item><title><![CDATA[Programmer's Enemy - Dependency Hell]]></title><description><![CDATA[<p>In a modular programming world, we have component-based software design, modular programming, etc. </p>
 
 <p>There are a planty of articles talking about the benifits we can get from the good component design, I'm not going to talk in here. </p>
 
@@ -438,29 +457,4 @@ setVersion method.
 
 <p>而看起来container默认的选择也是使用了Version 0而没有去改变version。所以当Cookie值中带有':'时，就无法读到colon后的内容。</p>
 
-<p>如果没有办法改container并且只能使用默认的request的话，暂时的解决方案是在写cookie的时候URLEncode, 然后在服务器端读的时候做URLDecode。</p>]]></description><link>http://villadora.me/2014/05/06/cookie-version/</link><guid isPermaLink="false">a3c2a196-34b6-4c9b-bbd4-fa257e8f8135</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 May 2014 05:34:00 GMT</pubDate></item><item><title><![CDATA[Iscroll5的几个bug]]></title><description><![CDATA[<p>Iscroll是在移动端开发不可缺少的组件，至少在实现原生的overflow:scroll之前。其中碰到有两个问题。</p>
-
-<ol>
-<li>Function.prototype.bind iscroll5在indicator中使用了bind, 但是这个bind在2.x的android浏览器上和webview中都没法使用，导致脚本出错。</li>
-</ol>
-
-<pre><code>this.fadeTimeout = setTimeout((function (val) {  
-    this.wrapperStyle.opacity = val;
-    this.visible = +val;
-}).bind(this, val), delay);
-</code></pre>
-
-<p>去掉bind, 改成closure解决问题</p>
-
-<pre><code>var selft = this;  
-self.fadetimeout = setTimeout(function (val) {  
-    self.wrapperStyle.opacity = val;
-    self.visible = +val;
-}, delay);
-</code></pre>
-
-<p>这个修正已经有人发了 pullrequest 只不过暂时还没有merge到master分支中。</p>
-
-<ol>
-<li>click事件多次触发。在有些浏览器上会发现使用了iscroll的元素click事件会导致多次触发, 这是因为iscroll为了模拟滑动事件，屏蔽了scroll元素上的click事件，而自己通过touchend来决定是否触发模拟的click事件。但是在移动上的有些浏览器上e.preventDefault并不能阻止事件，因为click事件的cancelable为false。 这个时候只能检测e.cancelable属性，然后决定是否要产生模拟事件。</li>
-</ol>]]></description><link>http://villadora.me/2014/04/08/isroll-event-preventdefault/</link><guid isPermaLink="false">4d8523e9-1014-4618-9343-1f58b40abfe4</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 08 Apr 2014 02:18:00 GMT</pubDate></item></channel></rss>
+<p>如果没有办法改container并且只能使用默认的request的话，暂时的解决方案是在写cookie的时候URLEncode, 然后在服务器端读的时候做URLDecode。</p>]]></description><link>http://villadora.me/2014/05/06/cookie-version/</link><guid isPermaLink="false">a3c2a196-34b6-4c9b-bbd4-fa257e8f8135</guid><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 06 May 2014 05:34:00 GMT</pubDate></item></channel></rss>
