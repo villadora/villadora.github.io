@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=dc71e49d92"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=dc71e49d92"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,138 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-javascript tag-nodejs tag-performance tag-v8">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/29/tofastproperties-in-bluebirds/index.html" itemprop="url" data-pjax title="toFastProperties in bluebirds">
+        toFastProperties in bluebirds
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p><a href="http://stackoverflow.com/questions/24987896/how-does-bluebirds-util-tofastproperties-function-make-an-objects-properties/24989927#24989927">ToFastProperties in bluebirds</a></p>
+
+<p>非常有趣的回答，解释了为什么下面这段代码能够提高property access的速度。</p>
+
+<pre><code class="javascript">function toFastProperties(obj) {  
+    /*jshint -W027*/
+    function f() {}
+    f.prototype = obj;
+    ASSERT("%HasFastProperties", true, obj);
+    return f;
+    eval(obj);
+}
+</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-29" itemprop="datePublished">
+           July 29, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/javascript/index.html" data-pjax>javascript</a>, 
+          
+            <a itemprop="keywords" href="../../tag/nodejs/index.html" data-pjax>nodejs</a>, 
+          
+            <a itemprop="keywords" href="../../tag/performance/index.html" data-pjax>performance</a>, 
+          
+            <a itemprop="keywords" href="../../tag/v8/index.html" data-pjax>v8</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/29/tofastproperties-in-bluebirds/index.html#disqus_thread" data-pjax data-disqus-identifier="146">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/28/couchdb-1-6gai-dong/index.html" itemprop="url" data-pjax title="couchdb 1.5/1.6中的Proxy Authentication">
+        couchdb 1.5/1.6中的Proxy Authentication
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>因为最近要在<code>couchdb</code>中使用<a href="http://couchdb.readthedocs.org/en/latest/api/server/authn.html#api-auth-proxy"><strong>Proxy Authentication</strong></a></p>
+
+<p>于是参照文档，修改<em>local.ini</em>配置为:</p>
+
+<pre><code>authentication_handlers = {couch_httpd_auth, cookie_authentication_handler}, {couch_httpd_auth, proxy_authentication_handler}, {couch_httpd_auth, default_authentication_handler}  
+</code></pre>
+
+<p>但是参照文档中修改配置之后,启动服务，会出现如下错误：</p>
+
+<pre><code>{
+    error: "unknown</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-28" itemprop="datePublished">
+           July 28, 2014
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/28/couchdb-1-6gai-dong/index.html#disqus_thread" data-pjax data-disqus-identifier="145">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-flowing-mode tag-non-flowing-mode">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/index.html" itemprop="url" data-pjax title="node中的Readable - flowing/non-flowing mode">
+        node中的Readable - flowing/non-flowing mode
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>大家都知道在node中<code>Readable</code> Stream有两种模式: <code>flowing mode</code>和<code>non-flowing mode</code>。</p>
+
+<p>对于<code>flowing mode</code>的<code>Readable</code> Stream, 我们是没法控制它何时去读数据读多少的，它会去尽快的去消耗data,并emit出来。</p>
+
+<pre><code class="javascript">// in lib/_stream_readable.js
+if (state.flowing &amp;&amp; state.length === 0 &amp;&amp;!state.sync) {  
+        stream</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-07-24" itemprop="datePublished">
+           July 24, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/flowing-mode/index.html" data-pjax>flowing mode</a>, 
+          
+            <a itemprop="keywords" href="../../tag/non-flowing-mode/index.html" data-pjax>non-flowing mode</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/07/24/nodezhong-de-readable-flowingnon-flowing-mode/index.html#disqus_thread" data-pjax data-disqus-identifier="142">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-scale tag-da-xing-xiang-mu tag-lei-xing-jian-ce">
@@ -477,120 +609,6 @@ self.fadetimeout = setTimeout</code></pre>&hellip;</p>
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2014/03/06/passport-openid-nodejs/index.html" itemprop="url" data-pjax title="在cluster中使用passport openID">
-        在cluster中使用passport openID
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><h1 id="passportopenidincluster">Passport openid in cluster</h1>
-
-<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
-
-<h2 id="session">session</h2>
-
-<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
-
-<h2 id="openidassociation">open id association</h2>
-
-<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
-但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
-
-<pre><code class=" js">    var passport = require('passport');
-    var</code></pre>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2014-03-06" itemprop="datePublished">
-           March 06, 2014
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-arguments">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/08/09/arguments-exceed-javascript/index.html" itemprop="url" data-pjax title="javascript arguments长度限制">
-        javascript arguments长度限制
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>先看下这一段代码片段(in chrome):</p>
-
-<pre><code class="javascript">var a = [];  
-a[2&lt;&lt;16] = 1;  
-fucntion b() {}  
-b.apply([], a);  
-</code></pre>
-
-<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
-为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
-大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-08-09" itemprop="datePublished">
-           August 09, 2013
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="../../tag/arguments/index.html" data-pjax>arguments</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/08/09/arguments-exceed-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="130">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/08/06/interupt-when-hexo-generating/index.html" itemprop="url" data-pjax title="interupt when hexo generating">
-        interupt when hexo generating
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-08-06" itemprop="datePublished">
-           August 06, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/08/06/interupt-when-hexo-generating/index.html#disqus_thread" data-pjax data-disqus-identifier="128">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -624,9 +642,9 @@ b.apply([], a);
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
+    <script src="../../public/jquery.js?v=dc71e49d92"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=dc71e49d92"></script>
 
     <script type="text/javascript">
 

@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Mon, 27 Oct 2014 01:58:58 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Package xxx was not found in pkg-config search path]]></title><description><![CDATA[<p>这个是<code>pkg-config</code>没有在自己的路径中找到对应的<code>*.pc</code>文件。</p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[时光屋]]></title><description><![CDATA[The past is a ghost, the future a dream and all we ever have is now.]]></description><link>http://villadora.me/</link><generator>Ghost v0.4.2</generator><lastBuildDate>Thu, 13 Nov 2014 08:18:39 GMT</lastBuildDate><atom:link href="http://villadora.me/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Multitasking in Mobile]]></title><description><![CDATA[<p>最近看到几篇几年前的文章，关于多任务执行在移动设备上设计。</p>
+
+<p><a href='http://blog.rlove.org/2010/04/why-ipad-and-iphone-dont-support.html' >http://blog.rlove.org/2010/04/why-ipad-and-iphone-dont-support.html</a></p>
+
+<p>这篇谈到iOS上为什么没有想android那样去做multitasking，他的观点是认为android有着良好的api去保存程序状态，有着一整套复杂的程序组件状态机，以及能够很好的去管理在不同状态之间的切换。而iOS在iphone/iPad上实现这样一套系统会非常复杂，而android则是一开始就考虑好的。</p>
+
+<p>个人认为到应该不是这么回事，苹果的工程师绝不会一个这样的系统都无法在iOS上做出来。只不过双方的设计哲学有所不同。</p>
+
+<p>无论是andorid还是iOS的设计者，在移动设备上用户只能关注于一个应用上这个观点保持了一致。而感觉android是倾向于给予程序更多的自治权利:我提供功能众多，开发者在其中选取自己需要的，所以你的程序你可以选择在后台运行，这是你的权利。</p>
+
+<p>而可以参考apple文档: </p>
+
+<p><a href='https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html' #//apple_ref/doc/uid/TP40007072-CH4">https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4</a></p>
+
+<p>Apple的风格是:允许程序去申请一小段时间去完成最后的工作（留下遗言），如果你还赖着不肯死，就直接枪毙了。至于可以留下些什么，也是apple限定好的，比如下载，音频，位置定位等。至于别的，啥也别留下。这样的好处是可以控制程序的执行和销毁都在系统的掌握之下。</p>
+
+<p>从apple store和google market的现状就可以看出两者思路的多么不一致。app到apple store都是需要审核而且只能在apple store上发行的，而android app发行的渠道就多了去了，直接下载也是可以的。</p>
+
+<p>下面这篇是android的官方blog里面的文章, 讲android的multitasking的设计理念。可以看到 "all applications are created equal"的哲学，而苹果嘛，恩，自己程序后台跑的好好的呢。</p>
+
+<p><a href='http://android-developers.blogspot.com/2010/04/multitasking-android-way.html' >http://android-developers.blogspot.com/2010/04/multitasking-android-way.html</a></p>]]></description><link>http://villadora.me/2014/11/13/multitasking-in-mobile/</link><guid isPermaLink="false">34bd7de2-3bef-48fb-b741-eac476afbc0f</guid><category><![CDATA[mobile]]></category><category><![CDATA[android]]></category><category><![CDATA[ios]]></category><category><![CDATA[apple]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 13 Nov 2014 08:14:56 GMT</pubDate></item><item><title><![CDATA[Android 学习笔记(3)]]></title><description><![CDATA[<ul>
+<li>WakeLock 可以用来唤醒屏幕和CPU，用来做重要事情的通知。微信天天晚上还响个不停是不是就是这种情况？建议是只在真正需要的时候用。影响电池使用，增加耗电。</li>
+</ul>
+
+<pre><code>PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
+PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "WakeLock");
+
+wl.acquire(10000);
+
+wl.release();  
+</code></pre>
+
+<p>说到耗电，关于老外和国人还有一个梗: 记得最早看到mobile web的时候，google有个研究是研究什么技术在什么网络下比较耗电。国内么，后台进程杀都杀不完，某app晚上经常唤醒手机导致屏幕一闪一闪，某狐app在背后默默的10分钟内用掉了30M的流量, 估计一直在唤醒网络吧。</p>
+
+<ul>
+<li>Parcelable, Bundle</li>
+</ul>
+
+<p>Parcelable表示是一个对象能够包装到Parcel里的一个interface,而Parcel是包裹的意思，这个包裹是用来做IPC通信时传递讯息的，而不是用来储存的。大家收到快递后都会把包裹拆了而不是直接就放到自家的收藏柜里了吧。在官方文档里面也有明确的说明, Parcel不是一个通用的序列化机制，而是为了搞笑的IPC通信传输。</p>
+
+<p>所以如果是为了持久化和网络传输，应该实现Serializable，而只有是为进程之间，程序之间进行通信的时候才实现Parcelable。</p>
+
+<p>而Bundle则是Parcelable的一个实现，可以想象成对包裹的标记管理，很多包裹的情况下会给包裹标记上String标签，这样打包的人和收包裹的人就知道如何去放置/读取包裹。</p>
+
+<ul>
+<li>ConnectivityManager</li>
+</ul>]]></description><link>http://villadora.me/2014/11/13/android-xue-xi-bi-ji-3/</link><guid isPermaLink="false">d647abbd-46de-46a5-9ee0-3b430679c215</guid><category><![CDATA[android]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Thu, 13 Nov 2014 07:59:11 GMT</pubDate></item><item><title><![CDATA[static javascript]]></title><description><![CDATA[<p>Velocity2013上有一篇演讲说的是<strong>static memory of javascript</strong>, 是关于emscripten的应用。除了迁移C/C++的lib到javascript之外，还提到一个观点是关于static memory的。由于在C/C++中的内存都是手动分配和释放，所以在emscripten生成的asm.js中会事先分配一个大heap，之后所有的相关内存管理都在这个heap中进行，就没gc啥事了。</p>
+
+<p>好处是避免的gc在意料不到的时候进行， 观点合理的手动分配是最高效的。emscripten在游戏方面还是很有用，很多游戏引擎剥离gpu相关的代码之后都是纯计算的没有io操作，在浏览器中执行没有任何问题，然后就是游戏对于使用的流畅性，gc的无法预知会导致一定是有在某个时刻会开始进行gc而导致性能下降，表现就是卡死。这对网络游戏者来说是致命的。</p>
+
+<p>static memory，管理起来比较麻烦，但是也是说明如果在一个object创建和销毁频繁的情况下，使用object pool是非常有效的。如果在gc上碰到性能瓶颈也可以通过提前预支一块heap来优化。</p>
+
+<p>然后一直在想的一点是javascript和大部分语言不一样的地方是没有struct，只有array能勉强算作struct，对于object之类的内存结构也无法预知内存空间大小。导致在操作数据方面性能比起java,python等处于劣势。这也是为什么新的要替代javascript的语言typescript, dart都会提供class的原因, 至于之后javascript提供的class提供了语法糖但是并没有阻止prototype上在被定义之后添加新的属性。也就是说只有在运行时可以做优化认为是struct，而不能在编译时确认为struct，从而也没法进行内存的优先分配或者脱离prototype机制运行。</p>]]></description><link>http://villadora.me/2014/10/28/static-javascript/</link><guid isPermaLink="false">dfaa2253-25af-4bb6-b573-71bb516ed72a</guid><category><![CDATA[static]]></category><category><![CDATA[javascrip]]></category><category><![CDATA[class]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Tue, 28 Oct 2014 08:34:03 GMT</pubDate></item><item><title><![CDATA[Package xxx was not found in pkg-config search path]]></title><description><![CDATA[<p>这个是<code>pkg-config</code>没有在自己的路径中找到对应的<code>*.pc</code>文件。</p>
 
 <p>可以通过以下命令查看<code>pkg-config</code>的路径:</p>
 
@@ -344,92 +397,4 @@ src.on('data', ondata);
 
 <p>错误不要只返回给状态吗，能够给出一定错误信息的情况下要在body中返回统一的结构化的错误信息。这样客户端也可以做出正确的处理，是等待之后重试还是停止请求通知用户。</p>
 
-<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>]]></description><link>http://villadora.me/2014/07/11/http-apishe-ji/</link><guid isPermaLink="false">033dce8c-eb1c-4495-952e-25f49d004c44</guid><category><![CDATA[http]]></category><category><![CDATA[rest]]></category><category><![CDATA[api]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 11 Jul 2014 14:00:49 GMT</pubDate></item><item><title><![CDATA[迁移到Ghost]]></title><description><![CDATA[<p>从octopress迁移到ghost，有后台可以live review的平台还是比裸写markdown的感觉更好。</p>
-
-<p>ghost要导入之前的博客需要进入 <em>'host/ghost/debug'</em> 来导入json文件，做了个小工具去扫 <code>_posts</code> 下面的 <code>*.md</code>和<code>*.mardown</code>文件, 最终生成 <code>exports.json</code> 可以导入ghost.</p>
-
-<p><a href='http://npmjs.org/oghost' >npmjs.org/oghost</a></p>
-
-<pre><code class="bash">npm install oghost -g  
-cd _posts  
-oghost &gt; exports.json  
-</code></pre>
-
-<p>导入的时候发现ghost的tag和post对应关系生成不了，报了</p>
-
-<pre><code>Unique Constraint failed in tag field  
-</code></pre>
-
-<p>但是tags里面是没有重复的，很奇怪，有人知道什么原因么？</p>]]></description><link>http://villadora.me/2014/07/09/qian-yi-dao-ghost/</link><guid isPermaLink="false">a242e3d8-ae82-4782-a22b-33fa3343a7c4</guid><category><![CDATA[ghost]]></category><category><![CDATA[blog]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 09 Jul 2014 08:35:34 GMT</pubDate></item><item><title><![CDATA[AMD到CommonJS的转换]]></title><description><![CDATA[<p>CommonJS和AMD的争论已经有很多，而两者也在项目进化和融合。</p>
-
-<p>个人看来CommonJS更面向于开发者，对于开发者来说，需要的是清晰的版本和管理，更少的代码和干扰，更少的配置。而AMD在代码中允许匿名模块，模块名称和变量之间关系的不清晰，非就近依赖，冗余依赖定义都不是开发者友好。</p>
-
-<p><a href='http://www.npmjs.com/require2commonjs' >require2commonjs</a> 提供了命令行和node模块来将在requirejs中使用的AMD转化为CommonJS格式，方便其他使用CMD或者 <a href='http://nodejs.org/' >node</a> <a href='http://github.com/cortexjs/cortex' >cortex</a> 等外部系统来使用。</p>
-
-<p>目前的官方AMD提供一下几种方式去定义一个模块：</p>
-
-<p>1) Dependency-free module, simple object</p>
-
-<pre><code class=" javascript">define({  
-    add: function(a, b) { return a + b; }
-});
-</code></pre>
-
-<p>没有任何依赖，直接定义模块的exports。这种情况下要将AMD转话为CommonJS模块，只需要变为</p>
-
-<pre><code class=" javascript">module.exports = {  
-    add: function(a, b) { return a + b; }
-};
-</code></pre>
-
-<p>语法树转换非常简单。</p>
-
-<p>2) Simplified CommonJS wrapping</p>
-
-<pre><code class=" javascript"> define(function (require, exports, module) {
-     var a = require('a'),
-         b = require('b');
-     exports.action = function () {};
- });
-</code></pre>
-
-<p>现在AMD提供CommonJS wrapping这种格式，更为简单。 只需要将factory函数中的函数体提取出来就可以了</p>
-
-<pre><code class=" javascript">var a = require('a'),  
-    b = require('b');
-
-exports.action = function () {};  
-</code></pre>
-
-<p>3) Normalized</p>
-
-<p>这个是通常我们见到的AMD格式</p>
-
-<pre><code class=" javascript">define(['backbone', './util', 'Buffer'], function(Bakcbone, util) {  
-    // other process
-    return {
-       data: {}
-   };
-});
-</code></pre>
-
-<p>对于这种格式，处理有两个步骤 1) 将依赖转变为require的形式，中间要注意的是依赖申明和 factory 的参数并不一定一致； 2) 将 return 转变为 module.exports</p>
-
-<pre><code class="javascript">var Backbone = require('backbone');  
-var util = require('./util');  
-require('Buffer');
-
-module.exports = { data: {} };  
-</code></pre>]]></description><link>http://villadora.me/2014/05/24/amd-define-and-how-to-translate-amd-to-co/</link><guid isPermaLink="false">458bef5d-b1cb-4223-8df8-153dee4f26c6</guid><category><![CDATA[javascript]]></category><category><![CDATA[amd]]></category><category><![CDATA[commonjs]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 23 May 2014 17:06:59 GMT</pubDate></item><item><title><![CDATA[regexp.toString()]]></title><description><![CDATA[<p>Regexp.toString在不同浏览器下修辞符顺序不一致。</p>
-
-<p>Chrome, firefox</p>
-
-<pre><code>var re = /abc/gim;  
-re.toString(); // return '/abc/gim'  
-</code></pre>
-
-<p>IE 9.0</p>
-
-<pre><code>var re = /abc/gim;  
-re.toString(); // return '/abc/igm'  
-</code></pre>]]></description><link>http://villadora.me/2014/05/21/regexptost/</link><guid isPermaLink="false">9bddac02-815c-4bff-acaa-9a3fb95c680f</guid><category><![CDATA[javascript]]></category><category><![CDATA[browsers]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Wed, 21 May 2014 11:17:55 GMT</pubDate></item></channel></rss>
+<p>当然还有很多就不一一细列了。去看heroku团队的指南吧</p>]]></description><link>http://villadora.me/2014/07/11/http-apishe-ji/</link><guid isPermaLink="false">033dce8c-eb1c-4495-952e-25f49d004c44</guid><category><![CDATA[http]]></category><category><![CDATA[rest]]></category><category><![CDATA[api]]></category><dc:creator><![CDATA[villadora]]></dc:creator><pubDate>Fri, 11 Jul 2014 14:00:49 GMT</pubDate></item></channel></rss>

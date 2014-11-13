@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=dc71e49d92"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=dc71e49d92"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,120 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/03/06/passport-openid-nodejs/index.html" itemprop="url" data-pjax title="在cluster中使用passport openID">
+        在cluster中使用passport openID
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><h1 id="passportopenidincluster">Passport openid in cluster</h1>
+
+<p>使用nodejs的cluster可以让我们更好的利用cpu资源, 但是同时也会带来一些问题.</p>
+
+<h2 id="session">session</h2>
+
+<p>这个大家都应该知道如果使用in memory session, 那么不同的cluster之间就不能共享session也会导致login失败, 解决办法很简单,使用redis或者mongo这种持久层来保存cookie, 或者可以使用sticky-session之类来固定cluster (但是stikcy-session这个模块是基于ip，在proxy背后会失去作用，没有找到源码，不推荐).</p>
+
+<h2 id="openidassociation">open id association</h2>
+
+<p>association是用来在replyParty和openID provider之间建立一个共享的secret, 这样在接下来的访问中就可以通过association来判断对方是不是伪造的。 <br />
+但是再使用了cluster之后,http请求被分发给了不同的process, 前面拿到的association在另一个process里面正常的模式下是拿不到的，这个时候请求会被当作一个没有授权的请求,从而要求用户重新登录。解决办法是在passport的strategy中设置saveAssociation和loadAssociation将openIdAssocation存到redis或者mongodb中。</p>
+
+<pre><code class=" js">    var passport = require('passport');
+    var</code></pre>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-03-06" itemprop="datePublished">
+           March 06, 2014
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/03/06/passport-openid-nodejs/index.html#disqus_thread" data-pjax data-disqus-identifier="131">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-arguments">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/09/arguments-exceed-javascript/index.html" itemprop="url" data-pjax title="javascript arguments长度限制">
+        javascript arguments长度限制
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>先看下这一段代码片段(in chrome):</p>
+
+<pre><code class="javascript">var a = [];  
+a[2&lt;&lt;16] = 1;  
+fucntion b() {}  
+b.apply([], a);  
+</code></pre>
+
+<p>这段代码最终回导致RangeError: Maximum call stack size exceed. 实际上并不是因为调用栈满了，而只是数组长度太长了.
+为什么会这样呢？ 不是在<code>a[2&lt;&lt;16] = 1</code>的时候还好好的吗？
+大家都知道javascript的数组并不是真的数组，而只是一个特殊的以数组作为key的table而已</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-09" itemprop="datePublished">
+           August 09, 2013
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../../tag/arguments/index.html" data-pjax>arguments</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/09/arguments-exceed-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="130">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2013/08/06/interupt-when-hexo-generating/index.html" itemprop="url" data-pjax title="interupt when hexo generating">
+        interupt when hexo generating
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>用<code>hexo generate</code>的时候有时强制中断了，下次再重新generate就会失败, 预计是<code>db.json</code>还没有完全生成完，而重新generate的时候会去尝试读<code>db.json</code>，这个时候就会报错，删除<code>db.json</code>就ok. 奇怪的是作者为什么在报错之后不直接重新生成<code>db.json</code>，毕竟这个文件只是用来做server的数据库，莫非还有别的用途?</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2013-08-06" itemprop="datePublished">
+           August 06, 2013
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2013/08/06/interupt-when-hexo-generating/index.html#disqus_thread" data-pjax data-disqus-identifier="128">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -409,117 +523,6 @@ HTML5 各方角力又开始了</p>&hellip;</p>
 </article>
 
       
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/05/06/custom-git-command/index.html" itemprop="url" data-pjax title="自定义git命令, like git-flow, git-extras">
-        自定义git命令, like git-flow, git-extras
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>git flow和git extras很强大，原先以为是用一些git alias定义git命令去调用shell脚本，之后看了代码才发现完全不是那么回事。</p>
-
-<p>git的可扩展性非常强，去自定义一个git命令, 在unix环境下，你只需要在PATH中定义一个可执行的脚本，以"git="开头，然后剩余的部分就是你的sub command的名字了。比如如果有一个"git-mark"的脚本，那么在执行git mark命令时，实际上git会去调用git-mark这个脚本。是不是很简单？</p>
-
-<p>为了了解git对alias,builtin,custom command的执行顺序，弄了下脚本做测试。</p>
-
-<ol>
-<li>在有builtin的情况下，alias和custom command不起作用，就是说像log, status等这些命令是无法通过alias和custom command来覆盖的。  </li>
-<li>在没有builtin的情况下, custom</li></ol>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-05-06" itemprop="datePublished">
-           May 06, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/05/06/custom-git-command/index.html#disqus_thread" data-pjax data-disqus-identifier="122">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/26/usage-of-synchronize-tasks-in-javascript/index.html" itemprop="url" data-pjax title="同步调用在javascript中的应用">
-        同步调用在javascript中的应用
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><p>在javascript中很多任务都是异步执行的，而在有些情况下，我们更希望利用同步的方式来组织：</p>
-
-<ol>
-<li>页面动画. 页面动画的执行现在即可以通过css也可以通过javascript来执行，理想的情况下自然是通过css来处理所有动画，但是在css并没有完全覆盖所有的动画并且设计总是在不断的涌现新的需求的情况下，很多时候我们的动画效果都是css和javascript混合执行的，而这个时候，我们希望在前一个css效果结束后才调用javascript之后的调用。或者两个javsacript的动画效果能够按照顺序执行。  </li>
-<li>page unload. 在执行page unload返回一些统计信息的时候，我们不希望函数被async的执行，否则在callback调用时页面已经被destory了，callback方法自然是没办法执行了。</li>
-</ol>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-26" itemprop="datePublished">
-           April 26, 2013
-        </time>
-      </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/26/usage-of-synchronize-tasks-in-javascript/index.html#disqus_thread" data-pjax data-disqus-identifier="121">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
-        <article itemscope itemtype="http://schema.org/BlogPosting"
-  role="article" class="post-item post tag-browsers tag-ie7-2">
-  <header class="post-item-header">
-    <h2 itemprop="name" class="post-item-title">
-      <a href="../../2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/index.html" itemprop="url" data-pjax title="IE7的两个兼容性问题">
-        IE7的两个兼容性问题
-      </a>
-    </h2>
-  </header>
-  <section itemprop="description" class="post-item-excerpt">
-    <p><h2 id="1hrefgetattributehref">1. 获取href的属性 getAttribute('href')  </h2>
-
-<p>在使用.getAttribute('href')获取anchor上的'href'属性时，ie7的实现和其他的浏览器不一样：在ie里面会返回完整的url，而其他的浏览器则只会返回href的设置的值。而jQuery的attr是通过.getAttribute来拿属性的，也不可避免的存在了这个问题。stackoverflow上的建议是用.get(0).href。</p>
-
-<p>ie7 has different implementation for .getAttribute('href') with other browsers.</p>
-
-<p>other browser will return the actual value</p>&hellip;</p>
-  </section>
-  <footer class="post-item-footer">
-    <ul class="post-item-meta-list">
-      <li class="post-item-meta-item">
-        <time datetime="2013-04-06" itemprop="datePublished">
-           April 06, 2013
-        </time>
-      </li>
-      
-        <li class="post-item-meta-item">
-          
-            <a itemprop="articleSection" href="../../tag/browsers/index.html" data-pjax>browsers</a>, 
-          
-            <a itemprop="keywords" href="../../tag/ie7-2/index.html" data-pjax>ie7</a> 
-          
-        </li>
-      
-      <li class="post-item-meta-item">
-        <a href="../../2013/04/06/ie7de-liang-ge-jian-rong-xing-wen-ti/index.html#disqus_thread" data-pjax data-disqus-identifier="120">Comments</a>
-      </li>
-    </ul>
-  </footer>
-</article>
-
-      
     </section>
 
     
@@ -553,9 +556,9 @@ HTML5 各方角力又开始了</p>&hellip;</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
+    <script src="../../public/jquery.js?v=dc71e49d92"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=dc71e49d92"></script>
 
     <script type="text/javascript">
 

@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=dc71e49d92"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=dc71e49d92"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -146,6 +146,105 @@ var enable_pjax = true;
     </header>
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-mobile tag-android tag-ios tag-apple">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/11/13/multitasking-in-mobile/index.html" itemprop="url" data-pjax title="Multitasking in Mobile">
+        Multitasking in Mobile
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>最近看到几篇几年前的文章，关于多任务执行在移动设备上设计。</p>
+
+<p><a href="http://blog.rlove.org/2010/04/why-ipad-and-iphone-dont-support.html">http://blog.rlove.org/2010/04/why-ipad-and-iphone-dont-support.html</a></p>
+
+<p>这篇谈到iOS上为什么没有想android那样去做multitasking，他的观点是认为android有着良好的api去保存程序状态，有着一整套复杂的程序组件状态机，以及能够很好的去管理在不同状态之间的切换。而iOS在iphone/iPad上实现这样一套系统会非常复杂，而android则是一开始就考虑好的。</p>
+
+<p>个人认为到应该不是这么回事，苹果的工程师绝不会一个这样的系统都无法在iOS上做出来。只不过双方的设计哲学有所不同。</p>
+
+<p>无论是andorid还是iOS的设计者，在移动设备上用户只能关注于一个应用上这个观点保持了一致。而感觉android是倾向于给予程序更多的自治权利:我提供功能众多，开发者在其中选取自己需要的，所以你的程序你可以选择在后台运行，这是你的权利。</p>
+
+<p>而可以参考apple文档: </p>
+
+<p><a href="https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4">https://developer.apple.com/library/ios/documentation</a></p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-11-13" itemprop="datePublished">
+           November 13, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="../mobile/index.html" data-pjax>mobile</a>, 
+          
+            <a itemprop="keywords" href="index.html" data-pjax>android</a>, 
+          
+            <a itemprop="keywords" href="../ios/index.html" data-pjax>ios</a>, 
+          
+            <a itemprop="keywords" href="../apple/index.html" data-pjax>apple</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/11/13/multitasking-in-mobile/index.html#disqus_thread" data-pjax data-disqus-identifier="157">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post tag-android">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2014/11/13/android-xue-xi-bi-ji-3/index.html" itemprop="url" data-pjax title="Android 学习笔记(3)">
+        Android 学习笔记(3)
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><ul>
+<li>WakeLock 可以用来唤醒屏幕和CPU，用来做重要事情的通知。微信天天晚上还响个不停是不是就是这种情况？建议是只在真正需要的时候用。影响电池使用，增加耗电。</li>
+</ul>
+
+<pre><code>PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
+PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "WakeLock");
+
+wl.acquire(10000);
+
+wl.release();  
+</code></pre>
+
+<p>说到耗电，关于老外和国人还有一个梗: 记得最早看到mobile web的时候，google有个研究是研究什么技术在什么网络下比较耗电</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2014-11-13" itemprop="datePublished">
+           November 13, 2014
+        </time>
+      </li>
+      
+        <li class="post-item-meta-item">
+          
+            <a itemprop="articleSection" href="index.html" data-pjax>android</a> 
+          
+        </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2014/11/13/android-xue-xi-bi-ji-3/index.html#disqus_thread" data-pjax data-disqus-identifier="153">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post tag-android tag-development tag-network">
@@ -317,9 +416,9 @@ var enable_pjax = true;
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
+    <script src="../../public/jquery.js?v=dc71e49d92"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=dc71e49d92"></script>
 
     <script type="text/javascript">
 

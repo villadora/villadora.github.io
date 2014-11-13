@@ -42,7 +42,7 @@
     <link href="http://fonts.googleapis.com/" rel="dns-prefetch">
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&amp;subset=latin,latin-ext" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/main.min.css?v=2e5cd82aa2"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css?v=dc71e49d92"/>
 
     <script type="text/javascript">
       
@@ -73,7 +73,7 @@ var enable_pjax = true;
       GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
     </script>
 
-    <script src="../../assets/js/head-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/head-scripts.min.js?v=dc71e49d92"></script>
 
     <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="时光屋" href="../../rss/index.html">
@@ -144,6 +144,112 @@ var enable_pjax = true;
 
 
     <section class="post-list">
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2011/12/15/opinion-to-reading-and-analyzing/index.html" itemprop="url" data-pjax title="对于读书与分析问题的几个观点">
+        对于读书与分析问题的几个观点
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>读书也好分析问题也好，一个人的思维总归是被某种观念所占据，其行动也是被这种观点所指引；如读书，学习分析问题，这是改进和断念其指导思想的方法。我想谈下在这个过程中所需要注意的几点：</p>
+
+<ol>
+<li><p>尽信书不如无书。 <br />
+自己不好好思考不动脑看到是什么就是什么的人参与政治和历史这种研究主体是人的问题很容易被人忽悠；因为这些东西比较主观，很难让人从客观的角度来审视；一般不会有绝对的对错，所以如果相信书上或者某些人说的就一定是正确的，而一定要去争个面红耳赤的还是研究客观的问题好。</p></li>
+<li><p>发展的眼光看问题。 <br />
+很不幸，目前来看我们所处的宏观世界里时间只能向前，过去的合适并不一定现在合适，现在合适的并不一定过去合适。钱穆先生在书中说的好，一个是历史意见，一个是时代意见。我们不应该单凭时代意见来抹杀已往的历史意见。过去的就是历史，只有当时当地所出的环境下的当事人意见才是真实有效的，事后诸葛亮来指点着指点那，就应该当作是学习经验，而不是指手画脚。而以时代意见指导历史意见与刻舟求剑何异？一个人的行动到底是由思想所指导还是由习惯所指导将决定其是否能适应变化。</p></li>
+<li><p>全面的考虑。 <br />
+从片面的条件推导出结论，如果不是真的疏忽和考虑欠缺，而是有意为之，要就只能是别有用心了</p></li></ol>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2011-12-15" itemprop="datePublished">
+           December 15, 2011
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2011/12/15/opinion-to-reading-and-analyzing/index.html#disqus_thread" data-pjax data-disqus-identifier="114">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2011/10/04/virtualboxli-de-si-chong-networking-modes/index.html" itemprop="url" data-pjax title="VirtualBox里的四种networking modes">
+        VirtualBox里的四种networking modes
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>装了个virtualbox，现在的机器性能估计还可以带起2-3台虚拟机，装了个archlinux加个win8 折腾了半天了；虽然原来弄过虚拟机，知道bridge adapter这种模式最好但是并不了解具体的几种mode下的区别，今天学习了来分享下。</p>
+
+<!-- more -->
+
+<h2 id="nat">NAT</h2>
+
+<p>Network Address Transaction，主要是将虚拟机的虚拟网络地址转化成现实网络中的可用地址，主要有三种形式：静态转换Static Nat、动态转换Dynamic Nat 和端口多路复用OverLoad。</p>
+
+<p>静态转换和动态转换，顾名思义，就是转化地址映射表是静态还是动态的区别。而虚拟机实现的方式是端口多路复用，也就是说host machine的地址: ip1:port1, guest machine的地址ip2：port1在通过host machine的NAT转换后就变成了ip1:port2，从而与外界网络交流。</p>
+
+<p>这样的情形下，对于外界的网络而言</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2011-10-04" itemprop="datePublished">
+           October 04, 2011
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2011/10/04/virtualboxli-de-si-chong-networking-modes/index.html#disqus_thread" data-pjax data-disqus-identifier="111">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
+      
+        <article itemscope itemtype="http://schema.org/BlogPosting"
+  role="article" class="post-item post">
+  <header class="post-item-header">
+    <h2 itemprop="name" class="post-item-title">
+      <a href="../../2011/09/25/shanghai-barcamp/index.html" itemprop="url" data-pjax title="Shanghai Barcamp">
+        Shanghai Barcamp
+      </a>
+    </h2>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p><p>早上起来晚了，晚睡晚起的习惯很不好！总是有段时间会养成这样的不好习惯，过一段时间又会早睡早起。总结的说，去了还是有不少收获的，而且刚好就在前一段时间看了不少关于vc和初期投资培养方面的知识，结果这次居然就用到了，不然有几个就不知道在讲什么。</p>
+
+<p>早上一眼睁开就发现已经九点半了，然后打开电脑弄了半天才搞懂创智天地在那，知道了原来可以坐公交过去的。真正等到一身轻出门的时候已经是10：00了，可是去了才知道，时间刚刚好～ 哈哈 到的时候是10：40，还没有一个speech开始！大家都是很不守时，后来觉得忘带了笔记本（不是电脑！）和相机，只好依靠大脑记点东西，靠着不靠谱的手机拍个不清晰的照片。</p>
+
+<p>下面是今天听过的几个:</p>&hellip;</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item">
+        <time datetime="2011-09-25" itemprop="datePublished">
+           September 25, 2011
+        </time>
+      </li>
+      
+      <li class="post-item-meta-item">
+        <a href="../../2011/09/25/shanghai-barcamp/index.html#disqus_thread" data-pjax data-disqus-identifier="110">Comments</a>
+      </li>
+    </ul>
+  </footer>
+</article>
+
       
         <article itemscope itemtype="http://schema.org/BlogPosting"
   role="article" class="post-item post">
@@ -400,9 +506,9 @@ Synchronizers: =Semaphore=, =CyclicBarrier=, =CountDownLatch= ,etc.</p>
       </div>
     </main>
 
-    <script src="../../public/jquery.js?v=2e5cd82aa2"></script>
+    <script src="../../public/jquery.js?v=dc71e49d92"></script>
 
-    <script src="../../assets/js/foot-scripts.min.js?v=2e5cd82aa2"></script>
+    <script src="../../assets/js/foot-scripts.min.js?v=dc71e49d92"></script>
 
     <script type="text/javascript">
 
